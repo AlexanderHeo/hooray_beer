@@ -80,7 +80,11 @@ const Form = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
+padding: 24px 0;
+
 fieldset {
+	margin: 3px 0;
+	padding: 0;
 	border: none;
 }
 label {
