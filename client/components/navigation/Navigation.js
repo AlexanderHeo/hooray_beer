@@ -12,9 +12,6 @@ const navigation = () => (
           <button>Breweries</button>
         </li>
         <li>
-          <button>Wish List</button>
-        </li>
-        <li>
           <button>Favorites</button>
         </li>
         <li>

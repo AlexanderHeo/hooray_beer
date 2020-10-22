@@ -7,7 +7,7 @@ const tempBeerList = [
     beerId: 1,
     name: 'Sculpin',
     brewery: 'Beachwood',
-    rating: 5,
+    rating: [[1], [2], [3], [4]],
     notes: 'flavorful hazy ipa',
     bar: 'Beachwood'
   },
@@ -15,7 +15,7 @@ const tempBeerList = [
     beerId: 2,
     name: 'Nobility',
     brewery: 'Noble Ale Works',
-    rating: 5,
+    rating: [[1], [2], [3], [4], [5]],
     notes: 'full bodied double ipa',
     bar: 'Noble Ale Works'
   }
@@ -44,7 +44,7 @@ export default beerList;
 
 const Table = styled.table`
 width: 100%;
-* {
+th, td {
 border: 1px solid black;
 border-radius: 6px;
 padding: 6px 12px;
