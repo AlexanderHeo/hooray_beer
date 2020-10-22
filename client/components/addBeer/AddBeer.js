@@ -1,6 +1,4 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-import { json } from 'express';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 

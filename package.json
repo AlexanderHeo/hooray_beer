@@ -21,11 +21,6 @@
       "server/sessions/"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx}": [
       "eslint --fix",
@@ -73,7 +68,8 @@
             "error"
           ]
         }
-      ],
+			],
+			"allow-indentation-tabs": 0,
       "space-before-function-paren": [
         "error",
         {
@@ -92,6 +88,7 @@
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-session": "1.17.0",
+    "node-fetch": "2.6.1",
     "pg": "7.17.1",
     "react": "16.14.0",
     "react-dom": "16.14.0",
@@ -120,6 +117,7 @@
     "styled-components": "5.2.0",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.10.1"
+    "webpack-dev-server": "3.10.1",
+    "webpack-node-externals": "2.5.2"
   }
 }
