@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { Component } from 'react';
 import styled from 'styled-components';

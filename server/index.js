@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 require('dotenv/config');
 const express = require('express');
 
@@ -16,6 +17,7 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// get My Beers List
 app.get('/api/beer-list', (req, res, next) => {
   const beerListSQL = `
 		select * from "beers";
@@ -25,6 +27,7 @@ app.get('/api/beer-list', (req, res, next) => {
     .catch(error => next(error));
 });
 
+// get My Breweries List
 app.get('/api/brewery-list', (req, res, next) => {
   const brewerysql = `
 		select * from "brewery";
@@ -33,6 +36,21 @@ app.get('/api/brewery-list', (req, res, next) => {
     .then(result => {
       res.status(200).json(result.rows);
     })
+    .catch(error => next(error));
+});
+
+// add new Brewery
+app.post('/api/add-new-brewery', (req, res, next) => {
+  const addBrewerySQL = `
+		insert into "brewery" ("breweryID", "name", "city", "state", "link")
+		values ($1, $2, $3, $4, $5)
+		returning *;
+	`;
+  const addBreweryParams = ([
+		`${req.body.breweryID}`, `${req.body.name}`, `${req.body.city}`, `${req.body.state}`, `${req.body.link}`
+  ]);
+  db.query(addBrewerySQL, addBreweryParams)
+    .then(result => res.status(200).json(result.rows))
     .catch(error => next(error));
 });
 
@@ -97,15 +115,6 @@ app.get('/api/brewery-list', (req, res, next) => {
 //     .catch(error => next(error));
 
 // });
-
-app.get('/api/beers', (req, res, next) => {
-  const beersql = `
-		select "name" from "beers";
-	`;
-  db.query(beersql)
-    .then(result => res.status(200).json(result.rows))
-    .catch(err => next(err));
-});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
