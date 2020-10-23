@@ -10,5 +10,5 @@ const header = () => (
 export default header;
 
 const Header = styled.div`
-padding: 0 16px
+	padding: 0 16px
 `;

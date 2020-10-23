@@ -1,22 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const navigation = () => (
+const navigation = props => (
   <>
     <Navigation>
       <ul>
         <li>
-          <button>My Beers List</button>
+          <button onClick={() => props.setView('beerList')}>My Beers List</button>
         </li>
         <li>
-          <button>Breweries</button>
+          <button onClick={() => props.setView('add')}>Add New Beer</button>
         </li>
         <li>
-          <button>Favorites</button>
+          <button onClick={() => props.setView('brewery')}>Breweries</button>
+        </li>
+        {/* <li>
+          <button onClick={() => props.setView('favorites')}>Favorites</button>
         </li>
         <li>
-          <button>No Likes</button>
-        </li>
+          <button onClick={() => props.setView('noLikes')}>No Likes</button>
+        </li> */}
       </ul>
     </Navigation>
   </>
