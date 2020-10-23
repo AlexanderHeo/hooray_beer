@@ -54,6 +54,21 @@ app.post('/api/add-new-brewery', (req, res, next) => {
     .catch(error => next(error));
 });
 
+// add new Beer
+app.post('/api/add-new-beer', (req, res, next) => {
+  const addBeerSQL = `
+		insert into "beers" ("name", "brewery", "rating", "note", "bar")
+		values ($1, $2, $3, $4, $5)
+		returning *;
+	`;
+  const addBeerParams = ([
+		`${req.body.name}`, `${req.body.brewery}`, `${req.body.rating}`, `${req.body.note}`, `${req.body.bar}`
+  ]);
+  db.query(addBeerSQL, addBeerParams)
+    .then(result => res.status(200).json(result.rows))
+    .catch(error => next(error));
+});
+
 // app.post('/api/add-new-beer', (req, res, next) => {
 //   const beer = req.body.beer;
 //   const breweryName = req.body.brewery;

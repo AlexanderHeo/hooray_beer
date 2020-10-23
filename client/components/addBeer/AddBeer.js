@@ -7,6 +7,7 @@ class NewBeer extends Component {
 	state = {
 	  beer: '',
 	  brewery: '',
+	  breweryID: '',
 	  rating: '',
 	  notes: '',
 	  bar: '',
@@ -14,7 +15,9 @@ class NewBeer extends Component {
 	  breweryList: [],
 	  breweryNameList: [],
 	  breweryQuery: [],
-	  breweryQueryLoading: false
+	  breweryForm: '',
+	  breweryQueryLoading: false,
+	  brewerySet: false
 	}
 
 	componentDidMount() {
@@ -26,7 +29,7 @@ class NewBeer extends Component {
 	    .then(response => response.json())
 	    .then(data => {
 	      const breweryNameList = [];
-	      data.forEach(brewery => breweryNameList.push(brewery.name));
+	      data.forEach(brewery => breweryNameList.push({ name: brewery.name, breweryID: brewery.id }));
 	      this.setState({
 	        breweryList: data,
 	        breweryNameList: breweryNameList
@@ -72,12 +75,19 @@ class NewBeer extends Component {
 	}
 
 	addNewBeer = () => {
+	  const newBeer = {
+	    name: this.state.beer,
+	    brewery: this.state.breweryID,
+	    rating: this.state.rating,
+	    note: this.state.notes,
+	    bar: this.state.bar
+	  };
 	  fetch('/api/add-new-beer', {
 	    method: 'POST',
 	    headers: {
 	      'Content-Type': 'application/json'
 	    },
-	    body: JSON.stringify(this.state)
+	    body: JSON.stringify(newBeer)
 	  })
 	    .then(response => response.json())
 	    .then(data => {
@@ -95,8 +105,8 @@ class NewBeer extends Component {
 	  }
 	}
 
-	addBreweryToForm = name => {
-	  this.setState({ brewery: name });
+	addBreweryToForm = (name, id) => {
+	  this.setState({ breweryForm: name, breweryID: id });
 	}
 
 	queryBreweries = brewery => {
@@ -128,7 +138,7 @@ class NewBeer extends Component {
 	  })
 	    .then(response => response.json())
 	    .then(data => {
-	      console.log(data);
+	      this.setState({ brewerySet: true });
 	    });
 	}
 
@@ -136,7 +146,7 @@ class NewBeer extends Component {
 	  const breweryNameList = this.state.breweryList.map(brewery => {
 	    return <li
 	      key={brewery.breweryID}
-	      onClick={() => this.addBreweryToForm(brewery.name)}>
+	      onClick={() => this.addBreweryToForm(brewery.name, brewery.breweryID)}>
 	      {brewery.name}</li>;
 	  });
 
@@ -192,66 +202,68 @@ class NewBeer extends Component {
 	    </AddBeerForm>
 	  );
 
-	  return (
-	    <>
-	      {!this.state.breweryQueryLoading
-	        ? addBreweryForm
-	        : addBreweryFromQuery}
-	    </>
+	  const addBeerForm = (
+	    <AddBeerForm onSubmit={this.addNewBeer}>
+	      <Form onSubmit={this.addNewBeer}>
+	        <fieldset>
+	          <label htmlFor="beer">Beer:</label>
+	          <input
+	            type="text"
+	            placeholder="Beer"
+	            name="beer"
+	            value={this.state.beer}
+	            onChange={this.handleInput} />
+	        </fieldset>
+	        <fieldset>
+	          <label htmlFor="rating">Rating:</label>
+	          <select
+	            name="rating"
+	            value={this.state.rating}
+	            onChange={this.handleInput}>
+	            <option defaultValue="default">Pick a Rating</option>
+	            <option value="1">1</option>
+	            <option value="2">2</option>
+	            <option value="3">3</option>
+	            <option value="4">4</option>
+	            <option value="5">5</option>
+	          </select>
+	        </fieldset>
+	        <fieldset>
+	          <label htmlFor="notes">Notes:</label>
+	          <textarea
+	            type="text"
+	            placeholder="What are your thoughts?"
+	            name="notes"
+	            value={this.state.notes}
+	            onChange={this.handleInput} />
+	        </fieldset>
+	        <fieldset>
+	          <label htmlFor="bar">Bar:</label>
+	          <input
+	            type="text"
+	            placeholder="Where did you drink this beer?"
+	            name="bar"
+	            value={this.state.bar}
+	            onChange={this.handleInput} />
+	        </fieldset>
+	        <div className="button-container">
+	          <button type="submit">Add Beer</button>
+	          <button type="reset">Cancel</button>
+	        </div>
+	      </Form>
+	    </AddBeerForm>
 	  );
+
+	  let addNewBeerComponent = addBreweryForm;
+	  if (this.state.breweryQueryLoading) {
+	    addNewBeerComponent = addBreweryFromQuery;
+	  } else if (this.state.breweryForm) {
+	    addNewBeerComponent = addBeerForm;
+	  }
+
+	  return (addNewBeerComponent);
 	}
 }
-
-{ // let buttonContainer = null;
-	  // if (!this.state.invalidMessage) {
-	  //   buttonContainer = <div className="button-container">
-	  //     <button type="submit">Add Beer</button>
-	  //     <button type="reset">Cancel</button>
-	  //   </div>;
-	  // } else {
-	  //   buttonContainer = <div>{this.state.invalidMessage}</div>;
-	  // }
-
-  /* <fieldset>
-	        <label htmlFor="rating">Rating:</label>
-	        <select
-	          name="rating"
-	          value={this.state.rating}
-	          onChange={this.handleInput}>
-	          <option defaultValue="default">Pick a Rating</option>
-	          <option value="1">1</option>
-	          <option value="2">2</option>
-	          <option value="3">3</option>
-	          <option value="4">4</option>
-	          <option value="5">5</option>
-	        </select>
-
-	        <input
-	          type="number"
-	          placeholder="Enter 1-5"
-	          name="rating"
-	          value={this.state.rating}
-	          onChange={this.handleInput} />
-	      </fieldset>
-	      <fieldset>
-	        <label htmlFor="notes">Notes:</label>
-	        <textarea
-	          type="text"
-	          placeholder="What are your thoughts?"
-	          name="notes"
-	          value={this.state.notes}
-	          onChange={this.handleInput} />
-	      </fieldset>
-	      <fieldset>
-	        <label htmlFor="bar">Bar:</label>
-	        <input
-	          type="text"
-	          placeholder="Where did you drink this beer?"
-	          name="bar"
-	          value={this.state.bar}
-	          onChange={this.handleInput} />
-	      </fieldset>
-	      {buttonContainer} */ }
 
 export default NewBeer;
 

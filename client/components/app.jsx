@@ -9,7 +9,7 @@ import Header from './ui/header';
 
 export default class App extends React.Component {
 	state = {
-	  view: 'add'
+	  view: 'beerList'
 	}
 
 	setView = view => {
