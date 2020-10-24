@@ -20,7 +20,14 @@ app.get('/api/health-check', (req, res, next) => {
 // get My Beers List
 app.get('/api/beer-list', (req, res, next) => {
   const beerListSQL = `
-		select * from "beers";
+		select "br"."name" as "brewery",
+					 "be"."name",
+					 "be"."rating",
+					 "be"."note",
+					 "be"."bar",
+					 "be"."beerID"
+		from "beers" as "be"
+		join "brewery" as "br" using ("breweryID")
 	`;
   db.query(beerListSQL)
     .then(result => res.status(200).json(result.rows))
@@ -66,6 +73,46 @@ app.post('/api/add-new-beer', (req, res, next) => {
   ]);
   db.query(addBeerSQL, addBeerParams)
     .then(result => res.status(200).json(result.rows))
+    .catch(error => next(error));
+});
+
+// remove Beer
+app.delete('/api/remove-beer/:beerID', (req, res, next) => {
+  const { beerID } = req.params;
+  const removeBeerSQL = `
+		delete from "beers"
+		where "beerID" = $1
+		returning *;
+	`;
+  const removeBeerParams = [beerID];
+  db.query(removeBeerSQL, removeBeerParams)
+    .then(result => {
+      const removedBeer = result.rows[0];
+      if (!removedBeer) {
+        res.status(404).json({ error: `Cannot find beer at id ${beerID}` });
+      } else {
+        res.status(204).json(removedBeer);
+      }
+    })
+    .catch(error => next(error));
+});
+
+// edit Beer
+app.patch('/api/beer-edit/:beerID', (req, res, next) => {
+  const { beerID } = req.params;
+  console.log(beerID);
+  const beerPatchSQL = `
+		update "beers"
+		set "rating" = $1, "note" = $2, "bar" =$3
+		where "beerID" = $4
+		returning *;
+	`;
+  const beerPatchParams = ([req.body.rating, req.body.note, req.body.bar, beerID]);
+  db.query(beerPatchSQL, beerPatchParams)
+    .then(result => {
+      console.log(result.rows[0]);
+      res.status(200).json(result.rows[0]);
+    })
     .catch(error => next(error));
 });
 

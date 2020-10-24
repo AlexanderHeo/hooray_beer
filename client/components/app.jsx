@@ -1,10 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import React from 'react';
-import Add from './addBeer/AddBeer';
+import Add from './addBeer/AddBeerForm';
 import BeerList from './beerList/BeerList';
 import BreweryList from './breweries/BreweryList';
-import Navigation from './navigation/Navigation';
 import Header from './ui/header';
 
 export default class App extends React.Component {
@@ -26,11 +25,10 @@ export default class App extends React.Component {
 	  } else if (view === 'brewery') {
 	    component = <BreweryList />;
 	  }
+
 	  return (
 	    <>
-	      <Header />
-	      <hr />
-	      <Navigation setView={this.setView}/>
+	      <Header setView={this.setView}/>
 	      <hr />
 	      {component}
 	    </>

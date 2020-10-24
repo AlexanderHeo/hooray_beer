@@ -1,11 +1,17 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+/* eslint-disable no-tabs */
+import { faBeer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import styled from 'styled-components';
 
 const ratingDisplay = props => {
-  return (<span>
-    <FontAwesomeIcon icon={faStar} size="sm" />
-  </span>);
+  return (<BeerIcon>
+    <FontAwesomeIcon icon={faBeer} size="sm" style={{ backgroundColor: 'yellow' }} border/>
+  </BeerIcon>);
 };
 
 export default ratingDisplay;
+
+const BeerIcon = styled.span`
+	margin: 0 3px;
+`;
