@@ -1,15 +1,15 @@
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
+import PickRating from 'beauty-stars';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PickRating from '../pickRating/PickRating';
 
 class NewBeer extends Component {
 	state = {
 	  beer: '',
 	  brewery: '',
 	  breweryID: '',
-	  rating: '',
+	  rating: 0,
 	  notes: '',
 	  bar: '',
 	  invalidMessage: '',
@@ -217,7 +217,10 @@ class NewBeer extends Component {
 	        </fieldset>
 	        <fieldset>
 	          <label htmlFor="rating">Rating:</label>
-	          <PickRating />
+	          <PickRating
+	            value={this.state.rating}
+	            onChange={rating => this.setState({ rating })}
+	          />
 	        </fieldset>
 	        <fieldset>
 	          <label htmlFor="notes">Notes:</label>
