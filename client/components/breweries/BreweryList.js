@@ -49,14 +49,15 @@ export default BreweryList;
 
 const Table = styled.table`
 	width: 100%;
-	th, td {
-		border: 1px solid;
-		border-color: rgb(0, 0, 0) rgb(118, 118, 118) rgb(118, 118, 118) rgb(0, 0, 0);
-		border-radius: 6px;
-		padding: 6px 12px;
+	tr:nth-child(even) {
+		background-color: rgb(200, 200, 200);
 	}
 	th {
-		background-color: #333;
-		color: #ccc;
+		border-bottom: 2px solid;
+		border-color: rgba(118, 118, 118);
+		background-color: rgb(255, 255, 255);
+	}
+	th, td {
+		padding: 6px 12px;
 	}
 `;

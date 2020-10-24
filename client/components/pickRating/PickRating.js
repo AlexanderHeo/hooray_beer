@@ -1,52 +1,38 @@
 /* eslint-disable no-tabs */
 import { faBeer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const pickRating = props => (
-  <BeerIcon>
-    <FontAwesomeIcon
-      icon={faBeer}
-      size="sm"
-      border
-      name="one"
-      style={{ backgroundColor: 'yellow' }}
-      onClick={props.pickRating}/>
-    <FontAwesomeIcon
-      icon={faBeer}
-      size="sm"
-      border
-      name="two"
-      style={{ backgroundColor: 'yellow' }}
-      onClick={props.pickRating}/>
-    <FontAwesomeIcon
-      icon={faBeer}
-      size="sm"
-      border
-      name="three"
-      style={{ backgroundColor: 'yellow' }}
-      onClick={props.pickRating}/>
-    <FontAwesomeIcon
-      icon={faBeer}
-      size="sm"
-      border
-      name="four"
-      style={{ backgroundColor: 'yellow' }}
-      onClick={props.pickRating}/>
-    <FontAwesomeIcon
-      icon={faBeer}
-      size="sm"
-      border
-      name="five"
-      style={{ backgroundColor: 'yellow' }}
-      onClick={props.pickRating}/>
-  </BeerIcon>
-);
+const icons = [['one'], ['two'], ['three'], ['four'], ['five']];
 
-export default pickRating;
+class PickRating extends Component {
+  render() {
+    return (
+      <BeerIcon>
+        {icons.map(icon => {
+          const name = icon[0];
+          return (
+            <div
+              style={{ display: 'inline-block' }}
+              key={name}
+              name={name}
+              onClick={event => this.props.pickRating(event)}>
+              <FontAwesomeIcon
+                icon={faBeer}
+                size="sm"
+                border
+                style={{ backgroundColor: 'yellow' }}/>
+            </div>);
+        })}
+      </BeerIcon>
+    );
+  }
+}
 
-const BeerIcon = styled.span`
+export default PickRating;
+
+const BeerIcon = styled.div`
 	width: 200px;
 	border: 2px solid;
 	border-radius: 6px;
