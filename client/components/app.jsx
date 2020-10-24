@@ -4,20 +4,16 @@ import React from 'react';
 import Add from './addBeer/AddBeerForm';
 import BeerList from './beerList/BeerList';
 import BreweryList from './breweries/BreweryList';
-import Pick from './pickRating/PickRating';
 import Header from './ui/header';
 
 export default class App extends React.Component {
 	state = {
-	  view: 'pick'
+	  view: 'beerList',
+	  ratingNumber: 'nth-child(-n)'
 	}
 
 	setView = view => {
 	  this.setState({ view: view });
-	}
-
-	pickRating = event => {
-	  console.log(event.currentTarget.getAttribute('name'));
 	}
 
 	render() {
@@ -29,8 +25,6 @@ export default class App extends React.Component {
 	    component = <Add />;
 	  } else if (view === 'brewery') {
 	    component = <BreweryList />;
-	  } else if (view === 'pick') {
-	    component = <Pick pickRating={this.pickRating}/>;
 	  }
 
 	  return (

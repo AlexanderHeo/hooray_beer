@@ -64,7 +64,7 @@ app.post('/api/add-new-brewery', (req, res, next) => {
 // add new Beer
 app.post('/api/add-new-beer', (req, res, next) => {
   const addBeerSQL = `
-		insert into "beers" ("name", "brewery", "rating", "note", "bar")
+		insert into "beers" ("name", "breweryID", "rating", "note", "bar")
 		values ($1, $2, $3, $4, $5)
 		returning *;
 	`;
