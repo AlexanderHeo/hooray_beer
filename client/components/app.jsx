@@ -1,15 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import React from 'react';
-import Add from './addBeer/AddBeerForm';
+import AddBeer from './addBeer/AddBeer';
 import BeerList from './beerList/BeerList';
 import BreweryList from './breweries/BreweryList';
 import Header from './ui/header';
 
 export default class App extends React.Component {
 	state = {
-	  view: 'beerList',
-	  ratingNumber: 'nth-child(-n)'
+	  view: 'add'
 	}
 
 	setView = view => {
@@ -22,7 +21,7 @@ export default class App extends React.Component {
 	  if (view === 'beerList') {
 	    component = <BeerList />;
 	  } else if (view === 'add') {
-	    component = <Add />;
+	    component = <AddBeer setView={this.setView}/>;
 	  } else if (view === 'brewery') {
 	    component = <BreweryList />;
 	  }

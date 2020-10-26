@@ -16,7 +16,7 @@ class BreweryList extends Component {
 	}
 
 	getBreweryList = () => {
-	  fetch('/api/brewery-list')
+	  fetch('/api/brewery')
 	    .then(response => response.json())
 	    .then(data => this.setState({ breweryList: data, breweryListLoaded: true }))
 	    .catch(error => console.error(error));
@@ -35,7 +35,13 @@ class BreweryList extends Component {
 	          </tr>
 	        </thead>
 	        <tbody>
-	          {this.state.breweryList.map(brewery => <Brewery brewery={brewery} key={brewery.breweryID} />)}
+	          {this.state.breweryList.map(brewery => {
+	            return <Brewery
+	              brewery={brewery}
+	              key={brewery.breweryID}
+	              buttonClick={this.handleButtonClick}
+	            />;
+	          })}
 	        </tbody>
 	      </Table>
 	    );
