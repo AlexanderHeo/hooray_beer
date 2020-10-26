@@ -28,6 +28,7 @@ app.get('/api/beer', (req, res, next) => {
 					 "be"."beerID"
 		from "beers" as "be"
 		join "brewery" as "br" using ("breweryID")
+		order by "be"."beerID"
 	`;
   db.query(beerListSQL)
     .then(result => res.status(200).json(result.rows))
@@ -37,7 +38,8 @@ app.get('/api/beer', (req, res, next) => {
 // get My Breweries List
 app.get('/api/brewery', (req, res, next) => {
   const brewerysql = `
-		select * from "brewery";
+		select * from "brewery"
+		order by "breweryID";
 	`;
   db.query(brewerysql)
     .then(result => {
