@@ -63,17 +63,21 @@ app.post('/api/add-new-brewery', (req, res, next) => {
 
 // add new Beer
 app.post('/api/add-new-beer', (req, res, next) => {
+  console.log(req.body);
   const addBeerSQL = `
 		insert into "beers" ("name", "breweryID", "rating", "note", "bar")
 		values ($1, $2, $3, $4, $5)
 		returning *;
 	`;
   const addBeerParams = ([
-		`${req.body.name}`, `${req.body.brewery}`, `${req.body.rating}`, `${req.body.note}`, `${req.body.bar}`
+		`${req.body.name}`, `${req.body.breweryID}`, `${req.body.rating}`, `${req.body.note}`, `${req.body.bar}`
   ]);
   db.query(addBeerSQL, addBeerParams)
     .then(result => res.status(200).json(result.rows))
-    .catch(error => next(error));
+    .catch(error => {
+      console.log(error);
+      next(error);
+    });
 });
 
 // remove Beer
@@ -100,7 +104,6 @@ app.delete('/api/remove-beer/:beerID', (req, res, next) => {
 // edit Beer
 app.patch('/api/beer-edit/:beerID', (req, res, next) => {
   const { beerID } = req.params;
-  console.log(beerID);
   const beerPatchSQL = `
 		update "beers"
 		set "rating" = $1, "note" = $2, "bar" =$3
@@ -110,73 +113,10 @@ app.patch('/api/beer-edit/:beerID', (req, res, next) => {
   const beerPatchParams = ([req.body.rating, req.body.note, req.body.bar, beerID]);
   db.query(beerPatchSQL, beerPatchParams)
     .then(result => {
-      console.log(result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
     .catch(error => next(error));
 });
-
-// app.post('/api/add-new-beer', (req, res, next) => {
-//   const beer = req.body.beer;
-//   const breweryName = req.body.brewery;
-//   const rating = req.body.rating;
-//   const note = req.body.note;
-//   const bar = req.body.bar;
-
-//   if (!beer) {
-//     return res.status(400).json({
-//       error: 'You must enter a beer.'
-//     });
-//   } else if (!breweryName) {
-//     return res.state(400).json({
-//       error: 'You must enter a brewery.'
-//     });
-//   } else if (!rating || isNaN(rating) || rating < 1 || rating > 5) {
-//     return res.status(400).json({
-//       error: 'Rating must be a number between 1 and 5'
-//     });
-//   } else if (!note) {
-//     return res.status(400).json({
-//       error: 'You must enter a note.'
-//     });
-//   } else if (!bar) {
-//     return res.status(400).json({
-//       error: 'You must enter a bar.'
-//     });
-//   }
-//   const getBreweryCodeSQL = `
-// 		select * from "brewery" where "name" = $1
-// 	`;
-//   const getBreweryCodeParams = ([breweryName]);
-
-//   db.query(getBreweryCodeSQL, getBreweryCodeParams)
-//     .then(result => {
-//       let breweryID = null;
-//       if (result.rows[0]) {
-//         breweryID = result.rows[0].breweryID;
-//         console.log('breweryID:', breweryID);
-//       } else if (!result.rows[0]) {
-//         fetch(`https://api.openbrewerydb.org/breweries/search?query=${breweryName}`)
-//           .then(result => result.json())
-//           .then(json => console.log('brewery queried:', json));
-//       }
-//       //   const newBeerSQL = `
-//       // 		insert into "beers" ("name", "brewery", "rating", "note", "bar")
-//       // 		values ($1, $2, $3, $4, $5)
-//       // 		returning *;
-//       // `;
-
-//       //   const newBeerParams = ([beer, breweryID, rating, note, bar]);
-
-//     //   db.query(newBeerSQL, newBeerParams)
-//     //     .then(result => {
-//     //       res.status(200).json(result.rows[0]);
-//     //     })
-//     //     .catch(error => next(error));
-//     })
-//     .catch(error => next(error));
-
-// });
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
