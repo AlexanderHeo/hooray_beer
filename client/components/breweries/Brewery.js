@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 import React from 'react';
 
 const brewery = props => {

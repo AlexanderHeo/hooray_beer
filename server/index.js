@@ -18,7 +18,7 @@ app.get('/api/health-check', (req, res, next) => {
 });
 
 // get My Beers List
-app.get('/api/beer-list', (req, res, next) => {
+app.get('/api/beer', (req, res, next) => {
   const beerListSQL = `
 		select "br"."name" as "brewery",
 					 "be"."name",
@@ -35,7 +35,7 @@ app.get('/api/beer-list', (req, res, next) => {
 });
 
 // get My Breweries List
-app.get('/api/brewery-list', (req, res, next) => {
+app.get('/api/brewery', (req, res, next) => {
   const brewerysql = `
 		select * from "brewery";
 	`;
@@ -47,7 +47,7 @@ app.get('/api/brewery-list', (req, res, next) => {
 });
 
 // add new Brewery
-app.post('/api/add-new-brewery', (req, res, next) => {
+app.post('/api/brewery', (req, res, next) => {
   const addBrewerySQL = `
 		insert into "brewery" ("breweryID", "name", "city", "state", "link")
 		values ($1, $2, $3, $4, $5)
@@ -62,8 +62,7 @@ app.post('/api/add-new-brewery', (req, res, next) => {
 });
 
 // add new Beer
-app.post('/api/add-new-beer', (req, res, next) => {
-  console.log(req.body);
+app.post('/api/beer', (req, res, next) => {
   const addBeerSQL = `
 		insert into "beers" ("name", "breweryID", "rating", "note", "bar")
 		values ($1, $2, $3, $4, $5)
@@ -75,13 +74,12 @@ app.post('/api/add-new-beer', (req, res, next) => {
   db.query(addBeerSQL, addBeerParams)
     .then(result => res.status(200).json(result.rows))
     .catch(error => {
-      console.log(error);
       next(error);
     });
 });
 
 // remove Beer
-app.delete('/api/remove-beer/:beerID', (req, res, next) => {
+app.delete('/api/beer/:beerID', (req, res, next) => {
   const { beerID } = req.params;
   const removeBeerSQL = `
 		delete from "beers"
@@ -102,7 +100,7 @@ app.delete('/api/remove-beer/:beerID', (req, res, next) => {
 });
 
 // edit Beer
-app.patch('/api/beer-edit/:beerID', (req, res, next) => {
+app.patch('/api/beer/:beerID', (req, res, next) => {
   const { beerID } = req.params;
   const beerPatchSQL = `
 		update "beers"
@@ -114,6 +112,27 @@ app.patch('/api/beer-edit/:beerID', (req, res, next) => {
   db.query(beerPatchSQL, beerPatchParams)
     .then(result => {
       res.status(200).json(result.rows[0]);
+    })
+    .catch(error => next(error));
+});
+
+// remove Brewery
+app.delete('/api/brewery/:breweryID', (req, res, next) => {
+  const { breweryID } = req.params;
+  const removeBrewerySQL = `
+		delete from "brewery"
+		where "breweryID" = $1
+		returning *;
+	`;
+  const removeBreweryParams = [breweryID];
+  db.query(removeBrewerySQL, removeBreweryParams)
+    .then(result => {
+      const removedBrewery = result.rows[0];
+      if (!removedBrewery) {
+        res.status(404).json({ error: `Cannot find brewery at id ${breweryID}` });
+      } else {
+        res.status(204).json(removedBrewery);
+      }
     })
     .catch(error => next(error));
 });

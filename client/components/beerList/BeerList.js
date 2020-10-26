@@ -19,7 +19,7 @@ class BeerList extends Component {
   }
 
   getBeerList = () => {
-    fetch('/api/beer-list')
+    fetch('/api/beer')
       .then(response => response.json())
       .then(data => this.setState({
         beerList: data,
@@ -42,7 +42,7 @@ class BeerList extends Component {
 	}
 
 	removeBeer = beerID => {
-	  fetch(`/api/remove-beer/${beerID}`, {
+	  fetch(`/api/beer/${beerID}`, {
 	    method: 'DELETE',
 	    headers: {
 	      'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ class BeerList extends Component {
 
 	editBeer = beer => {
 	  const beerID = beer.beerID;
-	  fetch(`/api/edit-beer/${beer.beerID}`, {
+	  fetch(`/api/beer/${beer.beerID}`, {
 	    method: 'PATCH',
 	    headers: { 'Content-Type': 'application/json' },
 	    body: JSON.stringify(beer)
