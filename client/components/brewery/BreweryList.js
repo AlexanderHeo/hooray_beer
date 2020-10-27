@@ -2,7 +2,7 @@
 /* eslint-disable no-tabs */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../ui/spinner/Spinner';
 import Brewery from './Brewery';
 
 class BreweryList extends Component {

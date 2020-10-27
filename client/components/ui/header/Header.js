@@ -1,7 +1,7 @@
 /* eslint-disable no-tabs */
 import React from 'react';
 import styled from 'styled-components';
-import Navigation from '../navigation/Navigation';
+import Navigation from '../../navigation/Navigation';
 
 const header = props => (
   <Header>
