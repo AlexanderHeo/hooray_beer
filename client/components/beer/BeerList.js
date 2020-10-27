@@ -2,9 +2,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Spinner from '../spinner/Spinner';
-import UpdateBeer from '../updateBeer/UpdateBeer';
+import Spinner from '../ui/spinner/Spinner';
 import Beer from './Beer';
+import UpdateBeer from './updateBeer/UpdateBeer';
 
 class BeerList extends Component {
   state = {
@@ -38,7 +38,10 @@ class BeerList extends Component {
 	}
 
 	displayEditBeer = beerData => {
-	  this.setState({ editing: true, beerToUpdate: beerData });
+	  this.setState({
+	    editing: true,
+	    beerToUpdate: beerData
+	  });
 	}
 
 	removeBeer = beerID => {
@@ -110,7 +113,7 @@ class BeerList extends Component {
 	            <Beer
 	              beer={beer}
 	              key={beer.beerID}
-	              addBeerButtonClick={this.handleEditBeer}/>
+	              addBeerButtonClick={(event, beer) => this.handleEditBeer(event, beer)}/>
 	          ))}
 	        </tbody>
 	      </Table>
@@ -119,7 +122,8 @@ class BeerList extends Component {
 	  return (
 	    this.state.editing
 	      ? <UpdateBeer
-	        beerToUpdate={this.state.beerToUpdate}/>
+	        beerToUpdate={this.state.beerToUpdate}
+	        editBeer={this.editBeer}/>
 	      : beerList
 	  );
 	}

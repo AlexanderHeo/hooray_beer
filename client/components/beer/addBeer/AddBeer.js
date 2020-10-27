@@ -1,7 +1,7 @@
 /* eslint-disable no-tabs */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../../ui/spinner/Spinner';
 import AddBeerData from './AddBeerData';
 import AddBreweryFromList from './AddBreweryFromList';
 import AddBreweryFromQuery from './AddBreweryFromQuery';

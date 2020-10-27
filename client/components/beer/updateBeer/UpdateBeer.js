@@ -1,14 +1,13 @@
 /* eslint-disable no-tabs */
-import PickRating from 'beauty-stars';
+import Rating from 'beauty-stars';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-class addBeerData extends Component {
-	state ={
-	  name: '',
-	  rating: 0,
-	  note: '',
-	  bar: ''
+class UpdateBeer extends Component {
+	state = {
+	  rating: this.props.beerToUpdate.rating,
+	  note: this.props.beerToUpdate.note,
+	  bar: this.props.beerToUpdate.bar
 	}
 
 	handleInput = event => {
@@ -20,14 +19,17 @@ class addBeerData extends Component {
 
 	handleClick = event => {
 	  event.preventDefault();
-	  const beerData = {
-	    name: this.state.name,
+	  const updatedBeerData = {
+	    beerID: this.props.beerToUpdate.beerID,
+	    name: this.props.beerToUpdate.name,
+	    breweryID: this.props.beerToUpdate.breweryID,
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar
+
 	  };
-	  if (event.target.name === 'submit') {
-	    this.props.addBeerData(beerData);
+	  if (event.target.name === 'update') {
+	    this.props.editBeer(updatedBeerData);
 	  } else if (event.target.name === 'reset') {
 	    this.handleReset();
 	  }
@@ -35,73 +37,66 @@ class addBeerData extends Component {
 
 	handleReset = () => {
 	  this.setState({
-	    name: '',
 	    rating: 0,
-	    note: 0,
+	    note: '',
 	    bar: ''
 	  });
 	}
 
 	render() {
 	  return (
-	    <AddBeerContainer>
+	    <UpdateModal>
+	      <h3>{this.props.beerToUpdate.name}</h3>
+	      <h4>{this.props.beerToUpdate.brewery}</h4>
 	      <Form>
 	        <fieldset>
-	          <label htmlFor="name">Beer:</label>
-	          <input
-	            type="text"
-	            placeholder="Beer"
-	            name="name"
-	            value={this.state.name}
-	            onChange={this.handleInput} />
-	        </fieldset>
-	        <fieldset>
-	          <label htmlFor="rating">Rating:</label>
-	          <PickRating
+	          <label htmlFor="rating">Rating: </label>
+	          <Rating
 	            value={this.state.rating}
-	            onChange={rating => this.setState({ rating })}
-	          />
+	            onChange={rating => this.setState({ rating })} />
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="notes">Notes:</label>
+	          <label htmlFor="note">Note: </label>
 	          <textarea
 	            type="text"
-	            placeholder="What are your thoughts?"
+	            placeholder="What do you think?"
 	            name="note"
 	            rows="4"
 	            value={this.state.note}
-	            onChange={this.handleInput} />
+	            onChange={this.handleInput}/>
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="bar">Bar:</label>
+	          <label htmlFor="bar">Bar: </label>
 	          <input
 	            type="text"
-	            placeholder="Where did you drink this beer?"
+	            placeholder="Where did you have this beer?"
 	            name="bar"
 	            value={this.state.bar}
-	            onChange={this.handleInput} />
+	            onChange={this.handleInput}/>
 	        </fieldset>
 	        <div className="button-container">
 	          <button
-	            name="submit"
-	            onClick={this.handleClick}>Add Beer</button>
+	            name="update"
+	            onClick={this.handleClick}>Update</button>
 	          <button
 	            name="reset"
 	            onClick={this.handleClick}>Cancel</button>
 	        </div>
 	      </Form>
-	    </AddBeerContainer>
+	    </UpdateModal>
 	  );
 	}
 }
 
-export default addBeerData;
+export default UpdateBeer;
 
-const AddBeerContainer = styled.div`
-	h4 {
-		margin-top: 6px;
-		margin-bottom: 0;
-	}
+const UpdateModal = styled.div`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	z-index: 5;
+	background-color: rgba(0, 0, 0, 0.25);
 `;
 
 const Form = styled.form`
@@ -127,18 +122,14 @@ label {
 	border-radius: 6px;
 }
 input {
-	padding: 12px;
+	padding: 6px 12px;
 	border-radius: 6px;
 }
-input {
+input, textarea {
 	width: 200px;
 }
-textarea {
-	border: 2px solid;
-	border-color: rgb(0, 0, 0) rgb(118, 118, 118) rgb(118, 118, 118) rgb(0, 0, 0);
-	border-radius: 6px;
-	padding: 12px;
-	width: 200px;
+select {
+	width: 208px;
 }
 .button-container {
 	margin: 6px 0;

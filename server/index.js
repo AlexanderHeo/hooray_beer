@@ -21,6 +21,7 @@ app.get('/api/health-check', (req, res, next) => {
 app.get('/api/beer', (req, res, next) => {
   const beerListSQL = `
 		select "br"."name" as "brewery",
+					 "br"."breweryID",
 					 "be"."name",
 					 "be"."rating",
 					 "be"."note",
@@ -50,13 +51,26 @@ app.get('/api/brewery', (req, res, next) => {
 
 // add new Brewery
 app.post('/api/brewery', (req, res, next) => {
+  const breweryID = req.body.breweryID;
+  const name = req.body.name;
+  const city = req.body.city;
+  const state = req.body.state;
+  const link = req.body.link;
+
+  if (!breweryID || !name || !city || !state || !link) {
+    next(new ClientError('Please complete the form before submitting.', 400));
+    return;
+  } else if (isNaN(breweryID)) {
+    next(new ClientError('Error with Brewery ID. Please contact web master.', 400));
+  }
+
   const addBrewerySQL = `
 		insert into "brewery" ("breweryID", "name", "city", "state", "link")
 		values ($1, $2, $3, $4, $5)
 		returning *;
 	`;
   const addBreweryParams = ([
-		`${req.body.breweryID}`, `${req.body.name}`, `${req.body.city}`, `${req.body.state}`, `${req.body.link}`
+    breweryID, name, city, state, link
   ]);
   db.query(addBrewerySQL, addBreweryParams)
     .then(result => res.status(200).json(result.rows))
@@ -65,13 +79,25 @@ app.post('/api/brewery', (req, res, next) => {
 
 // add new Beer
 app.post('/api/beer', (req, res, next) => {
+  const name = req.body.name;
+  const breweryID = req.body.breweryID;
+  const rating = req.body.rating;
+  const note = req.body.note;
+  const bar = req.body.bar;
+
+  if (!name || !breweryID || !rating || !note || !bar) {
+    next(new ClientError('Please complete form before submitting', 400));
+  } else if (isNaN(breweryID)) {
+    next(new ClientError('Error with Brewery ID. Please contact web master', 400));
+  }
+
   const addBeerSQL = `
 		insert into "beers" ("name", "breweryID", "rating", "note", "bar")
 		values ($1, $2, $3, $4, $5)
 		returning *;
 	`;
   const addBeerParams = ([
-		`${req.body.name}`, `${req.body.breweryID}`, `${req.body.rating}`, `${req.body.note}`, `${req.body.bar}`
+    name, breweryID, rating, note, bar
   ]);
   db.query(addBeerSQL, addBeerParams)
     .then(result => res.status(200).json(result.rows))
@@ -83,6 +109,11 @@ app.post('/api/beer', (req, res, next) => {
 // remove Beer
 app.delete('/api/beer/:beerID', (req, res, next) => {
   const { beerID } = req.params;
+  if (isNaN(beerID)) {
+    next(new ClientError('Beer ID must be a number', 400));
+  } else if (!beerID) {
+    next(new ClientError('Beer ID is required', 400));
+  }
   const removeBeerSQL = `
 		delete from "beers"
 		where "beerID" = $1
@@ -104,6 +135,11 @@ app.delete('/api/beer/:beerID', (req, res, next) => {
 // edit Beer
 app.patch('/api/beer/:beerID', (req, res, next) => {
   const { beerID } = req.params;
+	  if (isNaN(beerID)) {
+    next(new ClientError('Beer ID must be a number', 400));
+  } else if (!beerID) {
+    next(new ClientError('Beer ID is required', 400));
+  }
   const beerPatchSQL = `
 		update "beers"
 		set "rating" = $1, "note" = $2, "bar" =$3
@@ -121,6 +157,11 @@ app.patch('/api/beer/:beerID', (req, res, next) => {
 // remove Brewery
 app.delete('/api/brewery/:breweryID', (req, res, next) => {
   const { breweryID } = req.params;
+	  if (isNaN(breweryID)) {
+    next(new ClientError('Brewery ID must be a number', 400));
+  } else if (!breweryID) {
+    next(new ClientError('Brewery ID is required', 400));
+  }
   const removeBrewerySQL = `
 		delete from "brewery"
 		where "breweryID" = $1

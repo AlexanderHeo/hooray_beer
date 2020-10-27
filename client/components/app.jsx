@@ -1,10 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import React from 'react';
-import AddBeer from './addBeer/AddBeer';
-import BeerList from './beerList/BeerList';
-import BreweryList from './breweries/BreweryList';
-import Header from './ui/header';
+import AddBeer from './beer/addBeer/AddBeer';
+import BeerList from './beer/BeerList';
+import BreweryList from './brewery/BreweryList';
+import Header from './ui/header/Header';
 
 export default class App extends React.Component {
 	state = {
