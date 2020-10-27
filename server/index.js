@@ -43,9 +43,7 @@ app.get('/api/brewery', (req, res, next) => {
 		order by "breweryID";
 	`;
   db.query(brewerysql)
-    .then(result => {
-      res.status(200).json(result.rows);
-    })
+    .then(result => res.status(200).json(result.rows))
     .catch(error => next(error));
 });
 
@@ -101,9 +99,7 @@ app.post('/api/beer', (req, res, next) => {
   ]);
   db.query(addBeerSQL, addBeerParams)
     .then(result => res.status(200).json(result.rows))
-    .catch(error => {
-      next(error);
-    });
+    .catch(error => next(error));
 });
 
 // remove Beer
@@ -148,9 +144,7 @@ app.patch('/api/beer/:beerID', (req, res, next) => {
 	`;
   const beerPatchParams = ([req.body.rating, req.body.note, req.body.bar, beerID]);
   db.query(beerPatchSQL, beerPatchParams)
-    .then(result => {
-      res.status(200).json(result.rows[0]);
-    })
+    .then(result => res.status(200).json(result.rows[0]))
     .catch(error => next(error));
 });
 
