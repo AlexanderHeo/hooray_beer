@@ -28,10 +28,10 @@ class BeerList extends Component {
       .catch(error => console.error(error));
   }
 
-	handleEditBeer = (event, beerData) => {
+	handleEditButton = (event, beerData) => {
 	  const name = event.target.name;
 	  if (name === 'remove') {
-	    this.removeBeer(beerData);
+	    this.handleRemoveBeer(beerData);
 	  } else if (name === 'edit') {
 	    this.displayEditBeer(beerData);
 	  }
@@ -44,7 +44,7 @@ class BeerList extends Component {
 	  });
 	}
 
-	removeBeer = beerID => {
+	handleRemoveBeer = beerID => {
 	  fetch(`/api/beer/${beerID}`, {
 	    method: 'DELETE',
 	    headers: {
@@ -64,7 +64,7 @@ class BeerList extends Component {
 	    .catch(error => console.error(error));
 	}
 
-	editBeer = beer => {
+	handleEditBeer = beer => {
 	  const beerID = beer.beerID;
 	  fetch(`/api/beer/${beer.beerID}`, {
 	    method: 'PATCH',
@@ -113,7 +113,7 @@ class BeerList extends Component {
 	            <Beer
 	              beer={beer}
 	              key={beer.beerID}
-	              addBeerButtonClick={(event, beer) => this.handleEditBeer(event, beer)}/>
+	              addBeerButtonClick={(event, beer) => this.handleEditButton(event, beer)}/>
 	          ))}
 	        </tbody>
 	      </Table>
@@ -123,7 +123,7 @@ class BeerList extends Component {
 	    this.state.editing
 	      ? <UpdateBeer
 	        beerToUpdate={this.state.beerToUpdate}
-	        editBeer={this.editBeer}/>
+	        editBeer={this.handleEditBeer}/>
 	      : beerList
 	  );
 	}

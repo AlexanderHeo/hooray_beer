@@ -22,9 +22,9 @@ const addBreweryFromList = props => {
 export default addBreweryFromList;
 
 const AddBeerForm = styled.div`
+	text-align: center;
 	h4 {
-		margin-top: 6px;
-		margin-bottom: 0;
+		margin: 6px 0;
 	}
 `;
 

@@ -36,6 +36,7 @@ const UL = styled.ul`
 		margin: 6px;
 		width: 200px;
 		padding: 6px 12px;
+		cursor: pointer;
 	}
 	li:nth-child(odd) {
 		background-color: rgb(188, 188, 188);

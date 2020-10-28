@@ -7,13 +7,19 @@ const navigation = props => (
     <Navigation>
       <ul>
         <li>
-          <button onClick={() => props.setView('beerList')}>My Beers List</button>
+          <button
+            className="listButton"
+            onClick={() => props.setView('beerList')}>My Beers</button>
         </li>
         <li>
-          <button onClick={() => props.setView('add')}>Add New Beer</button>
+          <button
+            className="listButton"
+            onClick={() => props.setView('brewery')}>My Breweries</button>
         </li>
         <li>
-          <button onClick={() => props.setView('brewery')}>Breweries</button>
+          <button
+            className="addBeerButton"
+            onClick={() => props.setView('add')}>Add New Beer</button>
         </li>
       </ul>
     </Navigation>
@@ -35,16 +41,33 @@ width: 100%;
 		justify-content: flex-end;
 	}
 	button {
-		background-color: rgb(255, 255, 255);
 		cursor: pointer;
 		padding: 6px 12px;
 		margin: 0 6px;
-		border-radius: 6px;
+		border: 2px solid transparent;
 	}
-	button:hover,
-	button:active,
-	button.active {
-		background-color: rgb(50, 50, 50);
-		color: rgb(188, 188, 188)
+	.listButton {
+		background-color: rgb(255, 255, 255);
+	}
+	.listButton:hover,
+	.listButton:active,
+	.listButton.active {
+		border: 2px solid rgb(135, 206, 235);
+		background-color: rgb(135, 206, 235);
+		border-radius: 6px;
+		color: rgb(0, 0, 255);
+	}
+	.addBeerButton {
+		border-radius: 6px;
+		background-color: rgb(0, 144, 247);
+		color: rgb(240, 240, 40);
+	}
+	.addBeerButton:hover,
+	.addBeerButton:active,
+	.addBeerButton.active {
+		border: 2px solid rgb(0, 0, 255);
+		background-color: rgb(255, 255, 255);
+		color: rgb(0, 0, 255);
+		border-radius: 6px;
 	}
 `;

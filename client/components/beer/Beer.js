@@ -20,11 +20,13 @@ const beer = props => {
           <button
             type="submit"
             name="remove"
+            className="removeButton"
             onClick={ event => props.addBeerButtonClick(event, props.beer.beerID) }
             value="remove">Remove</button>
           <button
             type="submit"
             name="edit"
+            className="editButton"
             onClick={ event => props.addBeerButtonClick(event, props.beer) }
             value="edit">Edit</button>
         </Button>
@@ -40,17 +42,36 @@ const Button = styled.div`
 	justify-content: center;
 
 	button {
-		background-color: rgb(255, 255, 255);
+		border: 2px solid black;
+		background-color: transparent;
+		border-radius: 6px;
 		width: 80px;
 		padding: 6px 12px;
-		border-radius: 6px;
 		margin: 0 6px;
 		cursor: pointer;
 	}
-	button:hover,
-	button:active,
-	button.active {
-		background-color: rgb(50, 50, 50);
-		color: rgb(188, 188, 188)
+	.removeButton {
+		border: 2px solid rgb(255, 0, 0);
+		color: rgb(255, 0, 0);
+		background-color: rgb(255, 255, 255);
+	}
+	.editButton {
+		border: 2px solid rgb(0, 255, 0);
+		color: rgb(0, 255, 0);
+		background-color: rgb(255, 255, 255);
+	}
+	.removeButton:hover,
+	.removeButton:active,
+	.removeButton.active {
+		border: 2px solid transparent;
+		background-color: rgb(255, 0, 0);
+		color: rgb(255, 255, 255);
+	}
+	.editButton:hover,
+	.editButton:active,
+	.editButton.active {
+		border: 2px solid transparent;
+		background-color: rgb(0, 255, 0);
+		color: rgb(255, 255, 255);
 	}
 `;

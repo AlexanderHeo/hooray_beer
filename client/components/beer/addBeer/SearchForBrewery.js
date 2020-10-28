@@ -42,10 +42,12 @@ class AddNewBrewery extends Component {
 	      <div className="buttonContainer">
 	        <button
 	          name="search"
+	          className="enterButton"
 	          onClick={this.handleButtonClick}
 	        >Enter</button>
 	        <button
 	          name="reset"
+	          className="cancelButton"
 	          onClick={this.handleButtonClick}
 	        >Cancel</button>
 	      </div>
@@ -62,8 +64,7 @@ const Form = styled.form`
 	align-items: center;
 
 	h4 {
-		margin-top: 0;
-		margin-bottom: 6px;
+		margin: 6px 0;
 	}
 	.inputField {
 		padding: 6px 12px;
@@ -79,5 +80,17 @@ const Form = styled.form`
 	button {
 		width: 80px;
 		height: 33px;
+		border: 2px solid black;
+		border-radius: 6px;
 	}
+	.enterButton:hover {
+		border: 2px solid transparent;
+		background-color: rgb(135, 206, 235);
+		color: rgb(0, 0, 255);
+	}
+	.cancelButton:hover {
+		border: 2px solid transparent;
+		background-color: rgb(255, 0, 0);
+		color: rgb(255, 255, 255);
+	};
 `;

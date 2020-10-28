@@ -84,9 +84,11 @@ class addBeerData extends Component {
 	        <div className="button-container">
 	          <button
 	            name="submit"
+	            className="addButton"
 	            onClick={this.handleClick}>Add Beer</button>
 	          <button
 	            name="reset"
+	            className="cancelButton"
 	            onClick={this.handleClick}>Cancel</button>
 	        </div>
 	      </Form>
@@ -141,6 +143,25 @@ textarea {
 	width: 200px;
 }
 .button-container {
+	width: 100%;
 	margin: 6px 0;
+	display: flex;
+	justify-content: space-evenly;
+}
+button {
+	width: 80px;
+	height: 33px;
+	border: 2px solid black;
+	border-radius: 6px;
+}
+.addButton:hover {
+	border: 2px solid transparent;
+	background-color: rgb(135, 206, 235);
+	color: rgb(0, 0, 255);
+}
+.cancelButton:hover {
+	border: 2px solid transparent;
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
 }
 `;
