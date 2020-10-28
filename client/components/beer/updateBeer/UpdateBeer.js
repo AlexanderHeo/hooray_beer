@@ -23,6 +23,7 @@ class UpdateBeer extends Component {
 	    beerID: this.props.beerToUpdate.beerID,
 	    name: this.props.beerToUpdate.name,
 	    breweryID: this.props.beerToUpdate.breweryID,
+	    brewery: this.props.beerToUpdate.brewery,
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar

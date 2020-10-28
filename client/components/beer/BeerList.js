@@ -77,7 +77,7 @@ class BeerList extends Component {
 	      const index = beerListCopy.findIndex(beer => {
 	        return beer.beerID === beerID;
 	      });
-	      beerListCopy.splice(index, 1, data);
+	      beerListCopy.splice(index, 1, beer);
 	      this.setState({
 	        beerList: beerListCopy,
 	        editing: false
