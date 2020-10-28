@@ -12,7 +12,7 @@ const beer = props => {
     <tr>
       <td>{props.beer.name}</td>
       <td>{props.beer.brewery}</td>
-      <td>{rating.map(x => <RatingDisplay key={x[0]}/>)}</td>
+      <Rating>{rating.map(x => <RatingDisplay key={x[0]}/>)}</Rating>
       <td>{props.beer.note}</td>
       <td>{props.beer.bar}</td>
       <td>
@@ -36,11 +36,12 @@ const beer = props => {
 };
 
 export default beer;
-
+const Rating = styled.td`
+	min-width: 162px;
+`;
 const Button = styled.div`
 	display: flex;
 	justify-content: center;
-
 	button {
 		border: 2px solid black;
 		background-color: transparent;
