@@ -21,9 +21,11 @@ const Header = styled.div`
 	padding: 10px 10px 16px;
 	display: flex;
 	h1 {
-		min-width: 188px;
+		min-width: 220px;
 		padding: 0;
 		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: -0.2px;
 	}
 `;
 

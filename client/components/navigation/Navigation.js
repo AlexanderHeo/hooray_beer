@@ -45,6 +45,7 @@ width: 100%;
 		padding: 6px 12px;
 		margin: 0 6px;
 		border: 2px solid transparent;
+		outline: none;
 	}
 	.listButton {
 		background-color: rgb(255, 255, 255);

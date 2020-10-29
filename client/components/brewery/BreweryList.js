@@ -27,22 +27,24 @@ class BreweryList extends Component {
 	  if (this.state.breweryListLoaded) {
 	    breweryList = (
 	      <Table>
-	        <thead>
-	          <tr>
-	            <th>Name</th>
-	            <th>Location</th>
-	            <th>Link</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          {this.state.breweryList.map(brewery => {
-	            return <Brewery
-	              brewery={brewery}
-	              key={brewery.breweryID}
-	              buttonClick={this.handleButtonClick}
-	            />;
-	          })}
-	        </tbody>
+	        <table>
+	          <thead>
+	            <tr>
+	              <th>Name</th>
+	              <th>Location</th>
+	              <th>Link</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            {this.state.breweryList.map(brewery => {
+	              return <Brewery
+	                brewery={brewery}
+	                key={brewery.breweryID}
+	                buttonClick={this.handleButtonClick}
+	              />;
+	            })}
+	          </tbody>
+	        </table>
 	      </Table>
 	    );
 	  }
@@ -53,10 +55,19 @@ class BreweryList extends Component {
 
 export default BreweryList;
 
-const Table = styled.table`
-	width: 100%;
-	tr:nth-child(even) {
-		background-color: rgb(200, 200, 200);
+const Table = styled.div`
+	display: flex;
+	justify-content: center;
+	margin: 24px 0;
+	table {
+		border: 2px solid transparent;
+		border-radius: 12px;
+		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+		padding: 10px 0;
+		width: 80%;
+		tr:nth-child(even) {
+			background-color: rgb(200, 200, 200);
+	}
 	}
 	th {
 		border-bottom: 2px solid;

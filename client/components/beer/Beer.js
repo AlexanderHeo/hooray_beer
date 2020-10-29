@@ -9,14 +9,15 @@ const beer = props => {
     rating.push([i + 1]);
   }
   return (<>
-    <TR className="row">
-      <td className="beer" rowSpan="4"><span className="beerName">{props.beer.name}</span><br/><span className="breweryName">{props.beer.brewery}</span><br/><span className="barName">@ {props.beer.bar}</span></td>
-      <td className="note" rowSpan="4">{props.beer.note}</td>
-      <td className="rating" rowSpan="1"><span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span></td>
-    </TR>
-    <tr></tr>
-    <tr>
-      <td rowSpan="1">
+    <TR>
+      <td className="beer" rowSpan="4">
+        <span className="beerName">{props.beer.name}</span>
+        <span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span><br/>
+        <span className="breweryName">{props.beer.brewery}</span><br/>
+        <span className="barName">@ {props.beer.bar}</span>
+      </td>
+      <td className="note" rowSpan="4"><span className="tastingNotes">Tasting Notes:</span>&nbsp;{props.beer.note}</td>
+      <td className="buttons" rowSpan="4">
         <Button>
           <button
             type="submit"
@@ -32,7 +33,9 @@ const beer = props => {
             value="edit">Edit</button>
         </Button>
       </td>
-    </tr>
+    </TR>
+    <tr></tr>
+    <tr></tr>
     <tr></tr>
   </>);
 };
@@ -41,27 +44,40 @@ export default beer;
 
 const TR = styled.tr`
 	.beer {
-		min-width: 180px;
+		min-width: 240px;
 	}
 	.beerName {
-		font-size: 18px;
+		font-size: 28px;
 		font-weight: 700;
+		letter-spacing: 0.2px;
 	}
-	.breweryName,
+	.breweryName {
+		font-size: 16px;
+		font-weight: 500;
+	}
 	.barName  {
-		font-size: 12px;
-	}
-	.note {
-		border-left: 2px solid rgb(118, 118, 118);
-		border-right: 2px solid rgb(118, 118, 118);
+		font-size: 16px;
 	}
 	.rating {
 		min-width: 162px;
-		border-bottom: 1px solid black;
 	}
 	.ratingSpan {
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
+		margin-left: 6px;
+	}
+	.note {
+		display: flex;
+		justify-content: flex-start;
+	}
+	.tastingNotes {
+		font-weight: 500;
+		color: rgb(118, 118, 118);
+	}
+	.buttons {
+		width: 208px;
+		min-width: 208px;
+		max-width: 208px;
 	}
 `;
 const Button = styled.div`

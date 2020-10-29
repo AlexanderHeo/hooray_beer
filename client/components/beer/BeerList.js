@@ -96,13 +96,6 @@ class BeerList extends Component {
 	            <col style={{ width: '50%' }} />
 	            <col style={{ width: '25%' }} />
 	          </colgroup>
-	          <thead>
-	            <tr>
-	              <th>Beer</th>
-	              <th className="notes">Notes</th>
-	              <th>Rating / Edit</th>
-	            </tr>
-	          </thead>
 	          <tbody>
 	            {this.state.beerList.map(beer => (
 	              <Beer
@@ -144,7 +137,7 @@ const Table = styled.div`
 		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
 		padding: 10px 0;
 		width: 80%;
-		border-spacing: 0;
+		border-spacing: 2px 0;
 	}
 	th {
 		border-bottom: 2px solid;
@@ -159,9 +152,5 @@ const Table = styled.div`
 	}
 	th:last-of-type {
 		border-top-right-radius: 12px;
-	}
-	.notes {
-		border-left: 2px solid rgb(118, 118, 118);
-		border-right: 2px solid rgb(118, 118, 118);
 	}
 `;
