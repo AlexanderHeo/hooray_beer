@@ -7,14 +7,16 @@ const addBreweryFromList = props => {
 
   return (
 		<AddBeerForm>
-			<h4>Pick a brewery:</h4>
-			<UL>
-				{props.brewery.map(x => (
-					<li
-						key={x.breweryID}
-						onClick={() => props.addBreweryFromList(x)}>{x.name}</li>
-				))}
-			</UL>
+			<div className="form">
+				<h4>Pick a brewery:</h4>
+				<UL>
+					{props.brewery.map(x => (
+						<li
+							key={x.breweryID}
+							onClick={() => props.addBreweryFromList(x)}>{x.name}</li>
+					))}
+				</UL>
+			</div>
 		</AddBeerForm>
 	);
 };
@@ -23,6 +25,16 @@ export default addBreweryFromList;
 
 const AddBeerForm = styled.div`
 	text-align: center;
+	border: 2px solid rgb(118, 118, 118);
+	border-radius: 12px;
+	padding: 12px 12px;
+	margin: 24px;
+	height: 300px;
+	box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+	.form {
+		height: 100%;
+		overflow-y: scroll;
+	}
 	h4 {
 		margin: 6px 0;
 	}

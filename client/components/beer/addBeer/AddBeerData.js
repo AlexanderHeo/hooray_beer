@@ -100,6 +100,11 @@ class addBeerData extends Component {
 export default addBeerData;
 
 const AddBeerContainer = styled.div`
+	border: 2px solid rgb(118, 118, 118);
+	border-radius: 12px;
+	box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+	margin: 24px 0;
+	padding: 12px 24px;
 	h4 {
 		margin-top: 6px;
 		margin-bottom: 0;
@@ -141,6 +146,7 @@ textarea {
 	border-radius: 6px;
 	padding: 12px;
 	width: 200px;
+	font-family: 'Roboto';
 }
 .button-container {
 	width: 100%;
@@ -153,6 +159,14 @@ button {
 	height: 33px;
 	border: 2px solid black;
 	border-radius: 6px;
+}
+.addButton {
+	border: 2px solid rgb(135, 206, 235);
+	background-color: rgb(255, 255, 255);
+}
+.cancelButton {
+	border: 2px solid rgb(255, 0, 0);
+	background-color: rgb(255, 255, 255);
 }
 .addButton:hover {
 	border: 2px solid transparent;

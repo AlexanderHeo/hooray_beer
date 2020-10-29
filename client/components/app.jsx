@@ -9,7 +9,7 @@ import Header from './ui/header/Header';
 
 export default class App extends React.Component {
 	state = {
-	  view: 'beerList'
+	  view: 'add'
 	}
 
 	setView = view => {
@@ -20,7 +20,7 @@ export default class App extends React.Component {
 	  let component = null;
 	  const view = this.state.view;
 	  if (view === 'beerList') {
-	    component = <BeerList />;
+	    component = <BeerList setView={this.setView}/>;
 	  } else if (view === 'add') {
 	    component = <AddBeer setView={this.setView}/>;
 	  } else if (view === 'brewery') {

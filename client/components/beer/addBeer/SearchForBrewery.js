@@ -69,6 +69,11 @@ class AddNewBrewery extends Component {
 export default AddNewBrewery;
 
 const Form = styled.form`
+	border: 2px solid rgb(118, 118, 118);
+	border-radius: 12px;
+	box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+	padding: 12px 24px;
+	margin-bottom: 24px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -92,6 +97,15 @@ const Form = styled.form`
 		height: 33px;
 		border: 2px solid black;
 		border-radius: 6px;
+		cursor: pointer;
+	}
+	.enterButton {
+		border: 2px solid rgb(135, 206, 235);
+		background-color: rgb(255, 255, 255);
+	}
+	.cancelButton {
+		border: 2px solid rgb(255, 0, 0);
+		background-color: rgb(255, 255, 255);
 	}
 	.enterButton:hover {
 		border: 2px solid transparent;
