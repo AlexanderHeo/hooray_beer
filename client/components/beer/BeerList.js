@@ -90,32 +90,28 @@ class BeerList extends Component {
 	  if (this.state.beerListLoaded) {
 	    beerList = (
 	      <Table>
-	        <colgroup>
-	          <col span="1" style={{ width: '10%' }} />
-	          <col span="1" style={{ width: '15%' }} />
-	          <col span="1" style={{ width: '12%' }} />
-	          <col span="1" style={{ width: '20%' }} />
-	          <col span="1" style={{ width: '15%' }} />
-	          <col span="1" style={{ width: '15%' }} />
-	        </colgroup>
-	        <thead>
-	          <tr>
-	            <th>Beer</th>
-	            <th>Brewery</th>
-	            <th>Rating</th>
-	            <th>Notes</th>
-	            <th>Bar</th>
-	            <th>Edit</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          {this.state.beerList.map(beer => (
-	            <Beer
-	              beer={beer}
-	              key={beer.beerID}
-	              addBeerButtonClick={(event, beer) => this.handleEditButton(event, beer)}/>
-	          ))}
-	        </tbody>
+	        <table>
+	          <colgroup>
+	            <col style={{ width: '25%' }} />
+	            <col style={{ width: '50%' }} />
+	            <col style={{ width: '25%' }} />
+	          </colgroup>
+	          <thead>
+	            <tr>
+	              <th>Beer</th>
+	              <th className="notes">Notes</th>
+	              <th>Rating / Edit</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            {this.state.beerList.map(beer => (
+	              <Beer
+	                beer={beer}
+	                key={beer.beerID}
+	                addBeerButtonClick={(event, beer) => this.handleEditButton(event, beer)}/>
+	            ))}
+	          </tbody>
+	        </table>
 	      </Table>
 	    );
 	  }
@@ -131,10 +127,24 @@ class BeerList extends Component {
 
 export default BeerList;
 
-const Table = styled.table`
-	width: 100%;
-	tr:nth-child(even) {
-		background-color: rgb(200, 200, 200);
+const Table = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 24px 0;
+	tr:nth-child(8n+1),
+	tr:nth-child(8n+2),
+	tr:nth-child(8n+3),
+	tr:nth-child(8n+4) {
+		background-color: rgb(235, 235, 235);
+	}
+	table {
+		border: 2px solid transparent;
+		border-radius: 12px;
+		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+		padding: 10px 0;
+		width: 80%;
+		border-spacing: 0;
 	}
 	th {
 		border-bottom: 2px solid;
@@ -143,5 +153,15 @@ const Table = styled.table`
 	}
 	th, td {
 		padding: 6px 12px;
+	}
+	th:first-of-type {
+		border-top-left-radius: 12px;
+	}
+	th:last-of-type {
+		border-top-right-radius: 12px;
+	}
+	.notes {
+		border-left: 2px solid rgb(118, 118, 118);
+		border-right: 2px solid rgb(118, 118, 118);
 	}
 `;

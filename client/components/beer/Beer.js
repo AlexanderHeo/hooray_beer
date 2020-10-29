@@ -8,14 +8,15 @@ const beer = props => {
   for (let i = 0; i < props.beer.rating; i++) {
     rating.push([i + 1]);
   }
-  return (
+  return (<>
+    <TR className="row">
+      <td className="beer" rowSpan="4"><span className="beerName">{props.beer.name}</span><br/><span className="breweryName">{props.beer.brewery}</span><br/><span className="barName">@ {props.beer.bar}</span></td>
+      <td className="note" rowSpan="4">{props.beer.note}</td>
+      <td className="rating" rowSpan="1"><span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span></td>
+    </TR>
+    <tr></tr>
     <tr>
-      <td>{props.beer.name}</td>
-      <td>{props.beer.brewery}</td>
-      <Rating>{rating.map(x => <RatingDisplay key={x[0]}/>)}</Rating>
-      <td>{props.beer.note}</td>
-      <td>{props.beer.bar}</td>
-      <td>
+      <td rowSpan="1">
         <Button>
           <button
             type="submit"
@@ -32,12 +33,36 @@ const beer = props => {
         </Button>
       </td>
     </tr>
-  );
+    <tr></tr>
+  </>);
 };
 
 export default beer;
-const Rating = styled.td`
-	min-width: 162px;
+
+const TR = styled.tr`
+	.beer {
+		min-width: 180px;
+	}
+	.beerName {
+		font-size: 18px;
+		font-weight: 700;
+	}
+	.breweryName,
+	.barName  {
+		font-size: 12px;
+	}
+	.note {
+		border-left: 2px solid rgb(118, 118, 118);
+		border-right: 2px solid rgb(118, 118, 118);
+	}
+	.rating {
+		min-width: 162px;
+		border-bottom: 1px solid black;
+	}
+	.ratingSpan {
+		display: flex;
+		justify-content: center;
+	}
 `;
 const Button = styled.div`
 	display: flex;
@@ -53,12 +78,12 @@ const Button = styled.div`
 	}
 	.removeButton {
 		border: 2px solid rgb(255, 0, 0);
-		color: rgb(255, 0, 0);
+		color: rgb(80, 80, 80);
 		background-color: rgb(255, 255, 255);
 	}
 	.editButton {
 		border: 2px solid rgb(0, 255, 0);
-		color: rgb(0, 255, 0);
+		color: rgb(80, 80, 80);
 		background-color: rgb(255, 255, 255);
 	}
 	.removeButton:hover,

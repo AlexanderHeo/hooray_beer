@@ -29,7 +29,6 @@ export default class App extends React.Component {
 	  return (
 	    <>
 	      <Header setView={this.setView}/>
-	      <hr />
 	      {component}
 	    </>
 	  );
