@@ -9,15 +9,25 @@ class Navigation extends Component {
 	}
 
 	setView = button => {
-	  const beerCurrentState = this.state.beerActive;
-	  const breweryCurrentState = this.state.breweryActive;
-	  if ((button === 'beerList' && !this.state.beerActive) || (button === 'brewery' && !this.state.breweryActive)) {
+	  if (button === 'beerList' && !this.state.beerActive) {
 	    this.setState({
-	      beerActive: !beerCurrentState,
-	      breweryActive: !breweryCurrentState
+	      beerActive: true,
+	      breweryActive: false
+	    });
+	    this.props.setView(button);
+	  } else if (button === 'brewery' && !this.state.breweryActive) {
+	    this.setState({
+	      beerActive: false,
+	      breweryActive: true
 	    });
 	    this.props.setView(button);
 	  } else if (button === 'add') {
+	    this.setState({
+	      beerActive: false,
+	      breweryActive: false
+	    });
+	    this.props.setView(button);
+	  } else {
 	    this.props.setView(button);
 	  }
 	}
@@ -88,7 +98,7 @@ width: 100%;
 	}
 	.addBeerButton:hover,
 	.addBeerButton:active {
-		border: 2px solid rgb(0, 0, 255);
+		border: 2px solid rgb(0, 144, 247);
 		background-color: rgb(255, 255, 255);
 		color: rgb(0, 0, 255);
 		border-radius: 6px;

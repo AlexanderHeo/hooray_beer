@@ -4,18 +4,22 @@ import styled from 'styled-components';
 
 class AddNewBrewery extends Component {
 	state={
-	  newBrewery: ''
+	  newBrewery: '',
+	  invalid: ''
 	}
 
 	handleInput = event => {
 	  this.setState({
-	    newBrewery: event.target.value
+	    newBrewery: event.target.value,
+	    invalid: ''
 	  });
 	}
 
 	handleButtonClick = event => {
 	  event.preventDefault();
-	  if (event.target.name === 'reset') {
+	  if (!this.state.newBrewery) {
+	    this.setState({ invalid: 'Please enter a brewery.' });
+	  } else if (event.target.name === 'reset' && this.state.newBrewery) {
 	    this.handleReset();
 	  } else if (event.target.name === 'search') {
 	    this.props.search(this.state.newBrewery);
@@ -27,6 +31,23 @@ class AddNewBrewery extends Component {
 	}
 
 	render() {
+	  let buttonContainer = (
+	    <div className="buttonContainer">
+	      <button
+	        name="search"
+	        className="enterButton"
+	        onClick={this.handleButtonClick}
+	      >Enter</button>
+	      <button
+	        name="reset"
+	        className="cancelButton"
+	        onClick={this.handleButtonClick}
+	      >Cancel</button>
+	    </div>
+	  );
+	  if (this.state.invalid) {
+	    buttonContainer = <div className="invalidMessage">{this.state.invalid}</div>;
+	  }
 	  return (
 	    <Form>
 	      <h4>Add New Brewery</h4>
@@ -39,18 +60,7 @@ class AddNewBrewery extends Component {
 	        value={this.state.newBrewery}
 	        onChange={this.handleInput}
 	      />
-	      <div className="buttonContainer">
-	        <button
-	          name="search"
-	          className="enterButton"
-	          onClick={this.handleButtonClick}
-	        >Enter</button>
-	        <button
-	          name="reset"
-	          className="cancelButton"
-	          onClick={this.handleButtonClick}
-	        >Cancel</button>
-	      </div>
+	      { buttonContainer }
 	    </Form>
 	  );
 	}
@@ -92,5 +102,10 @@ const Form = styled.form`
 		border: 2px solid transparent;
 		background-color: rgb(255, 0, 0);
 		color: rgb(255, 255, 255);
-	};
+	}
+	.invalidMessage {
+		font-weight: 500;
+		color: rgb(255, 0, 0);
+		margin-top: 12px;
+	}
 `;

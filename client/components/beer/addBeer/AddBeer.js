@@ -15,6 +15,7 @@ class AddBeer extends Component {
 	  breweryAdded: false,
 	  searchBreweryList: [],
 	  searchBreweryLoaded: false,
+	  searchBreweryFail: false,
 	  beerData: {
 	    name: '',
 	    rating: 0,
@@ -51,6 +52,11 @@ class AddBeer extends Component {
 	  fetch(`https://api.openbrewerydb.org/breweries/search?query=${breweryName}`)
 	    .then(response => response.json())
 	    .then(data => {
+	      if (data.length === 0) {
+	        this.setState({
+	          searchBreweryFail: true
+	        });
+	      }
 	      this.setState({
 	        searchBreweryList: data,
 	        searchBreweryLoaded: true
@@ -103,6 +109,7 @@ class AddBeer extends Component {
 	    breweryAdded: false,
 	    searchBreweryList: [],
 	    searchBreweryLoaded: false,
+	    searchBreweryFail: false,
 	    beerData: {
 	      name: '',
 	      rating: 0,
@@ -127,12 +134,14 @@ class AddBeer extends Component {
 	      </AddBreweryContainer>
 	    );
 	  }
-	  if (this.state.searchBreweryLoaded) {
+	  if (this.state.searchBreweryLoaded && !this.state.searchBreweryFail) {
 	    breweryList = (
 	      <AddBreweryFromQuery
 	        brewery={this.state.searchBreweryList}
 	        addFromQuery={this.addBreweryFromQuery}/>
 	    );
+	  } else if (this.state.searchBreweryLoaded && this.state.searchBreweryFail) {
+	    this.props.setView('fail');
 	  }
 	  if (this.state.breweryAdded) {
 	    breweryList = (

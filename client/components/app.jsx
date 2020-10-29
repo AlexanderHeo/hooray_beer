@@ -2,6 +2,7 @@
 /* eslint-disable no-tabs */
 import React from 'react';
 import AddBeer from './beer/addBeer/AddBeer';
+import SearchBreweryFail from './beer/addBeer/SearchBreweryFail';
 import BeerList from './beer/BeerList';
 import BreweryList from './brewery/BreweryList';
 import Header from './ui/header/Header';
@@ -24,6 +25,8 @@ export default class App extends React.Component {
 	    component = <AddBeer setView={this.setView}/>;
 	  } else if (view === 'brewery') {
 	    component = <BreweryList />;
+	  } else if (view === 'fail') {
+	    component = <SearchBreweryFail setView={this.setView}/>;
 	  }
 
 	  return (
