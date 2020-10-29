@@ -13,7 +13,7 @@ const beer = props => {
       <td className="beer" rowSpan="4">
         <span className="beerName">{props.beer.name}</span>
         <span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span><br/>
-        <span className="breweryName">{props.beer.brewery}</span><br/>
+        <span className="breweryName" onClick={() => props.setView('brewery')}>{props.beer.brewery}</span><br/>
         <span className="barName">@ {props.beer.bar}</span>
       </td>
       <td className="note" rowSpan="4"><span className="tastingNotes">Tasting Notes:</span>&nbsp;{props.beer.note}</td>
@@ -54,9 +54,12 @@ const TR = styled.tr`
 	.breweryName {
 		font-size: 16px;
 		font-weight: 500;
+		color: rgb(118, 118, 118);
+		cursor: pointer;
 	}
 	.barName  {
 		font-size: 16px;
+		color: rgb(118, 118, 118);
 	}
 	.rating {
 		min-width: 162px;

@@ -101,6 +101,7 @@ class BeerList extends Component {
 	              <Beer
 	                beer={beer}
 	                key={beer.beerID}
+	                setView={this.props.setView}
 	                addBeerButtonClick={(event, beer) => this.handleEditButton(event, beer)}/>
 	            ))}
 	          </tbody>
