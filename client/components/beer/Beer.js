@@ -105,12 +105,14 @@ const Button = styled.div`
 		color: rgb(80, 80, 80);
 		background-color: rgb(255, 255, 255);
 	}
-	.removeButton:hover,
-	.removeButton:active,
-	.removeButton.active {
+	.removeButton:hover {
 		border: 2px solid transparent;
 		background-color: rgb(255, 0, 0);
 		color: rgb(255, 255, 255);
+		box-shadow: 0 2px 5px rgb(255, 0, 0);
+	}
+	.removeButton:active {
+		box-shadow: inset -2px 2px 5px rgb(255, 0, 0);
 	}
 	.editButton:hover,
 	.editButton:active,

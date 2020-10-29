@@ -84,23 +84,29 @@ width: 100%;
 	.listButton {
 		background-color: rgb(255, 255, 255);
 	}
-	.listButton:hover,
-	.listButton:active {
+	.listButton:hover {
 		border: 2px solid rgb(135, 206, 235);
 		background-color: rgb(135, 206, 235);
 		border-radius: 6px;
 		color: rgb(0, 0, 255);
+		box-shadow: 0 2px 5px rgb(135, 206, 235);
+	}
+	.listButton:active {
+		box-shadow: inset -2px 2px 5px rgb(0, 0, 255);
 	}
 	.addBeerButton {
 		border-radius: 6px;
 		background-color: rgb(0, 144, 247);
 		color: rgb(240, 240, 40);
+		box-shadow: 0 2px 5px rgb(0, 0, 255);
 	}
-	.addBeerButton:hover,
-	.addBeerButton:active {
+	.addBeerButton:hover {
 		border: 2px solid rgb(0, 144, 247);
 		background-color: rgb(255, 255, 255);
 		color: rgb(0, 0, 255);
-		border-radius: 6px;
+	}
+	.addBeerButton:active {
+		box-shadow: inset -1px 1px 5px rgb(0, 0, 255);
+		box-shadow: 0;
 	}
 `;

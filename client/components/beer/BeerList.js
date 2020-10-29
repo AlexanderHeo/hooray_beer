@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Spinner from '../ui/spinner/Spinner';
 import Beer from './Beer';
+import BeerListEmpty from './BeerListEmpty';
 import UpdateBeer from './updateBeer/UpdateBeer';
 
 class BeerList extends Component {
@@ -87,7 +88,9 @@ class BeerList extends Component {
 
 	render() {
 	  let beerList = <Spinner />;
-	  if (this.state.beerListLoaded) {
+	  if (this.state.beerList.length === 0) {
+	    beerList = <BeerListEmpty setView={this.props.setView}/>;
+	  } else if (this.state.beerListLoaded) {
 	    beerList = (
 	      <Table>
 	        <table>
