@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
 
-const beerListEmpty = props => (
-  <BeerListEmpty>
+const emptyList = props => (
+  <EmptyList>
     <div className="emptyContainer">
       <FontAwesomeIcon
         className="icon"
@@ -13,18 +13,18 @@ const beerListEmpty = props => (
         size="lg"
         style={{ backgroundColor: 'yellow' }}
         border/>
-      <div>Hmmmm, the beer list seems to be empty.</div>
+      <div>Hmmmm, the {props.list} list seems to be empty.</div>
       <div>Let&apos;s get started and add your first beer!</div>
       <button
         onClick={() => props.setView('add')}
         className="addButton">Add New Beer</button>
     </div>
-  </BeerListEmpty>
+  </EmptyList>
 );
 
-export default beerListEmpty;
+export default emptyList;
 
-const BeerListEmpty = styled.div`
+const EmptyList = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;

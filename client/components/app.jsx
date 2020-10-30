@@ -24,7 +24,7 @@ export default class App extends React.Component {
 	  } else if (view === 'add') {
 	    component = <AddBeer setView={this.setView}/>;
 	  } else if (view === 'brewery') {
-	    component = <BreweryList />;
+	    component = <BreweryList setView={this.setView}/>;
 	  } else if (view === 'fail') {
 	    component = <SearchBreweryFail setView={this.setView}/>;
 	  }

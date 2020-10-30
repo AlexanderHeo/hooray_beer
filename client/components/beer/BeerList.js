@@ -1,10 +1,10 @@
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
-import Beer from './Beer';
-import BeerListEmpty from './BeerListEmpty';
+import LargeTable from './tables/LargeTable';
+import SmallTable from './tables/SmallTable';
 import UpdateBeer from './updateBeer/UpdateBeer';
 
 class BeerList extends Component {
@@ -12,12 +12,21 @@ class BeerList extends Component {
     beerList: [],
     beerListLoaded: false,
     editing: false,
-    beerToUpdate: []
+    beerToUpdate: [],
+    windowWidth: null
   }
 
-  componentDidMount() {
-    this.getBeerList();
-  }
+	handleResize = () => {
+	  this.setState({
+	    windowWidth: window.innerWidth
+	  });
+	}
+
+	componentDidMount() {
+	  this.getBeerList();
+	  this.handleResize();
+	  window.addEventListener('resize', this.handleResize);
+	}
 
   getBeerList = () => {
     fetch('/api/beer')
@@ -88,29 +97,18 @@ class BeerList extends Component {
 
 	render() {
 	  let beerList = <Spinner />;
-	  if (this.state.beerList.length === 0) {
-	    beerList = <BeerListEmpty setView={this.props.setView}/>;
-	  } else if (this.state.beerListLoaded) {
-	    beerList = (
-	      <Table>
-	        <table>
-	          <colgroup>
-	            <col style={{ width: '25%' }} />
-	            <col style={{ width: '50%' }} />
-	            <col style={{ width: '25%' }} />
-	          </colgroup>
-	          <tbody>
-	            {this.state.beerList.map(beer => (
-	              <Beer
-	                beer={beer}
-	                key={beer.beerID}
-	                setView={this.props.setView}
-	                addBeerButtonClick={(event, beer) => this.handleEditButton(event, beer)}/>
-	            ))}
-	          </tbody>
-	        </table>
-	      </Table>
-	    );
+	  if (this.state.beerListLoaded && this.state.beerList.length === 0) {
+	    beerList = <EmptyList setView={this.props.setView} list={'beer'}/>;
+	  } else if (this.state.beerListLoaded && this.state.windowWidth <= 769) {
+	    beerList = <SmallTable
+	      beerList={this.state.beerList}
+	      handleEditButton={this.handleEditBeer}
+	      setView={this.props.setView}/>;
+	  } else if (this.state.beerListLoaded && this.state.windowWidth > 769) {
+	    beerList = <LargeTable
+	      beerList={this.state.beerList}
+	      handleEditButton={this.handleEditBeer}
+	      setView={this.props.setView}/>;
 	  }
 	  return (
 	    this.state.editing
@@ -123,38 +121,3 @@ class BeerList extends Component {
 }
 
 export default BeerList;
-
-const Table = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 24px 0;
-	tr:nth-child(8n+1),
-	tr:nth-child(8n+2),
-	tr:nth-child(8n+3),
-	tr:nth-child(8n+4) {
-		background-color: rgb(235, 235, 235);
-	}
-	table {
-		border: 2px solid transparent;
-		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
-		padding: 10px 0;
-		width: 80%;
-		border-spacing: 2px 0;
-	}
-	th {
-		border-bottom: 2px solid;
-		border-color: rgb(118, 118, 118);
-		background-color: rgba(255, 255, 255);
-	}
-	th, td {
-		padding: 6px 12px;
-	}
-	th:first-of-type {
-		border-top-left-radius: 12px;
-	}
-	th:last-of-type {
-		border-top-right-radius: 12px;
-	}
-`;

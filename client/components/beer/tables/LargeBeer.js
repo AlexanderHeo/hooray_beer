@@ -1,7 +1,7 @@
 /* eslint-disable no-tabs */
 import React from 'react';
 import styled from 'styled-components';
-import RatingDisplay from '../ratingDisplay/RatingDisplay';
+import RatingDisplay from '../../ratingDisplay/RatingDisplay';
 
 const beer = props => {
   const rating = [];
@@ -44,7 +44,7 @@ export default beer;
 
 const TR = styled.tr`
 	.beer {
-		min-width: 240px;
+		min-width: 325px;
 	}
 	.beerName {
 		font-size: 28px;
@@ -94,14 +94,10 @@ const Button = styled.div`
 		padding: 6px 12px;
 		margin: 0 6px;
 		cursor: pointer;
+		outline: none;
 	}
 	.removeButton {
 		border: 2px solid rgb(255, 0, 0);
-		color: rgb(80, 80, 80);
-		background-color: rgb(255, 255, 255);
-	}
-	.editButton {
-		border: 2px solid rgb(0, 255, 0);
 		color: rgb(80, 80, 80);
 		background-color: rgb(255, 255, 255);
 	}
@@ -112,13 +108,22 @@ const Button = styled.div`
 		box-shadow: 0 2px 5px rgb(255, 0, 0);
 	}
 	.removeButton:active {
-		box-shadow: inset -2px 2px 5px rgb(255, 0, 0);
+		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+		box-shadow: 0;
 	}
-	.editButton:hover,
-	.editButton:active,
-	.editButton.active {
+	.editButton {
+		border: 2px solid rgb(0, 255, 0);
+		color: rgb(80, 80, 80);
+		background-color: rgb(255, 255, 255);
+	}
+	.editButton:hover {
 		border: 2px solid transparent;
 		background-color: rgb(0, 255, 0);
 		color: rgb(255, 255, 255);
+		box-shadow: 0 2px 5px rgb(0, 255, 0);
+	}
+	.editButton:active {
+		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+		box-shadow: 0;
 	}
 `;

@@ -2,6 +2,7 @@
 /* eslint-disable no-tabs */
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
 import Brewery from './Brewery';
 
@@ -24,7 +25,9 @@ class BreweryList extends Component {
 
 	render() {
 	  let breweryList = <Spinner />;
-	  if (this.state.breweryListLoaded) {
+	  if (this.state.breweryListLoaded && this.state.breweryList.length === 0) {
+	    breweryList = <EmptyList setView={this.props.setView} list={'brewery'} />;
+	  } else if (this.state.breweryListLoaded) {
 	    breweryList = (
 	      <Table>
 	        <table>

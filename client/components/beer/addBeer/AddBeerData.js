@@ -40,6 +40,7 @@ class addBeerData extends Component {
 	    note: '',
 	    bar: ''
 	  });
+	  this.props.setView('beerList');
 	}
 
 	render() {

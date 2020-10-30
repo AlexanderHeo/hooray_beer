@@ -4,8 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const addBreweryFromList = props => {
-
-  return (
+	let BreweryList = (
 		<AddBeerForm>
 			<div className="form">
 				<h4>Pick a brewery:</h4>
@@ -19,13 +18,17 @@ const addBreweryFromList = props => {
 			</div>
 		</AddBeerForm>
 	);
+	if (props.brewery.length === 0) {
+		BreweryList = null;
+	}
+  return BreweryList;
 };
 
 export default addBreweryFromList;
 
 const AddBeerForm = styled.div`
 	text-align: center;
-	border: 2px solid rgb(118, 118, 118);
+	border: 2px solid transparent;
 	border-radius: 12px;
 	padding: 12px 12px;
 	margin: 24px;

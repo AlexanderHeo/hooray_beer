@@ -42,6 +42,7 @@ class UpdateBeer extends Component {
 	    note: '',
 	    bar: ''
 	  });
+	  window.location.reload(true);
 	}
 
 	render() {
@@ -78,9 +79,11 @@ class UpdateBeer extends Component {
 	        <div className="button-container">
 	          <button
 	            name="update"
+	            className="updateButton"
 	            onClick={this.handleClick}>Update</button>
 	          <button
 	            name="reset"
+	            className="resetButton"
 	            onClick={this.handleClick}>Cancel</button>
 	        </div>
 	      </Form>
@@ -134,5 +137,42 @@ select {
 }
 .button-container {
 	margin: 6px 0;
+}
+button {
+	border-radius: 6px;
+	padding: 6px 12px;
+	margin: 0 6px;
+	cursor: pointer;
+	outline: none;
+}
+.updateButton {
+	border: 2px solid rgb(0, 255, 0);
+	color: rgb(80, 80, 80);
+	background-color: rgb(255, 255, 255);
+}
+.updateButton:hover {
+	border:2px solid transparent;
+	background-color: rgb(0, 255, 0);
+	color: rgb(255, 255, 255);
+	box-shadow: 0 2px 5px rgb(0, 255, 0);
+}
+.updateButton:active {
+	box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+	box-shadow: 0;
+}
+.resetButton {
+	border: 2px solid rgb(255, 0, 0);
+	color: rgb(80, 80, 80);
+	background-color: rgb(255, 255, 255);
+}
+.resetButton:hover {
+	border: 2px solid transparent;
+	background-color: rgb(0, 255, 0);
+	color: rgb(255, 255, 255);
+	box-shadow: 0 2px 5px rgb(0, 255, 0);
+}
+.resetButton:active {
+	box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+	box-shadow: 0;
 }
 `;

@@ -5,12 +5,12 @@ import Navigation from '../../navigation/Navigation';
 
 const header = props => (
   <Header>
-    <Logo>
+    <div className="logo">
       <h1>Hooray Beer!</h1>
-    </Logo>
-    <NaviContainer>
+    </div>
+    <div className="naviContainer">
       <Navigation setView={props.setView}/>
-    </NaviContainer>
+    </div>
   </Header>
 );
 
@@ -18,8 +18,9 @@ export default header;
 
 const Header = styled.div`
 	border-bottom: 2px solid rgb(118, 118, 118);
-	padding: 10px 10px 16px;
 	display: flex;
+	justify-content: center;
+	padding: 10px 10px 16px;
 	h1 {
 		min-width: 220px;
 		padding: 0;
@@ -27,16 +28,26 @@ const Header = styled.div`
 		text-transform: uppercase;
 		letter-spacing: -0.2px;
 	}
-`;
-
-const Logo = styled.div`
-	margin-left: 6px;
-	width: 20%;
-`;
-
-const NaviContainer = styled.div`
-	margin-right: 6px;
-	width: 80%;
-	display: flex;
-	align-items: flex-end;
+	.logo{
+		margin-left: 6px;
+		width: 20%;
+	}
+	.naviContainer {
+		margin-right: 6px;
+		width: 80%;
+		display: flex;
+		align-items: flex-end;
+	}
+	@media (max-width: 597px) {
+		flex-direction: column;
+		h1 {
+			font-size: 24px;
+		}
+		.logo {
+			width: 100%;
+		}
+		.naviContainer {
+			width: 100%;
+		}
+	}
 `;
