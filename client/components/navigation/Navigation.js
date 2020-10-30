@@ -60,10 +60,10 @@ class Navigation extends Component {
 export default Navigation;
 
 const Navi = styled.div`
-padding: 0;
-display: flex;
-flex-direction: column;
-width: 100%;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 	.true {
 		border-bottom: 2px solid rgb(135, 206, 235);
 	}
@@ -108,5 +108,11 @@ width: 100%;
 	.addBeerButton:active {
 		box-shadow: inset -1px 1px 5px rgb(0, 0, 255);
 		box-shadow: 0;
+	}
+	@media (max-width: 597px) {
+		button {
+			font-size: 12px;
+			padding: 3px 6px;
+		}
 	}
 `;
