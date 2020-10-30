@@ -3,8 +3,9 @@
 import React, { Component } from 'react';
 import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
-import LargeTable from './tables/LargeTable';
-import SmallTable from './tables/SmallTable';
+import LargeTable from './beerTables/LargeTable';
+import MediumTable from './beerTables/MediumTable';
+import SmallTable from './beerTables/SmallTable';
 import UpdateBeer from './updateBeer/UpdateBeer';
 
 class BeerList extends Component {
@@ -26,6 +27,10 @@ class BeerList extends Component {
 	  this.getBeerList();
 	  this.handleResize();
 	  window.addEventListener('resize', this.handleResize);
+	}
+
+	componentWillUnmount() {
+	  window.removeEventListener('resize', this.handleResize);
 	}
 
   getBeerList = () => {
@@ -97,14 +102,24 @@ class BeerList extends Component {
 
 	render() {
 	  let beerList = <Spinner />;
-	  if (this.state.beerListLoaded && this.state.beerList.length === 0) {
+	  const loaded = this.state.beerListLoaded;
+	  const width = this.state.windowWidth;
+	  if (loaded && this.state.beerList.length === 0) {
 	    beerList = <EmptyList setView={this.props.setView} list={'beer'}/>;
-	  } else if (this.state.beerListLoaded && this.state.windowWidth <= 769) {
+	  }
+	  if (loaded && width < 769) {
+	    beerList = <MediumTable
+	      beerList={this.state.beerList}
+	      handleEditButton={this.handleEditBeer}
+	      setView={this.props.setView}/>;
+	  }
+	  if (loaded && width < 501) {
 	    beerList = <SmallTable
 	      beerList={this.state.beerList}
 	      handleEditButton={this.handleEditBeer}
 	      setView={this.props.setView}/>;
-	  } else if (this.state.beerListLoaded && this.state.windowWidth > 769) {
+	  }
+	  if (loaded && width > 769) {
 	    beerList = <LargeTable
 	      beerList={this.state.beerList}
 	      handleEditButton={this.handleEditBeer}

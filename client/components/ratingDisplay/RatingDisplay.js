@@ -13,5 +13,5 @@ const ratingDisplay = props => {
 export default ratingDisplay;
 
 const BeerIcon = styled.span`
-	margin: 0 3px;
+	margin-right: 3px;
 `;

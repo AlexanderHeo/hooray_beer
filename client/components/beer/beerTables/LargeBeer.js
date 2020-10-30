@@ -12,11 +12,13 @@ const beer = props => {
     <TR>
       <td className="beer" rowSpan="4">
         <span className="beerName">{props.beer.name}</span>
-        <span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span><br/>
+        <br/>
         <span className="breweryName" onClick={() => props.setView('brewery')}>{props.beer.brewery}</span><br/>
         <span className="barName">@ {props.beer.bar}</span>
       </td>
-      <td className="note" rowSpan="4"><span className="tastingNotes">Tasting Notes:</span>&nbsp;{props.beer.note}</td>
+      <td className="note" rowSpan="4">
+        <span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span>
+        <span className="tastingNotes">Tasting Notes:</span>&nbsp;{props.beer.note}</td>
       <td className="buttons" rowSpan="4">
         <Button>
           <button
@@ -44,7 +46,7 @@ export default beer;
 
 const TR = styled.tr`
 	.beer {
-		min-width: 325px;
+		min-width: 260px;
 	}
 	.beerName {
 		font-size: 28px;
@@ -61,16 +63,16 @@ const TR = styled.tr`
 		font-size: 16px;
 		color: rgb(118, 118, 118);
 	}
-	.rating {
+	/* .rating {
 		min-width: 162px;
 	}
 	.ratingSpan {
 		display: inline-flex;
-		justify-content: center;
-		margin-left: 6px;
-	}
+		justify-content: flex-start;
+	} */
 	.note {
 		display: flex;
+		flex-direction: column;
 		justify-content: flex-start;
 	}
 	.tastingNotes {
