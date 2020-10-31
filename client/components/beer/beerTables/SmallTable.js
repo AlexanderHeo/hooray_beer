@@ -12,7 +12,7 @@ const smalltable = props => (
             beer={beer}
             key={beer.beerID}
             setView={props.setView}
-            addBeerButtonClick={(event, beer) => props.handleEditButton(event, beer)}/>
+            addBeerButtonClick={(event, beer) => props.handleButtonClick(event, beer)}/>
         ))}
       </tbody>
     </table>
@@ -33,11 +33,11 @@ const Table = styled.div`
 		background-color: rgb(235, 235, 235);
 	}
 		table {
+		width: 90%;
 		border: 2px solid transparent;
 		border-radius: 12px;
 		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
 		padding: 10px 0;
-		width: 80%;
 		border-spacing: 2px 0;
 	}
 	td {
@@ -61,11 +61,11 @@ const Table = styled.div`
 	.brewery,
 	.bar,
 	.tastingNotes {
-		font-size: 14px;
+		font-size: 12px;
 		color: rgb(118, 118, 118);
 	}
 	.note {
-		font-size: 14px;
+		font-size: 12px;
 	}
 	button {
 		border-radius: 6px;

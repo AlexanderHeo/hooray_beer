@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
 import LargeTable from './beerTables/LargeTable';
-import MediumTable from './beerTables/MediumTable';
 import SmallTable from './beerTables/SmallTable';
 import UpdateBeer from './updateBeer/UpdateBeer';
 
@@ -43,7 +42,7 @@ class BeerList extends Component {
       .catch(error => console.error(error));
   }
 
-	handleEditButton = (event, beerData) => {
+	handleButtonClick = (event, beerData) => {
 	  const name = event.target.name;
 	  if (name === 'remove') {
 	    this.handleRemoveBeer(beerData);
@@ -107,22 +106,16 @@ class BeerList extends Component {
 	  if (loaded && this.state.beerList.length === 0) {
 	    beerList = <EmptyList setView={this.props.setView} list={'beer'}/>;
 	  }
-	  if (loaded && width < 769) {
-	    beerList = <MediumTable
-	      beerList={this.state.beerList}
-	      handleEditButton={this.handleEditBeer}
-	      setView={this.props.setView}/>;
-	  }
-	  if (loaded && width < 501) {
+	  if (loaded && width < 520) {
 	    beerList = <SmallTable
 	      beerList={this.state.beerList}
-	      handleEditButton={this.handleEditBeer}
+	      handleButtonClick={this.handleButtonClick}
 	      setView={this.props.setView}/>;
 	  }
-	  if (loaded && width > 769) {
+	  if (loaded && width >= 520) {
 	    beerList = <LargeTable
 	      beerList={this.state.beerList}
-	      handleEditButton={this.handleEditBeer}
+	      handleButtonClick={this.handleButtonClick}
 	      setView={this.props.setView}/>;
 	  }
 	  return (

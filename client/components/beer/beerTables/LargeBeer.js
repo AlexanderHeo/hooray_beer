@@ -9,7 +9,7 @@ const beer = props => {
     rating.push([i + 1]);
   }
   return (<>
-    <TR>
+    <tr>
       <td className="beer" rowSpan="4">
         <span className="beerName">{props.beer.name}</span>
         <br/>
@@ -25,17 +25,15 @@ const beer = props => {
             type="submit"
             name="remove"
             className="removeButton"
-            onClick={ event => props.addBeerButtonClick(event, props.beer.beerID) }
-            value="remove">Remove</button>
+            onClick={event => props.addBeerButtonClick(event, props.beer.beerID)}>Remove</button>
           <button
             type="submit"
             name="edit"
             className="editButton"
-            onClick={ event => props.addBeerButtonClick(event, props.beer) }
-            value="edit">Edit</button>
+            onClick={ event => props.addBeerButtonClick(event, props.beer) }>Edit</button>
         </Button>
       </td>
-    </TR>
+    </tr>
     <tr></tr>
     <tr></tr>
     <tr></tr>
@@ -44,53 +42,10 @@ const beer = props => {
 
 export default beer;
 
-const TR = styled.tr`
-	.beer {
-		min-width: 260px;
-	}
-	.beerName {
-		font-size: 28px;
-		font-weight: 700;
-		letter-spacing: 0.2px;
-	}
-	.breweryName {
-		font-size: 16px;
-		font-weight: 500;
-		color: rgb(118, 118, 118);
-		cursor: pointer;
-	}
-	.barName  {
-		font-size: 16px;
-		color: rgb(118, 118, 118);
-	}
-	/* .rating {
-		min-width: 162px;
-	}
-	.ratingSpan {
-		display: inline-flex;
-		justify-content: flex-start;
-	} */
-	.note {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-	}
-	.tastingNotes {
-		font-weight: 500;
-		color: rgb(118, 118, 118);
-	}
-	.buttons {
-		width: 208px;
-		min-width: 208px;
-		max-width: 208px;
-	}
-`;
 const Button = styled.div`
 	display: flex;
 	justify-content: center;
 	button {
-		border: 2px solid black;
-		background-color: transparent;
 		border-radius: 6px;
 		width: 80px;
 		padding: 6px 12px;
@@ -127,5 +82,10 @@ const Button = styled.div`
 	.editButton:active {
 		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
 		box-shadow: 0;
+	}
+	@media (max-width: 722px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 `;

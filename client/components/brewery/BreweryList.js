@@ -41,7 +41,6 @@ class BreweryList extends Component {
 	  let breweryList = <Spinner />;
 	  const loaded = this.state.breweryListLoaded;
 	  const width = this.state.windowWidth;
-	  console.log(width);
 	  if (this.state.breweryListLoaded && this.state.breweryList.length === 0) {
 	    breweryList = <EmptyList setView={this.props.setView} list={'brewery'} />;
 	  }

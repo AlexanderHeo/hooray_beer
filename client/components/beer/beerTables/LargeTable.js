@@ -18,7 +18,7 @@ const largeTable = props => (
 						beer={beer}
 						key={beer.beerID}
 						setView={props.setView}
-						addBeerButtonClick={(event, beer) => props.handleEditButton(event, beer)}/>
+						addBeerButtonClick={(event, beer) => props.handleButtonClick(event, beer)}/>
 				))}
 			</tbody>
 		</table>
@@ -46,18 +46,65 @@ const Table = styled.div`
 		width: 80%;
 		border-spacing: 2px 0;
 	}
-	th {
-		border-bottom: 2px solid;
-		border-color: rgb(118, 118, 118);
-		background-color: rgba(255, 255, 255);
-	}
-	th, td {
+	td {
 		padding: 6px 12px;
 	}
-	th:first-of-type {
-		border-top-left-radius: 12px;
+	.beer {
+		min-width: 220px;
 	}
-	th:last-of-type {
-		border-top-right-radius: 12px;
+	.beerName {
+		font-size: 28px;
+		font-weight: 700;
+		letter-spacing: 0.2px;
+	}
+	.breweryName {
+		font-size: 16px;
+		font-weight: 500;
+		color: rgb(118, 118, 118);
+		cursor: pointer;
+	}
+	.barName  {
+		font-size: 16px;
+		color: rgb(118, 118, 118);
+	}
+	.rating {
+		min-width: 162px;
+	}
+	.ratingSpan {
+		display: inline-flex;
+		justify-content: flex-start;
+	}
+	.note {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+	.tastingNotes {
+		font-weight: 500;
+		color: rgb(118, 118, 118);
+	}
+	.buttons {
+		width: 208px;
+		min-width: 208px;
+	}
+	@media (max-width: 722px) {
+		.beer {
+			min-width: 160px;
+		}
+		.beerName {
+			font-size: 22px;
+		}
+		.breweryName,
+		.barName,
+		.tastingNotes,
+		.note {
+			font-size: 14px;
+		}
+		.buttons {
+			min-width: 104px;
+			button {
+				margin: 3px 0;
+			}
+		}
 	}
 `;

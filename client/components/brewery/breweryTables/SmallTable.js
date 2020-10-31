@@ -30,7 +30,7 @@ const Table = styled.div`
 		background-color: rgb(200, 200, 200);
 	}
 	table {
-		width: 300px;
+		width: 90%;
 		border: 2px solid transparent;
 		border-radius: 12px;
 		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
