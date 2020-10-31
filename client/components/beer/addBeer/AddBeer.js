@@ -146,6 +146,7 @@ class AddBeer extends Component {
 	  if (this.state.breweryAdded) {
 	    breweryList = (
 	      <AddBeerData
+	        brewery={this.state.brewery}
 	        addBeerData={this.addBeerData}
 	        setView={this.props.setView}/>
 	    );

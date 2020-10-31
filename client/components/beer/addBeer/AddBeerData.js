@@ -47,8 +47,9 @@ class addBeerData extends Component {
 	  return (
 	    <AddBeerContainer>
 	      <Form>
+	        <h4>{this.props.brewery.name}</h4>
 	        <fieldset>
-	          <label htmlFor="name">Beer:</label>
+	          <label htmlFor="name"></label>
 	          <input
 	            type="text"
 	            placeholder="Beer"
@@ -57,14 +58,14 @@ class addBeerData extends Component {
 	            onChange={this.handleInput} />
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="rating">Rating:</label>
+	          <label htmlFor="rating"></label>
 	          <PickRating
 	            value={this.state.rating}
 	            onChange={rating => this.setState({ rating })}
 	          />
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="notes">Notes:</label>
+	          <label htmlFor="notes"></label>
 	          <textarea
 	            type="text"
 	            placeholder="What are your thoughts?"
@@ -74,7 +75,7 @@ class addBeerData extends Component {
 	            onChange={this.handleInput} />
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="bar">Bar:</label>
+	          <label htmlFor="bar"></label>
 	          <input
 	            type="text"
 	            placeholder="Where did you drink this beer?"

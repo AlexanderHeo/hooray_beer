@@ -10,9 +10,12 @@ const addBreweryFromList = props => {
 				<h4>Pick a brewery:</h4>
 				<UL>
 					{props.brewery.map(x => (
-						<li
-							key={x.breweryID}
-							onClick={() => props.addBreweryFromList(x)}>{x.name}</li>
+						<li key={x.breweryID}>
+							{x.name}<br/>
+							<button
+								onClick={() => props.addBreweryFromList(x)}
+								className="chooseButton">Choose</button>
+						</li>
 					))}
 				</UL>
 			</div>
@@ -55,9 +58,22 @@ const UL = styled.ul`
 		margin: 3px;
 		width: 200px;
 		padding: 6px 12px;
+	}
+	li:nth-child(even) {
+		background-color: rgb(188, 188, 188)
+	}
+	.chooseButton {
+		margin-top: 6px;
+		padding: 6px 12px;
+		border-width: 2px;
+		border-style: solid;
+		border-color: rgb(135, 206, 235);
+		border-radius: 6px;
+		background-color: rgb(255, 255, 255);
+		color: rgb(50, 50, 50);
 		cursor: pointer;
 	}
-	li:nth-child(odd) {
-		background-color: rgb(188, 188, 188)
+	.chooseButton:hover {
+		background-color: rgb(135, 206, 235);
 	}
 `;

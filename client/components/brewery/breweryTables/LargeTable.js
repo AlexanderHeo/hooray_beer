@@ -7,13 +7,6 @@ import LargeBrewery from './LargeBrewery';
 const largeTable = props => (
   <BreweryTable>
     <Table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Link</th>
-        </tr>
-      </thead>
       <tbody>
         {props.breweryList.map(brewery => {
           return <LargeBrewery

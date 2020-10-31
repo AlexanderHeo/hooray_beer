@@ -38,10 +38,20 @@ const FailMessage = styled.div`
 		margin: 0 3px;
 		border-radius: 6px;
 	}
+	.return,
+	.beerList {
+		background-color: rgb(255, 255, 255);
+	}
 	.return {
-		background-color: rgb(0, 255, 0);
+		border: 2px solid rgb(0, 255, 0);
 	}
 	.beerList {
-		background-color: #fff897;
+		border: 2px solid rgb(242, 142, 28);
+	}
+	.return:hover {
+		background-color: rgb(0, 255, 0);
+	}
+	.beerList:hover {
+		background-color: rgb(242, 142, 28);
 	}
 `;
