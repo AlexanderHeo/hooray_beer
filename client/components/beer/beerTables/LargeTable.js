@@ -2,15 +2,16 @@
 /* eslint-disable indent */
 import React from 'react';
 import styled from 'styled-components';
+import BeerTable from '../../ui/table/BeerTable';
 import LargeBeer from './LargeBeer';
 
 const largeTable = props => (
-	<Table>
-		<table>
+	<BeerTable>
+		<Table>
 			<colgroup>
 				<col style={{ width: '25%' }} />
-				<col style={{ width: '50%' }} />
-				<col style={{ width: '25%' }} />
+				<col style={{ width: '55%' }} />
+				<col style={{ width: '20%' }} />
 			</colgroup>
 			<tbody>
 				{props.beerList.map(beer => (
@@ -18,34 +19,17 @@ const largeTable = props => (
 						beer={beer}
 						key={beer.beerID}
 						setView={props.setView}
-						addBeerButtonClick={(event, beer) => props.handleButtonClick(event, beer)}/>
+						handleButtonClick={props.handleButtonClick}/>
 				))}
 			</tbody>
-		</table>
-	</Table>
+		</Table>
+	</BeerTable>
 );
 
 export default largeTable;
 
-const Table = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 24px 0;
-	tr:nth-child(8n+1),
-	tr:nth-child(8n+2),
-	tr:nth-child(8n+3),
-	tr:nth-child(8n+4) {
-		background-color: rgb(235, 235, 235);
-	}
-	table {
-		border: 2px solid transparent;
-		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
-		padding: 10px 0;
-		width: 80%;
-		border-spacing: 2px 0;
-	}
+const Table = styled.table`
+	width: 80%;
 	td {
 		padding: 6px 12px;
 	}
@@ -83,9 +67,29 @@ const Table = styled.div`
 		font-weight: 500;
 		color: rgb(118, 118, 118);
 	}
-	.buttons {
-		width: 208px;
-		min-width: 208px;
+	.buttonContainer, .button {
+		display: flex;
+		justify-content: center;
+	}
+	button {
+		width: 80px;
+		padding: 6px 12px;
+	}
+	.removeButton {
+		border-width: 2px;
+	}
+	.editButton {
+		border-width: 2px;
+	}
+	@media (max-width: 900px) {
+		button {
+			margin: 3px 0
+		}
+		.buttonContainer {
+			align-items: center;
+			flex-direction: column;
+			min-width: 80px;
+		}
 	}
 	@media (max-width: 722px) {
 		.beer {
@@ -99,12 +103,6 @@ const Table = styled.div`
 		.tastingNotes,
 		.note {
 			font-size: 14px;
-		}
-		.buttons {
-			min-width: 104px;
-			button {
-				margin: 3px 0;
-			}
 		}
 	}
 `;

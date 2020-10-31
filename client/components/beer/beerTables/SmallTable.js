@@ -1,49 +1,33 @@
 /* eslint-disable no-tabs */
 import React from 'react';
 import styled from 'styled-components';
+import BeerTable from '../../ui/table/BeerTable';
 import SmallBeer from './SmallBeer';
 
 const smalltable = props => (
-  <Table>
-    <table>
+  <BeerTable>
+    <Table>
       <tbody>
         {props.beerList.map(beer => (
           <SmallBeer
             beer={beer}
             key={beer.beerID}
             setView={props.setView}
-            addBeerButtonClick={(event, beer) => props.handleButtonClick(event, beer)}/>
+            handleButtonClick={props.handleButtonClick}/>
         ))}
       </tbody>
-    </table>
-  </Table>
+    </Table>
+  </BeerTable>
 );
 
 export default smalltable;
 
-const Table = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 24px 0;
-	tr:nth-child(8n+1),
-	tr:nth-child(8n+2),
-	tr:nth-child(8n+3),
-	tr:nth-child(8n+4) {
-		background-color: rgb(235, 235, 235);
-	}
-		table {
-		width: 90%;
-		border: 2px solid transparent;
-		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
-		padding: 10px 0;
-		border-spacing: 2px 0;
-	}
+const Table = styled.table`
+	width: 90%;
 	td {
-		padding: 3px 12px;
+		padding: 1px 12px;
 	}
-		.firstRow {
+	.firstRow {
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
@@ -53,6 +37,7 @@ const Table = styled.div`
 		font-weight: 600;
 		display: flex;
 		align-items: baseline;
+		padding-bottom: 3px;
 	}
 	.secondRow {
 		display: flex;
@@ -67,43 +52,20 @@ const Table = styled.div`
 	.note {
 		font-size: 12px;
 	}
+	.buttonContainer {
+		display: flex;
+		justify-content: center;
+		margin: 6px 0;
+	}
 	button {
-		border-radius: 6px;
 		width: 63px;
 		padding: 3px 6px;
-		margin: 0 6px;
-		cursor: pointer;
-		outline: none;
 		font-size: 12px;
 	}
 	.removeButton {
-		border: 1px solid rgb(255, 0, 0);
-		color: rgb(80, 80, 80);
-		background-color: rgb(255, 255, 255);
-	}
-	.removeButton:hover {
-		border: 1px solid transparent;
-		background-color: rgb(255, 0, 0);
-		color: rgb(255, 255, 255);
-		box-shadow: 0 2px 5px rgb(255, 0, 0);
-	}
-	.removeButton:active {
-		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
-		box-shadow: 0;
+		border-width: 1px
 	}
 	.editButton {
-		border: 1px solid rgb(0, 255, 0);
-		color: rgb(80, 80, 80);
-		background-color: rgb(255, 255, 255);
-	}
-	.editButton:hover {
-		border: 1px solid transparent;
-		background-color: rgb(0, 255, 0);
-		color: rgb(255, 255, 255);
-		box-shadow: 0 2px 5px rgb(0, 255, 0);
-	}
-	.editButton:active {
-		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
-		box-shadow: 0;
+		border-width: 1px;
 	}
 `;

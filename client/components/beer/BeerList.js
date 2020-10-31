@@ -103,9 +103,6 @@ class BeerList extends Component {
 	  let beerList = <Spinner />;
 	  const loaded = this.state.beerListLoaded;
 	  const width = this.state.windowWidth;
-	  if (loaded && this.state.beerList.length === 0) {
-	    beerList = <EmptyList setView={this.props.setView} list={'beer'}/>;
-	  }
 	  if (loaded && width < 520) {
 	    beerList = <SmallTable
 	      beerList={this.state.beerList}
@@ -117,6 +114,9 @@ class BeerList extends Component {
 	      beerList={this.state.beerList}
 	      handleButtonClick={this.handleButtonClick}
 	      setView={this.props.setView}/>;
+	  }
+	  if (loaded && this.state.beerList.length === 0) {
+	    beerList = <EmptyList setView={this.props.setView} list={'beer'}/>;
 	  }
 	  return (
 	    this.state.editing
