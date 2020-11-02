@@ -17,17 +17,21 @@ class AddNewBrewery extends Component {
 
 	handleButtonClick = event => {
 	  event.preventDefault();
-	  if (!this.state.newBrewery) {
+	  if (event.target.name === 'search' && !this.state.newBrewery) {
 	    this.setState({ invalid: 'Please enter a brewery.' });
-	  } else if (event.target.name === 'reset' && this.state.newBrewery) {
-	    this.handleReset();
-	  } else if (event.target.name === 'search') {
+	  } else if (event.target.name === 'search' && !this.state.invalid) {
 	    this.props.search(this.state.newBrewery);
+	  } else if (event.target.name === 'reset') {
+	    this.handleReset();
 	  }
 	}
 
 	handleReset = () => {
-	  this.setState({ newBrewery: '' });
+	  this.setState({
+	    newBrewery: '',
+	    invalid: ''
+	  });
+	  this.props.setView('beerList');
 	}
 
 	render() {

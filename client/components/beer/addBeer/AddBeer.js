@@ -130,7 +130,8 @@ class AddBeer extends Component {
 	          brewery={this.state.breweryList}
 	          addBreweryFromList={this.addBreweryFromList}/>
 	        <SearchForBrewery
-	          search={this.searchBrewery}/>
+	          search={this.searchBrewery}
+	          setView={this.props.setView}/>
 	      </AddBreweryContainer>
 	    );
 	  }
