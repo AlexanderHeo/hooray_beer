@@ -102,7 +102,7 @@ class addBeerData extends Component {
 export default addBeerData;
 
 const AddBeerContainer = styled.div`
-	border: 2px solid rgb(118, 118, 118);
+	border: 2px solid transparent;
 	border-radius: 12px;
 	box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
 	margin: 24px 0;

@@ -48,45 +48,47 @@ class UpdateBeer extends Component {
 	render() {
 	  return (
 	    <UpdateModal>
-	      <h3>{this.props.beerToUpdate.name}</h3>
-	      <h4>{this.props.beerToUpdate.brewery}</h4>
-	      <Form>
-	        <fieldset>
-	          <label htmlFor="rating">Rating: </label>
-	          <Rating
-	            value={this.state.rating}
-	            onChange={rating => this.setState({ rating })} />
-	        </fieldset>
-	        <fieldset>
-	          <label htmlFor="note">Note: </label>
-	          <textarea
-	            type="text"
-	            placeholder="What do you think?"
-	            name="note"
-	            rows="4"
-	            value={this.state.note}
-	            onChange={this.handleInput}/>
-	        </fieldset>
-	        <fieldset>
-	          <label htmlFor="bar">Bar: </label>
-	          <input
-	            type="text"
-	            placeholder="Where did you have this beer?"
-	            name="bar"
-	            value={this.state.bar}
-	            onChange={this.handleInput}/>
-	        </fieldset>
-	        <div className="button-container">
-	          <button
-	            name="update"
-	            className="updateButton"
-	            onClick={this.handleClick}>Update</button>
-	          <button
-	            name="reset"
-	            className="resetButton"
-	            onClick={this.handleClick}>Cancel</button>
-	        </div>
-	      </Form>
+	      <div className="update">
+	        <div className="name">{this.props.beerToUpdate.name}</div>
+	        <div className="brewery">{this.props.beerToUpdate.brewery}</div>
+	        <Form>
+	          <fieldset>
+	            <label htmlFor="rating">Rating: </label>
+	            <Rating
+	              value={this.state.rating}
+	              onChange={rating => this.setState({ rating })} />
+	          </fieldset>
+	          <fieldset>
+	            <label htmlFor="note">Note: </label>
+	            <textarea
+	              type="text"
+	              placeholder="What do you think?"
+	              name="note"
+	              rows="4"
+	              value={this.state.note}
+	              onChange={this.handleInput}/>
+	          </fieldset>
+	          <fieldset>
+	            <label htmlFor="bar">Bar: </label>
+	            <input
+	              type="text"
+	              placeholder="Where did you have this beer?"
+	              name="bar"
+	              value={this.state.bar}
+	              onChange={this.handleInput}/>
+	          </fieldset>
+	          <div className="button-container">
+	            <button
+	              name="update"
+	              className="updateButton"
+	              onClick={this.handleClick}>Update</button>
+	            <button
+	              name="reset"
+	              className="resetButton"
+	              onClick={this.handleClick}>Cancel</button>
+	          </div>
+	        </Form>
+	      </div>
 	    </UpdateModal>
 	  );
 	}
@@ -95,12 +97,28 @@ class UpdateBeer extends Component {
 export default UpdateBeer;
 
 const UpdateModal = styled.div`
+	margin: 24px 12px;
 	width: 100%;
-	height: 100%;
 	position: absolute;
 	text-align: center;
-	z-index: 5;
-	background-color: rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	.update {
+		background-color: rgba(0, 0, 0, 0.25);
+		border: 2px solid transparent;
+		border-radius: 6px;
+		box-shadow:  0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+		padding: 12px;
+	}
+	.name {
+		margin-bottom: 6px;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.brewery {
+		font-weight: 700;
+		font-size: 26px;
+	}
 `;
 
 const Form = styled.form`
@@ -110,7 +128,7 @@ align-items: center;
 justify-content: center;
 
 fieldset {
-	margin: 6px;
+	margin: 12px;
 	padding: 0;
 	display: flex;
 	flex-direction: column;
@@ -132,11 +150,19 @@ input {
 input, textarea {
 	width: 200px;
 }
+textarea {
+	padding: 6px;
+	border-width: 2px;
+	border-radius: 6px;
+	border-color: rgb(33, 33, 33) rgb(133, 133, 133) rgb(133, 133, 133) rgb(33, 33, 33);
+	font-family: 'Roboto';
+	width: 212px;
+}
 select {
 	width: 208px;
 }
 .button-container {
-	margin: 6px 0;
+	margin: 12px 0;
 }
 button {
 	border-radius: 6px;
