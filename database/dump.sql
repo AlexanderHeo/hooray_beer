@@ -145,9 +145,6 @@ ALTER TABLE ONLY public.brewery ALTER COLUMN "breweryID" SET DEFAULT nextval('pu
 --
 
 COPY public.beers ("beerID", name, "breweryID", rating, note, bar) FROM stdin;
-48	Sculpin	356	4	hoppy 	Beachwood
-49	Hoppy Dog	629	4	fruity hoppy pale	Tin Roof
-50	Nobility	853	5	strong balanced double ipa	Quinn's
 \.
 
 
@@ -156,11 +153,6 @@ COPY public.beers ("beerID", name, "breweryID", rating, note, bar) FROM stdin;
 --
 
 COPY public.brewery ("breweryID", name, city, state, link) FROM stdin;
-629	Golden Road Brewing	Los Angeles	California	http://www.goldenroad.la
-366	Belmont Brewing Co	Long Beach	California	http://www.belmontbrewing.com
-356	Beachwood BBQ & Brewing	Long Beach	California	http://www.beachwoodbbq.com
-853	Noble Ale Works	Anaheim	California	http://www.noblealeworks.com
-7309	Vanish Farmwoods Brewery	Leesburg	Virginia	http://vanishbeer.com
 \.
 
 
@@ -168,7 +160,7 @@ COPY public.brewery ("breweryID", name, city, state, link) FROM stdin;
 -- Name: beers_beerID_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."beers_beerID_seq"', 52, true);
+SELECT pg_catalog.setval('public."beers_beerID_seq"', 60, true);
 
 
 --
