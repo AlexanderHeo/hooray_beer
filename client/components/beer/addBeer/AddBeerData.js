@@ -73,15 +73,6 @@ class addBeerData extends Component {
 	}
 
 	handleReset = () => {
-	  // this.setState({
-	  //   name: '',
-	  //   rating: 0,
-	  //   note: '',
-	  //   bar: '',
-	  //   invalid: '',
-	  //   invalidMessage: '',
-	  //   disabled: false
-	  // });
 	  this.props.setView('beerList');
 	}
 

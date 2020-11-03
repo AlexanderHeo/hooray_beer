@@ -7,14 +7,19 @@ class UpdateBeer extends Component {
 	state = {
 	  rating: this.props.beerToUpdate.rating,
 	  note: this.props.beerToUpdate.note,
-	  bar: this.props.beerToUpdate.bar
+	  bar: this.props.beerToUpdate.bar,
+	  invalid: '',
+	  invalidMessage: '',
+	  disabled: false
 	}
 
 	handleInput = event => {
-	  const target = event.target;
-	  const name = target.name;
-	  const value = target.value;
-	  this.setState({ [name]: value });
+	  this.setState({
+	    [event.target.name]: event.target.value,
+	    invalid: '',
+	    invalidMessage: '',
+	    disabled: false
+	  });
 	}
 
 	handleClick = event => {
@@ -27,13 +32,40 @@ class UpdateBeer extends Component {
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar
-
 	  };
-	  if (event.target.name === 'update') {
+
+	  if (!this.state.rating) {
+	    this.setState({
+	      invalid: 'rating',
+	      invalidMessage: 'Please set a rating.',
+	      disabled: true
+	    });
+	  } else if (!this.state.note) {
+	    this.setState({
+	      invalid: 'note',
+	      invalidMessage: 'Please enter a tasting note.',
+	      disabled: true
+	    });
+	  } else if (!this.state.bar) {
+	    this.setState({
+	      invalid: 'bar',
+	      invalidMessage: 'Please enter bar name.',
+	      disabled: true
+	    });
+	  } else if (event.target.name === 'update') {
 	    this.props.editBeer(updatedBeerData);
-	  } else if (event.target.name === 'reset') {
+	  }
+	  if (event.target.name === 'reset') {
 	    this.handleReset();
 	  }
+	}
+
+	handleRatingEnter = () => {
+	  this.setState({
+	    invalid: '',
+	    invalidMessage: '',
+	    disabled: false
+	  });
 	}
 
 	handleReset = () => {
@@ -46,12 +78,20 @@ class UpdateBeer extends Component {
 	      <div className="update">
 	        <div className="name">{this.props.beerToUpdate.name}</div>
 	        <div className="brewery">{this.props.beerToUpdate.brewery}</div>
-	        <Form>
+	        <form className="form">
 	          <fieldset>
 	            <label htmlFor="rating">Rating: </label>
 	            <Rating
 	              value={this.state.rating}
-	              onChange={rating => this.setState({ rating })} />
+	              onChange={rating => {
+	                this.setState({ rating });
+	                this.handleRatingEnter();
+	              }} />
+	            {
+	              this.state.invalid === 'rating'
+	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
+	                : null
+	            }
 	          </fieldset>
 	          <fieldset>
 	            <label htmlFor="note">Note: </label>
@@ -62,6 +102,11 @@ class UpdateBeer extends Component {
 	              rows="4"
 	              value={this.state.note}
 	              onChange={this.handleInput}/>
+	            {
+	              this.state.invalid === 'note'
+	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
+	                : null
+	            }
 	          </fieldset>
 	          <fieldset>
 	            <label htmlFor="bar">Bar: </label>
@@ -71,18 +116,24 @@ class UpdateBeer extends Component {
 	              name="bar"
 	              value={this.state.bar}
 	              onChange={this.handleInput}/>
+	            {
+	              this.state.invalid === 'bar'
+	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
+	                : null
+	            }
 	          </fieldset>
 	          <div className="button-container">
 	            <button
 	              name="update"
 	              className="updateButton"
-	              onClick={this.handleClick}>Update</button>
+	              onClick={this.handleClick}
+	              disabled={this.state.disabled}>Update</button>
 	            <button
 	              name="reset"
 	              className="resetButton"
 	              onClick={this.handleClick}>Cancel</button>
 	          </div>
-	        </Form>
+	        </form>
 	      </div>
 	    </UpdateModal>
 	  );
@@ -99,7 +150,7 @@ const UpdateModal = styled.div`
 	display: flex;
 	justify-content: center;
 	.update {
-		background-color: rgba(0, 0, 0, 0.25);
+		background-color: rgba(0, 0, 0, 0.1);
 		border: 2px solid transparent;
 		border-radius: 6px;
 		box-shadow:  0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
@@ -114,86 +165,94 @@ const UpdateModal = styled.div`
 		font-weight: 700;
 		font-size: 26px;
 	}
-`;
-
-const Form = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-
-fieldset {
-	margin: 12px;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border: none;
-}
-label {
-	display: inline-block;
-	text-align: center;
-	margin: 6px 0;
-	vertical-align: top;
-	border-radius: 6px;
-}
-input {
-	padding: 6px 12px;
-	border-radius: 6px;
-}
-input, textarea {
-	width: 200px;
-}
-textarea {
-	padding: 6px;
-	border-width: 2px;
-	border-radius: 6px;
-	border-color: rgb(33, 33, 33) rgb(133, 133, 133) rgb(133, 133, 133) rgb(33, 33, 33);
-	font-family: 'Roboto';
-	width: 212px;
-}
-select {
-	width: 208px;
-}
-.button-container {
-	margin: 12px 0;
-}
-button {
-	border-radius: 6px;
-	padding: 6px 12px;
-	margin: 0 6px;
-	cursor: pointer;
-	outline: none;
-}
-.updateButton {
-	border: 2px solid rgb(0, 255, 0);
-	color: rgb(80, 80, 80);
-	background-color: rgb(255, 255, 255);
-}
-.updateButton:hover {
-	border:2px solid transparent;
-	background-color: rgb(0, 255, 0);
-	color: rgb(255, 255, 255);
-	box-shadow: 0 2px 5px rgb(0, 255, 0);
-}
-.updateButton:active {
-	box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
-	box-shadow: 0;
-}
-.resetButton {
-	border: 2px solid rgb(255, 0, 0);
-	color: rgb(80, 80, 80);
-	background-color: rgb(255, 255, 255);
-}
-.resetButton:hover {
-	border: 2px solid transparent;
-	background-color: rgb(0, 255, 0);
-	color: rgb(255, 255, 255);
-	box-shadow: 0 2px 5px rgb(0, 255, 0);
-}
-.resetButton:active {
-	box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
-	box-shadow: 0;
-}
+	.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.errorMessage {
+		color: rgb(180, 0, 0);
+		margin-top: 6px;
+	}
+	fieldset {
+		margin: 12px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: none;
+	}
+	label {
+		display: inline-block;
+		text-align: center;
+		margin: 6px 0;
+		vertical-align: top;
+		border-radius: 6px;
+	}
+	input {
+		padding: 6px 12px;
+		border-radius: 6px;
+	}
+	input, textarea {
+		width: 200px;
+	}
+	textarea {
+		padding: 6px;
+		border-width: 2px;
+		border-radius: 6px;
+		border-color: rgb(33, 33, 33) rgb(133, 133, 133) rgb(133, 133, 133) rgb(33, 33, 33);
+		font-family: 'Roboto';
+		width: 212px;
+	}
+	select {
+		width: 208px;
+	}
+	.button-container {
+		margin: 12px 0;
+	}
+	button {
+		border-radius: 6px;
+		padding: 6px 12px;
+		margin: 0 6px;
+		cursor: pointer;
+		outline: none;
+	}
+	.updateButton {
+		border: 2px solid rgb(0, 255, 0);
+		color: rgb(80, 80, 80);
+		background-color: rgb(255, 255, 255);
+	}
+	.updateButton:hover {
+		border:2px solid transparent;
+		background-color: rgb(0, 255, 0);
+		color: rgb(255, 255, 255);
+		box-shadow: 0 2px 5px rgb(0, 255, 0);
+	}
+	.updateButton:active {
+		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+		box-shadow: 0;
+	}
+	.updateButton:disabled {
+		border: 2px solid rgb(188, 188, 188);
+		background-color: rgb(188, 188, 188);
+		color: rgb(30, 30, 30);
+		cursor: not-allowed;
+	}
+	.resetButton {
+		border: 2px solid rgb(255, 0, 0);
+		color: rgb(80, 80, 80);
+		background-color: rgb(255, 255, 255);
+	}
+	.resetButton:hover {
+		border: 2px solid transparent;
+		background-color: rgb(0, 255, 0);
+		color: rgb(255, 255, 255);
+		box-shadow: 0 2px 5px rgb(0, 255, 0);
+	}
+	.resetButton:active {
+		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
+		box-shadow: 0;
+	}
 `;
