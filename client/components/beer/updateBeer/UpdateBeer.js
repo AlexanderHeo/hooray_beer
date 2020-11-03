@@ -37,11 +37,6 @@ class UpdateBeer extends Component {
 	}
 
 	handleReset = () => {
-	  this.setState({
-	    rating: 0,
-	    note: '',
-	    bar: ''
-	  });
 	  window.location.reload(true);
 	}
 
