@@ -41,9 +41,6 @@ class BreweryList extends Component {
 	  let breweryList = <Spinner />;
 	  const loaded = this.state.breweryListLoaded;
 	  const width = this.state.windowWidth;
-	  if (this.state.breweryListLoaded && this.state.breweryList.length === 0) {
-	    breweryList = <EmptyList setView={this.props.setView} list={'brewery'} />;
-	  }
 	  if (loaded) {
 	    breweryList = <LargeTable
 	      breweryList={this.state.breweryList} />;
@@ -55,6 +52,9 @@ class BreweryList extends Component {
 	  if (loaded && width < 501) {
 	    breweryList = <SmallTable
 	      breweryList={this.state.breweryList} />;
+	  }
+	  if (loaded && this.state.breweryList.length === 0) {
+	    breweryList = <EmptyList setView={this.props.setView} list={'brewery'} />;
 	  }
 	  return breweryList;
 	}
