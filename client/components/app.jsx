@@ -1,15 +1,16 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import React from 'react';
+import React, { Component } from 'react';
 import AddBeer from './beer/addBeer/AddBeer';
 import SearchBreweryFail from './beer/addBeer/SearchBreweryFail';
 import BeerList from './beer/BeerList';
 import BreweryList from './brewery/BreweryList';
+import Intro from './navigation/intro/Intro';
 import Header from './ui/header/Header';
 
-export default class App extends React.Component {
+class App extends Component {
 	state = {
-	  view: 'beerList'
+	  view: 'intro'
 	}
 
 	setView = view => {
@@ -17,7 +18,7 @@ export default class App extends React.Component {
 	}
 
 	render() {
-	  let component = null;
+	  let component = <Intro setView={this.setView}/>;
 	  const view = this.state.view;
 	  if (view === 'beerList') {
 	    component = <BeerList setView={this.setView}/>;
@@ -37,3 +38,5 @@ export default class App extends React.Component {
 	  );
 	}
 }
+
+export default App;

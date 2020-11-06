@@ -36,6 +36,11 @@ const Table = styled.table`
 	.beer {
 		min-width: 220px;
 	}
+	.beerName,
+	.breweryName,
+	.barName {
+		text-transform: capitalize;
+	}
 	.beerName {
 		font-size: 28px;
 		font-weight: 700;

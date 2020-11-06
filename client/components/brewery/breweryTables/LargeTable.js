@@ -37,4 +37,8 @@ const Table = styled.table`
 	.name {
 		font-weight: 500;
 	}
+	.name,
+	.location {
+		text-transform: capitalize;
+	}
 `;

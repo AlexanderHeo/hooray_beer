@@ -41,6 +41,10 @@ const Table = styled.table`
 	td {
 		padding: 3px 12px;
 	}
+	.name,
+	.location {
+		text-transform: capitalize;
+	}
 	.name {
 		font-weight: 500;
 		font-size: 14px;

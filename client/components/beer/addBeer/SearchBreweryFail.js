@@ -8,7 +8,9 @@ const searchBreweryFail = props => {
       <div className="failContainer">
         <div>This isn&apos;t the brewery you are looking for.</div>
         <div>Please try again,</div>
-        <div>there is no brewery by that name</div>
+        <div>there is no brewery by that name,</div>
+        <div>or that is not a craft brewery.</div>
+        <div>Remember, no domestic brands.</div>
         <button className="return" onClick={() => props.setView('add')}>Return</button>
         <button className="beerList" onClick={() => props.setView('beerList')}>Beer List</button>
       </div>

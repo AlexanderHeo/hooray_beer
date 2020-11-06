@@ -9,7 +9,9 @@ const header = props => (
       <h1>Hooray Beer!</h1>
     </div>
     <div className="naviContainer">
-      <Navigation setView={props.setView}/>
+      <Navigation
+        setView={props.setView}
+        active={props.active}/>
     </div>
   </Header>
 );

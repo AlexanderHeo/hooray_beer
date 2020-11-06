@@ -5,14 +5,15 @@ import Spinner from '../../ui/spinner/Spinner';
 import AddBeerData from './AddBeerData';
 import AddBreweryFromList from './AddBreweryFromList';
 import AddBreweryFromQuery from './AddBreweryFromQuery';
+import SearchBreweryFail from './SearchBreweryFail';
 import SearchForBrewery from './SearchForBrewery';
 
 class AddBeer extends Component {
 	state = {
-	  breweryList: [],
-	  breweryListLoaded: false,
-	  brewery: {},
-	  breweryAdded: false,
+	  	breweryList: [],
+	  	breweryListLoaded: false,
+	  	brewery: {},
+	  	breweryAdded: false,
 	  searchBreweryList: [],
 	  searchBreweryLoaded: false,
 	  searchBreweryFail: false,
@@ -29,7 +30,14 @@ class AddBeer extends Component {
 	  this.getBreweryList();
 	}
 
-	getBreweryList = () => {
+	addBreweryFromList = breweryData => {
+	  this.setState({
+	    brewery: breweryData,
+	    breweryAdded: true
+	  });
+	}
+
+		getBreweryList = () => {
 	  fetch('/api/brewery')
 	    .then(response => response.json())
 	    .then(data => {
@@ -39,14 +47,7 @@ class AddBeer extends Component {
 	      });
 	    })
 	    .catch(error => console.error(error));
-	}
-
-	addBreweryFromList = breweryData => {
-	  this.setState({
-	    brewery: breweryData,
-	    breweryAdded: true
-	  });
-	}
+		}
 
 	searchBrewery = breweryName => {
 	  fetch(`https://api.openbrewerydb.org/breweries/search?query=${breweryName}`)
@@ -121,6 +122,10 @@ class AddBeer extends Component {
 	  this.props.setView('beerList');
 	}
 
+	handleFail = () => {
+	  this.props.setView('fail');
+	}
+
 	render() {
 	  let breweryList = <Spinner />;
 	  if (this.state.breweryListLoaded) {
@@ -142,7 +147,7 @@ class AddBeer extends Component {
 	        addFromQuery={this.addBreweryFromQuery}/>
 	    );
 	  } else if (this.state.searchBreweryLoaded && this.state.searchBreweryFail) {
-	    this.props.setView('fail');
+	    breweryList = <SearchBreweryFail setView={this.props.setView}/>;
 	  }
 	  if (this.state.breweryAdded) {
 	    breweryList = (

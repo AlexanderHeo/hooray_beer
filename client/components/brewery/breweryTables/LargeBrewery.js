@@ -6,7 +6,7 @@ const brewery = props => {
   return (
     <tr>
       <td className="name">{props.brewery.name}</td>
-      <td>{location}</td>
+      <td className="location">{location}</td>
       <td><a href={props.brewery.link}>{props.brewery.link}</a></td>
     </tr>
   );

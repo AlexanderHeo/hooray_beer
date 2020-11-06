@@ -44,6 +44,10 @@ const Table = styled.table`
 		display: flex;
 		justify-content: space-between;
 	}
+	.name,
+	.location {
+		text-transform: capitalize;
+	}
 	.name {
 		font-weight: 500;
 	}

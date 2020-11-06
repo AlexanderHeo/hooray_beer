@@ -32,6 +32,11 @@ const Table = styled.table`
 		justify-content: space-between;
 		align-items: baseline;
 	}
+	.name,
+	.brewery,
+	.bar {
+		text-transform: capitalize;
+	}
 	.name {
 		font-size: 18px;
 		font-weight: 600;

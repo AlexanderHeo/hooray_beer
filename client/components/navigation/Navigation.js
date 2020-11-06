@@ -9,13 +9,13 @@ class Navigation extends Component {
 	}
 
 	setView = button => {
-	  if (button === 'beerList' && !this.state.beerActive) {
+	  if (this.props.active === 'beer') {
 	    this.setState({
 	      beerActive: true,
 	      breweryActive: false
 	    });
 	    this.props.setView(button);
-	  } else if (button === 'brewery' && !this.state.breweryActive) {
+	  } else if (this.props.active === 'brewery') {
 	    this.setState({
 	      beerActive: false,
 	      breweryActive: true
