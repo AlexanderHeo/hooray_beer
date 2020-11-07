@@ -1,42 +1,49 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as viewActionCreator from '../store/action/view';
 import AddBeer from './beer/addBeer/AddBeer';
 import SearchBreweryFail from './beer/addBeer/SearchBreweryFail';
 import BeerList from './beer/BeerList';
+import UpdateBeer from './beer/updateBeer/UpdateBeer';
 import BreweryList from './brewery/BreweryList';
 import Intro from './navigation/intro/Intro';
 import Header from './ui/header/Header';
 
-class App extends Component {
-	state = {
-	  view: 'intro'
-	}
+const app = props => {
+  let component = <Intro setView={props.setView}/>;
+  const view = props.view;
+  if (view === 'beerList') {
+    component = <BeerList setView={props.setView}/>;
+  } else if (view === 'add') {
+    component = <AddBeer setView={props.setView}/>;
+  } else if (view === 'brewery') {
+    component = <BreweryList setView={props.setView}/>;
+  } else if (view === 'fail') {
+    component = <SearchBreweryFail setView={props.setView}/>;
+  } else if (view === 'edit') {
+    component = <UpdateBeer setView={props.setView}/>;
+  }
 
-	setView = view => {
-	  this.setState({ view: view });
-	}
+  return (
+    <>
+      <Header setView={props.setView}/>
+      {component}
+    </>
+  );
+};
 
-	render() {
-	  let component = <Intro setView={this.setView}/>;
-	  const view = this.state.view;
-	  if (view === 'beerList') {
-	    component = <BeerList setView={this.setView}/>;
-	  } else if (view === 'add') {
-	    component = <AddBeer setView={this.setView}/>;
-	  } else if (view === 'brewery') {
-	    component = <BreweryList setView={this.setView}/>;
-	  } else if (view === 'fail') {
-	    component = <SearchBreweryFail setView={this.setView}/>;
-	  }
+const mapStateToProps = state => {
+  return {
+    view: state.view
+  };
+};
 
-	  return (
-	    <>
-	      <Header setView={this.setView}/>
-	      {component}
-	    </>
-	  );
-	}
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    setView: view => dispatch(viewActionCreator.setView(view))
+  };
+};
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(app);

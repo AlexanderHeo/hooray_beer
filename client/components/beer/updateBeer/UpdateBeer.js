@@ -1,13 +1,15 @@
 /* eslint-disable no-tabs */
 import Rating from 'beauty-stars';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import * as actions from '../../../store/action/beer';
 
 class UpdateBeer extends Component {
 	state = {
-	  rating: this.props.beerToUpdate.rating,
-	  note: this.props.beerToUpdate.note,
-	  bar: this.props.beerToUpdate.bar,
+	  rating: this.props.beerToEdit.rating,
+	  note: this.props.beerToEdit.note,
+	  bar: this.props.beerToEdit.bar,
 	  invalid: '',
 	  invalidMessage: '',
 	  disabled: false
@@ -25,10 +27,10 @@ class UpdateBeer extends Component {
 	handleClick = event => {
 	  event.preventDefault();
 	  const updatedBeerData = {
-	    beerID: this.props.beerToUpdate.beerID,
-	    name: this.props.beerToUpdate.name,
-	    breweryID: this.props.beerToUpdate.breweryID,
-	    brewery: this.props.beerToUpdate.brewery,
+	    beerID: this.props.beerToEdit.beerID,
+	    name: this.props.beerToEdit.name,
+	    breweryID: this.props.beerToEdit.breweryID,
+	    brewery: this.props.beerToEdit.brewery,
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar
@@ -69,15 +71,15 @@ class UpdateBeer extends Component {
 	}
 
 	handleReset = () => {
-	  window.location.reload(true);
+	  this.props.setView('beerList');
 	}
 
 	render() {
 	  return (
 	    <UpdateModal>
 	      <div className="update">
-	        <div className="name">{this.props.beerToUpdate.name}</div>
-	        <div className="brewery">{this.props.beerToUpdate.brewery}</div>
+	        <div className="name">{this.props.beerToEdit.name}</div>
+	        <div className="brewery">{this.props.beerToEdit.brewery}</div>
 	        <form className="form">
 	          <fieldset>
 	            <label htmlFor="rating">Rating: </label>
@@ -140,7 +142,19 @@ class UpdateBeer extends Component {
 	}
 }
 
-export default UpdateBeer;
+const mapStateToProps = state => {
+  return {
+    beerToEdit: state.beerToEdit
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editBeer: beer => dispatch(actions.editBeer(beer))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateBeer);
 
 const UpdateModal = styled.div`
 	margin: 24px 12px;
