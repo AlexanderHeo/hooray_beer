@@ -36,7 +36,7 @@ const app = props => {
 
 const mapStateToProps = state => {
   return {
-    view: state.beerReducer.view
+    view: state.viewReducer.view
   };
 };
 
