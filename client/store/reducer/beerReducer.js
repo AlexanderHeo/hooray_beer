@@ -41,12 +41,14 @@ const reducer = (state = initialState, action) => {
         beerToEdit: action.beerToEdit
       };
     case actionTypes.EDIT_BEER_SUCCESS:
+      console.log('success');
       return {
         ...state,
         beerList: action.beerList,
         view: 'beerList'
       };
     case actionTypes.EDIT_BEER_FAIL:
+      console.log('err', action.error);
       return {
         ...state,
         error: action.error

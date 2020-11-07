@@ -56,8 +56,7 @@ class UpdateBeer extends Component {
 	    });
 	  } else if (event.target.name === 'update') {
 	    this.props.editBeer(updatedBeerData);
-	  }
-	  if (event.target.name === 'reset') {
+	  } else if (event.target.name === 'reset') {
 	    this.handleReset();
 	  }
 	}
@@ -144,7 +143,7 @@ class UpdateBeer extends Component {
 
 const mapStateToProps = state => {
   return {
-    beerToEdit: state.beerToEdit
+    beerToEdit: state.beerReducer.beerToEdit
   };
 };
 

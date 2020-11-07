@@ -47,7 +47,7 @@ export const removeBeer = beerID => {
     })
       .then(response => null)
       .then(data => {
-        const ogBeerList = getState().beerList;
+        const ogBeerList = getState().beerReducer.beerList;
         const beerListCopy = [...ogBeerList];
         const index = beerListCopy.findIndex(beers => beers.beerID === beerID);
         beerListCopy.splice(index, 1);
@@ -86,14 +86,12 @@ export const editBeer = beer => {
     })
       .then(response => response.json())
       .then(data => {
-        const ogBeerList = getState().beerList;
+        const ogBeerList = getState().beerReducer.beerList;
         const beerListCopy = [...ogBeerList];
-        const index = beerListCopy.findIndex(beer => {
-          return beer.beerID === beerID;
-        });
-        beerListCopy.splice(index, 1, beer);
+        const index = beerListCopy.findIndex(beers => beers.beerID === beerID);
+        beerListCopy.splice(index, 1, data);
         dispatch(editBeerSuccess(beerListCopy));
       })
-      .catch(error => dispatch(editBeerFail(error)));
+      .catch(error => console.error('error:', error));
   };
 };

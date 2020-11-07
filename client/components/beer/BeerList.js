@@ -75,11 +75,11 @@ class BeerList extends Component {
 
 const mapStateToProps = state => {
   return {
-    beerList: state.beerList,
-    beerListLoaded: state.beerListLoaded,
-    beerListLoadFail: state.beerListLoadFail,
-    beerToEdit: state.beerToEdit,
-    error: state.error
+    beerList: state.beerReducer.beerList,
+    beerListLoaded: state.beerReducer.beerListLoaded,
+    beerListLoadFail: state.beerReducer.beerListLoadFail,
+    beerToEdit: state.beerReducer.beerToEdit,
+    error: state.beerReducer.error
   };
 };
 
