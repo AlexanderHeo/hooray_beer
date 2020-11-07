@@ -1,63 +1,30 @@
 /* eslint-disable no-tabs */
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-class Navigation extends Component {
-	state = {
-	  beerActive: true,
-	  breweryActive: false
-	}
+const navigation = props => (
+  <Navi>
+    <ul>
+      <li>
+        <button
+          className='listButton'
+          onClick={() => props.setView('beerList')}>My Beers</button>
+      </li>
+      <li>
+        <button
+          className='listButton'
+          onClick={() => props.setView('brewery')}>My Breweries</button>
+      </li>
+      <li>
+        <button
+          className='addBeerButton'
+          onClick={() => props.setView('add')}>Add New Beer</button>
+      </li>
+    </ul>
+  </Navi>
+);
 
-	setView = button => {
-	  if (this.props.active === 'beer') {
-	    this.setState({
-	      beerActive: true,
-	      breweryActive: false
-	    });
-	    this.props.setView(button);
-	  } else if (this.props.active === 'brewery') {
-	    this.setState({
-	      beerActive: false,
-	      breweryActive: true
-	    });
-	    this.props.setView(button);
-	  } else if (button === 'add') {
-	    this.setState({
-	      beerActive: false,
-	      breweryActive: false
-	    });
-	    this.props.setView(button);
-	  } else {
-	    this.props.setView(button);
-	  }
-	}
-
-	render() {
-	  return (
-	    <Navi>
-	      <ul>
-	        <li>
-	          <button
-	            className={['listButton', this.state.beerActive].join(' ')}
-	            onClick={() => this.setView('beerList')}>My Beers</button>
-	        </li>
-	        <li>
-	          <button
-	            className={['listButton', this.state.breweryActive].join(' ')}
-	            onClick={() => this.setView('brewery')}>My Breweries</button>
-	        </li>
-	        <li>
-	          <button
-	            className="addBeerButton"
-	            onClick={() => this.setView('add')}>Add New Beer</button>
-	        </li>
-	      </ul>
-	    </Navi>
-	  );
-	}
-}
-
-export default Navigation;
+export default navigation;
 
 const Navi = styled.div`
 	padding: 0;

@@ -11,7 +11,7 @@ const header = props => (
     <div className="naviContainer">
       <Navigation
         setView={props.setView}
-        active={props.active}/>
+        active={props.view}/>
     </div>
   </Header>
 );

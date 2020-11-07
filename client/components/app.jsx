@@ -28,7 +28,7 @@ const app = props => {
 
   return (
     <>
-      <Header setView={props.setView}/>
+      <Header setView={props.setView} view={props.view}/>
       {component}
     </>
   );
