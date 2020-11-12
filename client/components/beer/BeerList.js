@@ -2,9 +2,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../store/action/beer';
 import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
+import * as actions from './actions';
 import LargeTable from './beerTables/LargeTable';
 import SmallTable from './beerTables/SmallTable';
 

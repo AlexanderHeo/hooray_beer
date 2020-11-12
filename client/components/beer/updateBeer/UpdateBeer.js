@@ -3,7 +3,7 @@ import Rating from 'beauty-stars';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import * as actions from '../../../store/action/beer';
+import * as actions from '../actions';
 
 class UpdateBeer extends Component {
 	state = {

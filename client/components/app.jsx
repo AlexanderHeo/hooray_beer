@@ -2,7 +2,7 @@
 /* eslint-disable no-tabs */
 import React from 'react';
 import { connect } from 'react-redux';
-import * as viewActionCreator from '../store/action/view';
+import * as viewActionCreator from './actions';
 import AddBeer from './beer/addBeer/AddBeer';
 import SearchBreweryFail from './beer/addBeer/SearchBreweryFail';
 import BeerList from './beer/BeerList';

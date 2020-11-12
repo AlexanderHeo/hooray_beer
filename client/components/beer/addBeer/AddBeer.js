@@ -1,6 +1,8 @@
 /* eslint-disable no-tabs */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import * as breweryActions from '../../brewery/actions';
 import Spinner from '../../ui/spinner/Spinner';
 import AddBeerData from './AddBeerData';
 import AddBreweryFromList from './AddBreweryFromList';
@@ -10,8 +12,8 @@ import SearchForBrewery from './SearchForBrewery';
 
 class AddBeer extends Component {
 	state = {
-	  	breweryList: [],
-	  	breweryListLoaded: false,
+	  	// breweryList: [],
+	  	// breweryListLoaded: false,
 	  	brewery: {},
 	  	breweryAdded: false,
 	  searchBreweryList: [],
@@ -27,8 +29,20 @@ class AddBeer extends Component {
 	}
 
 	componentDidMount() {
-	  this.getBreweryList();
+	  this.props.getBreweryList();
 	}
+
+	// getBreweryList = () => {
+	  // fetch('/api/brewery')
+	  //   .then(response => response.json())
+	  //   .then(data => {
+	  //     this.setState({
+	  //       breweryList: data,
+	  //       breweryListLoaded: true
+	  //     });
+	  //   })
+	  //   .catch(error => console.error(error));
+	// }
 
 	addBreweryFromList = breweryData => {
 	  this.setState({
@@ -36,18 +50,6 @@ class AddBeer extends Component {
 	    breweryAdded: true
 	  });
 	}
-
-		getBreweryList = () => {
-	  fetch('/api/brewery')
-	    .then(response => response.json())
-	    .then(data => {
-	      this.setState({
-	        breweryList: data,
-	        breweryListLoaded: true
-	      });
-	    })
-	    .catch(error => console.error(error));
-		}
 
 	searchBrewery = breweryName => {
 	  fetch(`https://api.openbrewerydb.org/breweries/search?query=${breweryName}`)
@@ -128,16 +130,23 @@ class AddBeer extends Component {
 
 	render() {
 	  let breweryList = <Spinner />;
-	  if (this.state.breweryListLoaded) {
+	  if (this.props.breweryListLoaded) {
 	    breweryList = (
 	      <AddBreweryContainer>
 	        <AddBreweryFromList
-	          brewery={this.state.breweryList}
+	          brewery={this.props.breweryList}
 	          addBreweryFromList={this.addBreweryFromList}/>
 	        <SearchForBrewery
 	          search={this.searchBrewery}
 	          setView={this.props.setView}/>
 	      </AddBreweryContainer>
+	    );
+	  } else if (this.props.breweryListLoadFail) {
+	    breweryList = (
+	      <>
+	        <div>something went wrong</div>
+	        <div>please try again</div>
+	      </>
 	    );
 	  }
 	  if (this.state.searchBreweryLoaded && !this.state.searchBreweryFail) {
@@ -165,7 +174,21 @@ class AddBeer extends Component {
 	}
 }
 
-export default AddBeer;
+const mapStateToProps = state => {
+  return {
+    breweryList: state.breweryReducer.breweryList,
+    breweryListLoaded: state.breweryReducer.breweryListLoaded,
+    breweryListLoadFail: state.breweryReducer.breweryListLoadFail
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getBreweryList: () => dispatch(breweryActions.getBreweryList())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBeer);
 
 const AddBreweryContainer = styled.div`
 	display: flex;
