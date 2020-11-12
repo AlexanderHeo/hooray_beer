@@ -1,9 +1,8 @@
-/* eslint-disable no-tabs */
-import Rating from 'beauty-stars';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import * as actions from '../actions';
+import Rating from 'beauty-stars'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import * as actions from '../actions'
 
 class UpdateBeer extends Component {
 	state = {
@@ -21,11 +20,11 @@ class UpdateBeer extends Component {
 	    invalid: '',
 	    invalidMessage: '',
 	    disabled: false
-	  });
+	  })
 	}
 
 	handleClick = event => {
-	  event.preventDefault();
+	  event.preventDefault()
 	  const updatedBeerData = {
 	    beerID: this.props.beerToEdit.beerID,
 	    name: this.props.beerToEdit.name,
@@ -34,30 +33,30 @@ class UpdateBeer extends Component {
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar
-	  };
+	  }
 
 	  if (!this.state.rating) {
 	    this.setState({
 	      invalid: 'rating',
 	      invalidMessage: 'Please set a rating.',
 	      disabled: true
-	    });
+	    })
 	  } else if (!this.state.note) {
 	    this.setState({
 	      invalid: 'note',
 	      invalidMessage: 'Please enter a tasting note.',
 	      disabled: true
-	    });
+	    })
 	  } else if (!this.state.bar) {
 	    this.setState({
 	      invalid: 'bar',
 	      invalidMessage: 'Please enter bar name.',
 	      disabled: true
-	    });
+	    })
 	  } else if (event.target.name === 'update') {
-	    this.props.editBeer(updatedBeerData);
+	    this.props.editBeer(updatedBeerData)
 	  } else if (event.target.name === 'reset') {
-	    this.handleReset();
+	    this.handleReset()
 	  }
 	}
 
@@ -66,11 +65,11 @@ class UpdateBeer extends Component {
 	    invalid: '',
 	    invalidMessage: '',
 	    disabled: false
-	  });
+	  })
 	}
 
 	handleReset = () => {
-	  this.props.setView('beerList');
+	  this.props.setView('beerList')
 	}
 
 	render() {
@@ -85,8 +84,8 @@ class UpdateBeer extends Component {
 	            <Rating
 	              value={this.state.rating}
 	              onChange={rating => {
-	                this.setState({ rating });
-	                this.handleRatingEnter();
+	                this.setState({ rating })
+	                this.handleRatingEnter()
 	              }} />
 	            {
 	              this.state.invalid === 'rating'
@@ -137,23 +136,23 @@ class UpdateBeer extends Component {
 	        </form>
 	      </div>
 	    </UpdateModal>
-	  );
+	  )
 	}
 }
 
 const mapStateToProps = state => {
   return {
     beerToEdit: state.beerReducer.beerToEdit
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     editBeer: beer => dispatch(actions.editBeer(beer))
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateBeer);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateBeer)
 
 const UpdateModal = styled.div`
 	margin: 24px 12px;
@@ -268,4 +267,4 @@ const UpdateModal = styled.div`
 		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
 		box-shadow: 0;
 	}
-`;
+`

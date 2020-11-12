@@ -1,33 +1,31 @@
-/* eslint-disable no-tabs */
-/* eslint-disable indent */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const addBreweryFromList = props => {
-	let BreweryList = (
-		<AddBeerForm>
-			<div className="form">
-				<h4>Pick a brewery:</h4>
-				<UL>
-					{props.brewery.map(x => (
-						<li key={x.breweryID}>
-							{x.name}<br/>
-							<button
-								onClick={() => props.addBreweryFromList(x)}
-								className="chooseButton">Choose</button>
-						</li>
-					))}
-				</UL>
-			</div>
-		</AddBeerForm>
-	);
-	if (props.brewery.length === 0) {
-		BreweryList = null;
-	}
-  return BreweryList;
-};
+  let BreweryList = (
+    <AddBeerForm>
+      <div className="form">
+        <h4>Pick a brewery:</h4>
+        <UL>
+          {props.brewery.map(x => (
+            <li key={x.breweryID}>
+              {x.name}<br/>
+              <button
+                onClick={() => props.addBreweryFromList(x)}
+                className="chooseButton">Choose</button>
+            </li>
+          ))}
+        </UL>
+      </div>
+    </AddBeerForm>
+  )
+  if (props.brewery.length === 0) {
+    BreweryList = null
+  }
+  return BreweryList
+}
 
-export default addBreweryFromList;
+export default addBreweryFromList
 
 const AddBeerForm = styled.div`
 	text-align: center;
@@ -76,4 +74,4 @@ const UL = styled.ul`
 	.chooseButton:hover {
 		background-color: rgb(135, 206, 235);
 	}
-`;
+`

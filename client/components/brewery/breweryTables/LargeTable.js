@@ -1,8 +1,7 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
-import BreweryTable from '../../ui/table/BreweryTable';
-import LargeBrewery from './LargeBrewery';
+import React from 'react'
+import styled from 'styled-components'
+import BreweryTable from '../../ui/table/BreweryTable'
+import LargeBrewery from './LargeBrewery'
 
 const largeTable = props => (
   <BreweryTable>
@@ -12,14 +11,14 @@ const largeTable = props => (
           return <LargeBrewery
             brewery={brewery}
             key={brewery.breweryID}
-          />;
+          />
         })}
       </tbody>
     </Table>
   </BreweryTable>
-);
+)
 
-export default largeTable;
+export default largeTable
 
 const Table = styled.table`
 	width: 80%;
@@ -41,4 +40,4 @@ const Table = styled.table`
 	.location {
 		text-transform: capitalize;
 	}
-`;
+`

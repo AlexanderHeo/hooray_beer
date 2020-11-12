@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const navigation = props => (
   <Navi>
@@ -22,9 +21,9 @@ const navigation = props => (
       </li>
     </ul>
   </Navi>
-);
+)
 
-export default navigation;
+export default navigation
 
 const Navi = styled.div`
 	padding: 0;
@@ -82,4 +81,4 @@ const Navi = styled.div`
 			padding: 3px 6px;
 		}
 	}
-`;
+`

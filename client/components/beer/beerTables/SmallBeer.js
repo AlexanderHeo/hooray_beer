@@ -1,12 +1,11 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import BeerButtons from '../../navigation/buttons/BeerButtons';
-import RatingDisplay from '../../ratingDisplay/RatingDisplay';
+import React from 'react'
+import BeerButtons from '../../navigation/buttons/BeerButtons'
+import RatingDisplay from '../../ratingDisplay/RatingDisplay'
 
 const smallBeer = props => {
-  const rating = [];
+  const rating = []
   for (let i = 0; i < props.beer.rating; i++) {
-    rating.push([i + 1]);
+    rating.push([i + 1])
   }
   return (
     <>
@@ -36,7 +35,7 @@ const smallBeer = props => {
         </td>
       </tr>
     </>
-  );
-};
+  )
+}
 
-export default smallBeer;
+export default smallBeer

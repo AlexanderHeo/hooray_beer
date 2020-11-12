@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const intro = props => (
   <Intro>
@@ -14,9 +13,9 @@ const intro = props => (
         onClick={() => props.setView('add')}>Click to get started</button>
     </div>
   </Intro>
-);
+)
 
-export default intro;
+export default intro
 
 const Intro = styled.div`
 display: flex;
@@ -46,4 +45,4 @@ button:active {
 		width: 500px;
 	}
 }
-`;
+`

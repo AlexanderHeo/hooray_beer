@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const beerButtons = props => (
   <ButtonContainer className="buttonContainer">
@@ -15,9 +14,9 @@ const beerButtons = props => (
       className="editButton"
       onClick={event => props.handleButtonClick(event, props.beer)}>Edit</button>
   </ButtonContainer>
-);
+)
 
-export default beerButtons;
+export default beerButtons
 
 const ButtonContainer = styled.div`
 	button {
@@ -56,4 +55,4 @@ const ButtonContainer = styled.div`
 		box-shadow: inset -1px 1px 5px rgb(80, 80, 80);
 		box-shadow: 0;
 	}
-`;
+`

@@ -1,15 +1,14 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const spinner = () => (
   <Spinner>
     <div className="double-bounce1"></div>
     <div className="double-bounce2"></div>
   </Spinner>
-);
+)
 
-export default spinner;
+export default spinner
 
 const Spinner = styled.div`
   width: 40px;
@@ -50,4 +49,4 @@ const Spinner = styled.div`
 			-webkit-transform: scale(1.0);
 		}
 	}
-`;
+`

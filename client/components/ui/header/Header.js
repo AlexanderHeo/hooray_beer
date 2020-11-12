@@ -1,7 +1,6 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
-import Navigation from '../../navigation/Navigation';
+import React from 'react'
+import styled from 'styled-components'
+import Navigation from '../../navigation/Navigation'
 
 const header = props => (
   <Header>
@@ -14,9 +13,9 @@ const header = props => (
         active={props.view}/>
     </div>
   </Header>
-);
+)
 
-export default header;
+export default header
 
 const Header = styled.div`
 	border-bottom: 2px solid rgb(118, 118, 118);
@@ -52,4 +51,4 @@ const Header = styled.div`
 			width: 100%;
 		}
 	}
-`;
+`

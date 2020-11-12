@@ -1,8 +1,7 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
-import BeerTable from '../../ui/table/BeerTable';
-import SmallBeer from './SmallBeer';
+import React from 'react'
+import styled from 'styled-components'
+import BeerTable from '../../ui/table/BeerTable'
+import SmallBeer from './SmallBeer'
 
 const smalltable = props => (
   <BeerTable>
@@ -18,9 +17,9 @@ const smalltable = props => (
       </tbody>
     </Table>
   </BeerTable>
-);
+)
 
-export default smalltable;
+export default smalltable
 
 const Table = styled.table`
 	width: 90%;
@@ -73,4 +72,4 @@ const Table = styled.table`
 	.editButton {
 		border-width: 1px;
 	}
-`;
+`

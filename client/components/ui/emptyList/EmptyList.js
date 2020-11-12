@@ -1,8 +1,7 @@
-/* eslint-disable no-tabs */
-import { faBeer } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import styled from 'styled-components';
+import { faBeer } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import styled from 'styled-components'
 
 const emptyList = props => (
   <EmptyList>
@@ -14,15 +13,15 @@ const emptyList = props => (
         style={{ backgroundColor: 'yellow' }}
         border/>
       <div>Hmmmm, the {props.list} list seems to be empty.</div>
-      <div>Let&apos;s get started and add your first beer!</div>
+      <div>Let&aposs get started and add your first beer!</div>
       <button
         onClick={() => props.setView('add')}
         className="addButton">Add New Beer</button>
     </div>
   </EmptyList>
-);
+)
 
-export default emptyList;
+export default emptyList
 
 const EmptyList = styled.div`
 	display: flex;
@@ -65,4 +64,4 @@ const EmptyList = styled.div`
 		box-shadow: inset -1px 1px 5px rgb(0, 0, 255);
 		box-shadow: 0;
 	}
-`;
+`

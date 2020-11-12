@@ -1,7 +1,6 @@
-/* eslint-disable no-tabs */
-import PickRating from 'beauty-stars';
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import PickRating from 'beauty-stars'
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
 class addBeerData extends Component {
 	state ={
@@ -20,47 +19,47 @@ class addBeerData extends Component {
 	    invalid: '',
 	    invalidMessage: '',
 	    disabled: false
-	  });
+	  })
 	}
 
 	handleClick = event => {
-	  event.preventDefault();
+	  event.preventDefault()
 	  const beerData = {
 	    name: this.state.name,
 	    rating: this.state.rating,
 	    note: this.state.note,
 	    bar: this.state.bar
-	  };
+	  }
 
 	  if (!this.state.name) {
 	    this.setState({
 	      invalid: 'name',
 	      invalidMessage: 'Please enter beer name.',
 	      disabled: true
-	    });
+	    })
 	  } else if (!this.state.rating) {
 	    this.setState({
 	      invalid: 'rating',
 	      invalidMessage: 'Please set a rating.',
 	      disabled: true
-	    });
+	    })
 	  } else if (!this.state.note) {
 	    this.setState({
 	      invalid: 'note',
 	      invalidMessage: 'Please enter a tasting note.',
 	      disabled: true
-	    });
+	    })
 	  } else if (!this.state.bar) {
 	    this.setState({
 	      invalid: 'bar',
 	      invalidMessage: 'Please enter bar name.',
 	      disabled: true
-	    });
+	    })
 	  } else if (event.target.name === 'submit') {
-	    this.props.addBeerData(beerData);
+	    this.props.addBeerData(beerData)
 	  }
 	  if (event.target.name === 'reset') {
-	    this.handleReset();
+	    this.handleReset()
 	  }
 	}
 
@@ -69,11 +68,11 @@ class addBeerData extends Component {
 	    invalid: '',
 	    invalidMessage: '',
 	    disabled: false
-	  });
+	  })
 	}
 
 	handleReset = () => {
-	  this.props.setView('beerList');
+	  this.props.setView('beerList')
 	}
 
 	render() {
@@ -100,8 +99,8 @@ class addBeerData extends Component {
 	          <PickRating
 	            value={this.state.rating}
 	            onChange={rating => {
-	              this.setState({ rating });
-	              this.handleRatingEnter();
+	              this.setState({ rating })
+	              this.handleRatingEnter()
 	            }}
 	          />
 	          {
@@ -152,11 +151,11 @@ class addBeerData extends Component {
 	        </div>
 	      </form>
 	    </AddBeerContainer>
-	  );
+	  )
 	}
 }
 
-export default addBeerData;
+export default addBeerData
 
 const AddBeerContainer = styled.div`
 	border: 2px solid transparent;
@@ -246,4 +245,4 @@ const AddBeerContainer = styled.div`
 		color: rgb(30, 30, 30);
 		cursor: not-allowed;
 	}
-`;
+`

@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const addBreweryFromQuery = props => {
   return (
@@ -19,15 +18,15 @@ const addBreweryFromQuery = props => {
                     onClick={() => props.addFromQuery(brewery)}>Choose</button>
                 </div>
               </li>
-            );
+            )
           })}
         </UL>
       </div>
     </AddBreweryFromQuery>
-  );
-};
+  )
+}
 
-export default addBreweryFromQuery;
+export default addBreweryFromQuery
 
 const AddBreweryFromQuery = styled.div`
 	border: 2px solid transparent;
@@ -76,4 +75,4 @@ const UL = styled.ul`
 	button:hover {
 		background-color: rgb(135, 206, 235);
 	}
-`;
+`

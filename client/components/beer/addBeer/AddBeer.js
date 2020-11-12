@@ -1,19 +1,16 @@
-/* eslint-disable no-tabs */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import * as breweryActions from '../../brewery/actions';
-import Spinner from '../../ui/spinner/Spinner';
-import AddBeerData from './AddBeerData';
-import AddBreweryFromList from './AddBreweryFromList';
-import AddBreweryFromQuery from './AddBreweryFromQuery';
-import SearchBreweryFail from './SearchBreweryFail';
-import SearchForBrewery from './SearchForBrewery';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import * as breweryActions from '../../brewery/actions'
+import Spinner from '../../ui/spinner/Spinner'
+import AddBeerData from './AddBeerData'
+import AddBreweryFromList from './AddBreweryFromList'
+import AddBreweryFromQuery from './AddBreweryFromQuery'
+import SearchBreweryFail from './SearchBreweryFail'
+import SearchForBrewery from './SearchForBrewery'
 
 class AddBeer extends Component {
 	state = {
-	  	// breweryList: [],
-	  	// breweryListLoaded: false,
 	  	brewery: {},
 	  	breweryAdded: false,
 	  searchBreweryList: [],
@@ -29,26 +26,14 @@ class AddBeer extends Component {
 	}
 
 	componentDidMount() {
-	  this.props.getBreweryList();
+	  this.props.getBreweryList()
 	}
-
-	// getBreweryList = () => {
-	  // fetch('/api/brewery')
-	  //   .then(response => response.json())
-	  //   .then(data => {
-	  //     this.setState({
-	  //       breweryList: data,
-	  //       breweryListLoaded: true
-	  //     });
-	  //   })
-	  //   .catch(error => console.error(error));
-	// }
 
 	addBreweryFromList = breweryData => {
 	  this.setState({
 	    brewery: breweryData,
 	    breweryAdded: true
-	  });
+	  })
 	}
 
 	searchBrewery = breweryName => {
@@ -58,13 +43,13 @@ class AddBeer extends Component {
 	      if (data.length === 0) {
 	        this.setState({
 	          searchBreweryFail: true
-	        });
+	        })
 	      }
 	      this.setState({
 	        searchBreweryList: data,
 	        searchBreweryLoaded: true
-	      });
-	    });
+	      })
+	    })
 	}
 
 	addBreweryFromQuery = breweryData => {
@@ -74,7 +59,7 @@ class AddBeer extends Component {
 	    city: breweryData.city,
 	    state: breweryData.state,
 	    link: breweryData.website_url
-	  };
+	  }
 	  fetch('/api/brewery', {
 	    method: 'POST',
 	    headers: {
@@ -87,12 +72,12 @@ class AddBeer extends Component {
 	      this.setState({
 	        brewery: brewery,
 	        breweryAdded: true
-	      });
-	    });
+	      })
+	    })
 	}
 
 	addBeerData = beerData => {
-	  beerData.breweryID = this.state.brewery.breweryID;
+	  beerData.breweryID = this.state.brewery.breweryID
 	  fetch('/api/beer', {
 	    method: 'POST',
 	    headers: {
@@ -101,7 +86,7 @@ class AddBeer extends Component {
 	    body: JSON.stringify(beerData)
 	  })
 	    .then(response => response.json())
-	    .then(data => this.handleReset());
+	    .then(data => this.handleReset())
 	}
 
 	handleReset = () => {
@@ -120,16 +105,16 @@ class AddBeer extends Component {
 	      bar: ''
 	    },
 	    beerAdded: false
-	  });
-	  this.props.setView('beerList');
+	  })
+	  this.props.setView('beerList')
 	}
 
 	handleFail = () => {
-	  this.props.setView('fail');
+	  this.props.setView('fail')
 	}
 
 	render() {
-	  let breweryList = <Spinner />;
+	  let breweryList = <Spinner />
 	  if (this.props.breweryListLoaded) {
 	    breweryList = (
 	      <AddBreweryContainer>
@@ -140,23 +125,23 @@ class AddBeer extends Component {
 	          search={this.searchBrewery}
 	          setView={this.props.setView}/>
 	      </AddBreweryContainer>
-	    );
+	    )
 	  } else if (this.props.breweryListLoadFail) {
 	    breweryList = (
 	      <>
 	        <div>something went wrong</div>
 	        <div>please try again</div>
 	      </>
-	    );
+	    )
 	  }
 	  if (this.state.searchBreweryLoaded && !this.state.searchBreweryFail) {
 	    breweryList = (
 	      <AddBreweryFromQuery
 	        brewery={this.state.searchBreweryList}
 	        addFromQuery={this.addBreweryFromQuery}/>
-	    );
+	    )
 	  } else if (this.state.searchBreweryLoaded && this.state.searchBreweryFail) {
-	    breweryList = <SearchBreweryFail setView={this.props.setView}/>;
+	    breweryList = <SearchBreweryFail setView={this.props.setView}/>
 	  }
 	  if (this.state.breweryAdded) {
 	    breweryList = (
@@ -164,13 +149,13 @@ class AddBeer extends Component {
 	        brewery={this.state.brewery}
 	        addBeerData={this.addBeerData}
 	        setView={this.props.setView}/>
-	    );
+	    )
 	  }
 	  return (
 	    <AddBreweryContainer>
 	      { breweryList }
 	    </AddBreweryContainer>
-	  );
+	  )
 	}
 }
 
@@ -179,19 +164,19 @@ const mapStateToProps = state => {
     breweryList: state.breweryReducer.breweryList,
     breweryListLoaded: state.breweryReducer.breweryListLoaded,
     breweryListLoadFail: state.breweryReducer.breweryListLoadFail
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     getBreweryList: () => dispatch(breweryActions.getBreweryList())
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBeer);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBeer)
 
 const AddBreweryContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-`;
+`

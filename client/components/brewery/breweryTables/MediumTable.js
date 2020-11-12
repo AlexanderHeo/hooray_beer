@@ -1,8 +1,7 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
-import BreweryTable from '../../ui/table/BreweryTable';
-import MediumBrewery from './MediumBrewery';
+import React from 'react'
+import styled from 'styled-components'
+import BreweryTable from '../../ui/table/BreweryTable'
+import MediumBrewery from './MediumBrewery'
 
 const mediumTable = props => (
   <BreweryTable>
@@ -16,9 +15,9 @@ const mediumTable = props => (
       </tbody>
     </Table>
   </BreweryTable>
-);
+)
 
-export default mediumTable;
+export default mediumTable
 
 const Table = styled.table`
 	border-spacing: 2px 0;
@@ -60,4 +59,4 @@ const Table = styled.table`
 		justify-content: baseline;
 		font-size: 14px;
 	}
-`;
+`

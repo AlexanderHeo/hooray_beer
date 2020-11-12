@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const searchBreweryFail = props => {
   return (
@@ -15,10 +14,10 @@ const searchBreweryFail = props => {
         <button className="beerList" onClick={() => props.setView('beerList')}>Beer List</button>
       </div>
     </FailMessage>
-  );
-};
+  )
+}
 
-export default searchBreweryFail;
+export default searchBreweryFail
 
 const FailMessage = styled.div`
 	display: flex;
@@ -56,4 +55,4 @@ const FailMessage = styled.div`
 	.beerList:hover {
 		background-color: rgb(242, 142, 28);
 	}
-`;
+`

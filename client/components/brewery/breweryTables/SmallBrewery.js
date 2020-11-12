@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const smallBrewery = props => {
 
@@ -14,7 +14,7 @@ const smallBrewery = props => {
         <td className="link"><a href={props.brewery.link}>{props.brewery.link}</a></td>
       </tr>
     </>
-  );
-};
+  )
+}
 
-export default smallBrewery;
+export default smallBrewery

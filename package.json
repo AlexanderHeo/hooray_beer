@@ -47,10 +47,10 @@
       }
     },
     "rules": {
-      "semi": [
-        "error",
-        "always"
-      ],
+			"semi": 0,
+			"no-tabs": 0,
+      "allow-indentation-tabs": 0,
+      "no-mixed-spaces-and-tabs": 0,
       "padded-blocks": 0,
       "arrow-parens": [
         "error",
@@ -69,8 +69,6 @@
           ]
         }
       ],
-      "allow-indentation-tabs": 0,
-      "no-mixed-spaces-and-tabs": 0,
       "space-before-function-paren": [
         "error",
         {

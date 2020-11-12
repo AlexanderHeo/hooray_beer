@@ -1,12 +1,11 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import BeerButtons from '../../navigation/buttons/BeerButtons';
-import RatingDisplay from '../../ratingDisplay/RatingDisplay';
+import React from 'react'
+import BeerButtons from '../../navigation/buttons/BeerButtons'
+import RatingDisplay from '../../ratingDisplay/RatingDisplay'
 
 const beer = props => {
-  const rating = [];
+  const rating = []
   for (let i = 0; i < props.beer.rating; i++) {
-    rating.push([i + 1]);
+    rating.push([i + 1])
   }
   return (<>
     <tr>
@@ -18,7 +17,7 @@ const beer = props => {
       </td>
       <td className="note" rowSpan="4">
         <span className="ratingSpan">{rating.map(x => <RatingDisplay key={x[0]}/>)}</span>
-        <span className="tastingNotes">Tasting Notes:</span>&nbsp;{props.beer.note}</td>
+        <span className="tastingNotes">Tasting Notes:</span>&nbsp{props.beer.note}</td>
       <td className="buttons" rowSpan="4">
         <BeerButtons
           handleButtonClick={props.handleButtonClick}
@@ -28,7 +27,7 @@ const beer = props => {
     <tr></tr>
     <tr></tr>
     <tr></tr>
-  </>);
-};
+  </>)
+}
 
-export default beer;
+export default beer

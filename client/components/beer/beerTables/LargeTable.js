@@ -1,32 +1,30 @@
-/* eslint-disable no-tabs */
-/* eslint-disable indent */
-import React from 'react';
-import styled from 'styled-components';
-import BeerTable from '../../ui/table/BeerTable';
-import LargeBeer from './LargeBeer';
+import React from 'react'
+import styled from 'styled-components'
+import BeerTable from '../../ui/table/BeerTable'
+import LargeBeer from './LargeBeer'
 
 const largeTable = props => (
-	<BeerTable>
-		<Table>
-			<colgroup>
-				<col style={{ width: '25%' }} />
-				<col style={{ width: '55%' }} />
-				<col style={{ width: '20%' }} />
-			</colgroup>
-			<tbody>
-				{props.beerList.map(beer => (
-					<LargeBeer
-						beer={beer}
-						key={beer.beerID}
-						setView={props.setView}
-						handleButtonClick={props.handleButtonClick}/>
-				))}
-			</tbody>
-		</Table>
-	</BeerTable>
-);
+  <BeerTable>
+    <Table>
+      <colgroup>
+        <col style={{ width: '25%' }} />
+        <col style={{ width: '55%' }} />
+        <col style={{ width: '20%' }} />
+      </colgroup>
+      <tbody>
+        {props.beerList.map(beer => (
+          <LargeBeer
+            beer={beer}
+            key={beer.beerID}
+            setView={props.setView}
+            handleButtonClick={props.handleButtonClick}/>
+        ))}
+      </tbody>
+    </Table>
+  </BeerTable>
+)
 
-export default largeTable;
+export default largeTable
 
 const Table = styled.table`
 	width: 80%;
@@ -110,4 +108,4 @@ const Table = styled.table`
 			font-size: 14px;
 		}
 	}
-`;
+`

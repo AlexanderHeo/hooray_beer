@@ -1,8 +1,8 @@
-import * as actionTypes from '../store/actionTypes';
+import * as actionTypes from '../store/actionTypes'
 
 const initialState = {
   view: 'intro'
-};
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,10 +10,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         view: action.view
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

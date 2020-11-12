@@ -1,14 +1,13 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const beerTable = props => (
   <Table>
     {props.children}
   </Table>
-);
+)
 
-export default beerTable;
+export default beerTable
 
 const Table = styled.div`
 	display: flex;
@@ -28,4 +27,4 @@ const Table = styled.div`
 		padding: 10px 0;
 		border-spacing: 2px 0;
 	}
-`;
+`

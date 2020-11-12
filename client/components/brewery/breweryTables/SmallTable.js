@@ -1,8 +1,7 @@
-/* eslint-disable no-tabs */
-import React from 'react';
-import styled from 'styled-components';
-import BreweryTable from '../../ui/table/BreweryTable';
-import SmallBrewery from './SmallBrewery';
+import React from 'react'
+import styled from 'styled-components'
+import BreweryTable from '../../ui/table/BreweryTable'
+import SmallBrewery from './SmallBrewery'
 
 const smallTable = props => (
   <BreweryTable>
@@ -16,9 +15,9 @@ const smallTable = props => (
       </tbody>
     </Table>
   </BreweryTable>
-);
+)
 
-export default smallTable;
+export default smallTable
 
 const Table = styled.table`
 	width: 90%;
@@ -56,4 +55,4 @@ const Table = styled.table`
 	.location, .link {
 		font-size: 12px;
 	}
-`;
+`

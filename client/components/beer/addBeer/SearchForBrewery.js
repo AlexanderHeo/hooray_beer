@@ -1,6 +1,5 @@
-/* eslint-disable no-tabs */
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
 class AddNewBrewery extends Component {
 	state={
@@ -12,17 +11,17 @@ class AddNewBrewery extends Component {
 	  this.setState({
 	    newBrewery: event.target.value,
 	    invalid: ''
-	  });
+	  })
 	}
 
 	handleButtonClick = event => {
-	  event.preventDefault();
+	  event.preventDefault()
 	  if (event.target.name === 'search' && !this.state.newBrewery) {
-	    this.setState({ invalid: 'Please enter a brewery.' });
+	    this.setState({ invalid: 'Please enter a brewery.' })
 	  } else if (event.target.name === 'search' && !this.state.invalid) {
-	    this.props.search(this.state.newBrewery);
+	    this.props.search(this.state.newBrewery)
 	  } else if (event.target.name === 'reset') {
-	    this.handleReset();
+	    this.handleReset()
 	  }
 	}
 
@@ -30,8 +29,8 @@ class AddNewBrewery extends Component {
 	  this.setState({
 	    newBrewery: '',
 	    invalid: ''
-	  });
-	  this.props.setView('beerList');
+	  })
+	  this.props.setView('beerList')
 	}
 
 	render() {
@@ -48,9 +47,9 @@ class AddNewBrewery extends Component {
 	        onClick={this.handleButtonClick}
 	      >Cancel</button>
 	    </div>
-	  );
+	  )
 	  if (this.state.invalid) {
-	    buttonContainer = <div className="invalidMessage">{this.state.invalid}</div>;
+	    buttonContainer = <div className="invalidMessage">{this.state.invalid}</div>
 	  }
 	  return (
 	    <Form>
@@ -66,11 +65,11 @@ class AddNewBrewery extends Component {
 	      />
 	      { buttonContainer }
 	    </Form>
-	  );
+	  )
 	}
 }
 
-export default AddNewBrewery;
+export default AddNewBrewery
 
 const Form = styled.form`
 	border: 2px solid transparent;
@@ -126,4 +125,4 @@ const Form = styled.form`
 		color: rgb(255, 0, 0);
 		margin-top: 12px;
 	}
-`;
+`
