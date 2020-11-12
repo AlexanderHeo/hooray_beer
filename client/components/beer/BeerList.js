@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
 import * as actions from './actions';
@@ -83,12 +84,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getBeerList: () => dispatch(actions.getBeerList()),
-    handleRemoveBeer: beerID => dispatch(actions.removeBeer(beerID)),
-    setEditBeer: beer => dispatch(actions.setEditBeer(beer))
-  };
-};
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getBeerList: actions.getBeerList,
+  handleRemoveBeer: beerID => dispatch(actions.removeBeer(beerID)),
+  setEditBeer: beer => dispatch(actions.setEditBeer(beer))
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BeerList);

@@ -2,9 +2,10 @@
 /* eslint-disable no-tabs */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import EmptyList from '../ui/emptyList/EmptyList';
 import Spinner from '../ui/spinner/Spinner';
-import * as actions from './actions';
+import { getBreweryList } from './actions';
 import LargeTable from './breweryTables/LargeTable';
 import MediumTable from './breweryTables/MediumTable';
 import SmallTable from './breweryTables/SmallTable';
@@ -69,10 +70,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreweryList: () => dispatch(actions.getBreweryList())
-  };
-};
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getBreweryList
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreweryList);
