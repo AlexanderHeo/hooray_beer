@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import * as breweryActions from '../../brewery/actions'
 import Spinner from '../../ui/spinner/Spinner'
 import AddBeerData from './AddBeerData'
-import AddBreweryFromList from './AddBreweryFromList'
-import AddBreweryFromQuery from './AddBreweryFromQuery'
-import SearchBreweryFail from './SearchBreweryFail'
-import SearchForBrewery from './SearchForBrewery'
+import AddBreweryFromList from './breweryData/AddBreweryFromList'
+import AddBreweryFromQuery from './breweryData/AddBreweryFromQuery'
+import SearchBreweryFail from './breweryData/SearchBreweryFail'
+import SearchForBrewery from './breweryData/SearchForBrewery'
 
 class AddBeer extends Component {
 	state = {
@@ -91,8 +91,6 @@ class AddBeer extends Component {
 
 	handleReset = () => {
 	  this.setState({
-	    breweryList: [],
-	    breweryListLoaded: false,
 	    brewery: {},
 	    breweryAdded: false,
 	    searchBreweryList: [],
