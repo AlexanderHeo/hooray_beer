@@ -1,7 +1,7 @@
 import * as actionTypes from '../store/actionTypes'
 
 const initialState = {
-  view: 'intro'
+  view: 'add'
 }
 
 const reducer = (state = initialState, action) => {

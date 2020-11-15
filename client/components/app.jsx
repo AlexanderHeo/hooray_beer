@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as viewActionCreator from './actions'
-import AddBeer from './beer/addBeer/AddBeer'
+import AddBeer from './beer/addBeer/AddBeerData'
 import SearchBreweryFail from './beer/addBeer/breweryData/SearchBreweryFail'
 import BeerList from './beer/BeerList'
 import UpdateBeer from './beer/updateBeer/UpdateBeer'
