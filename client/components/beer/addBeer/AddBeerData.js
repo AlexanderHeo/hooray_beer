@@ -99,7 +99,7 @@ class addBeerData extends Component {
 	            <input
 	            type="text"
 	            className="input"
-	              placeholder="name"
+	              placeholder=" "
 	              name="name"
 	              value={this.state.name}
 	              onChange={this.handleInput} />
@@ -261,7 +261,7 @@ const AddBeerContainer = styled.div`
 	}
 
 	::placeholder {
-		color: transparent;
+		color: #fff;
 	}
 	.input {
 		transition box-shadow .2s ease-in-out;
@@ -294,10 +294,11 @@ const AddBeerContainer = styled.div`
 		transform-origin: 0 50%;
 		transition: transform 200ms, color 200ms;
 	}
-	.input:focus ~ .placeholder  {
+	.input:focus ~ .placeholder,
+	.input:not(:placeholder-shown) ~ .placeholder {
 		transform: translateY(-30px) translateX(10px) scale(0.75);
 	}
-	.input:not(:placeholder-shown) ~ .placeholder {
+	.input:not(.input:placeholder-shown) ~ .placeholder {
 		color: #808097;
 	}
 
