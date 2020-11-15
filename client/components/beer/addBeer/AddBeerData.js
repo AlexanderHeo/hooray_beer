@@ -247,7 +247,7 @@ const AddBeerContainer = styled.div`
 		border-radius: 6px;
 	}
 	input {
-		padding: 12px;
+		padding: 7px 20px;
 		border-radius: 6px;
 		width: 200px;
 	}
@@ -260,12 +260,12 @@ const AddBeerContainer = styled.div`
 		font-family: 'Roboto';
 	}
 
-	::placeholder {
-		color: #fff;
-	}
 	.input {
 		transition box-shadow .2s ease-in-out;
 		box-shadow: inset 0px 0px 0px 0px transparent;
+	}
+	.input:placeholder-shown {
+		background-color: #fff;
 	}
 	.input:focus {
 		box-shadow: inset 0px 0px 0px 2px #dc2f55;
@@ -273,30 +273,34 @@ const AddBeerContainer = styled.div`
 	.cut {
 		border-radius: 10px;
 		position: absolute;
-		height: 20px;
-		width: 80px;
+		height: 16px;
+		width: 50px;
 		left: 20px;
-		top: -20px;
-		transform: translateY(0);
+		top: -30px;
+		transform: translateY(10px);
 		transition: transform 200ms;
 	}
 	.input:focus ~ .cut,
 	.input:not(:placeholder-shown) ~ .cut {
-		transform: translateY(8px);
+		transform: translateY(22px);
+		background-color: #fff;
+	}
+	.input:not(:placeholder-shown) ~ .cut {
+		background-color: rgb(232, 240, 254);
 	}
 	.placeholder {
 		position: absolute;
 		color: #65657b;
 		font-size: 14px;
 		font-weight: 300;
-		top: 8px;
-		left: 12px;
+		top: 2px;
+		left: 20px;
 		transform-origin: 0 50%;
 		transition: transform 200ms, color 200ms;
 	}
 	.input:focus ~ .placeholder,
 	.input:not(:placeholder-shown) ~ .placeholder {
-		transform: translateY(-30px) translateX(10px) scale(0.75);
+		transform: translateY(-15px) translateX(12px) scale(0.75);
 	}
 	.input:not(.input:placeholder-shown) ~ .placeholder {
 		color: #808097;
