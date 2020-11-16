@@ -25,15 +25,18 @@ const ButtonContainer = styled.div`
 		cursor: pointer;
 		outline: none;
 	}
-	.removeButton {
+	.removeButton,
+	.editButton {
+		color: hsl(15, 86%, 30%);
 		border-style: solid;
-		border-color: rgb(255, 0, 0);
 		background-color: rgb(255, 255, 255);
-		color: rgb(80, 80, 80);
+	}
+	.removeButton {
+		border-color: rgb(255, 0, 0);
 	}
 	.removeButton:hover {
 		background-color: rgb(255, 0, 0);
-		color: rgb(255, 255, 255);
+		color: hsl(49, 100%, 96%);
 		box-shadow: 0 2px 5px rgb(255, 0, 0);
 	}
 	.removeButton:active {
@@ -41,14 +44,11 @@ const ButtonContainer = styled.div`
 		box-shadow: 0;
 	}
 	.editButton {
-		border-style: solid;
 		border-color: rgb(0, 255, 0);
-		background-color: rgb(255, 255, 255);
-		color: rgb(80, 80, 80);
 	}
 	.editButton:hover {
 		background-color: rgb(0, 255, 0);
-		color: rgb(255, 255, 255);
+		color: hsl(49, 100%, 96%);
 		box-shadow: 0 2px 5px rgb(0, 255, 0);
 	}
 	.editButton:active {

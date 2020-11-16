@@ -2,6 +2,7 @@ import Rating from 'beauty-stars'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import * as viewActions from '../../actions'
 import * as actions from '../actions'
 
 class UpdateBeer extends Component {
@@ -28,7 +29,6 @@ class UpdateBeer extends Component {
 	  const updatedBeerData = {
 	    beerID: this.props.beerToEdit.beerID,
 	    name: this.props.beerToEdit.name,
-	    breweryID: this.props.beerToEdit.breweryID,
 	    brewery: this.props.beerToEdit.brewery,
 	    rating: this.state.rating,
 	    note: this.state.note,
@@ -55,6 +55,7 @@ class UpdateBeer extends Component {
 	    })
 	  } else if (event.target.name === 'update') {
 	    this.props.editBeer(updatedBeerData)
+	    this.handleReset()
 	  } else if (event.target.name === 'reset') {
 	    this.handleReset()
 	  }
@@ -148,7 +149,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editBeer: beer => dispatch(actions.editBeer(beer))
+    editBeer: beer => dispatch(actions.editBeer(beer)),
+    setView: view => dispatch(viewActions.setView(view))
   }
 }
 

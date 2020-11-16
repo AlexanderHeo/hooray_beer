@@ -72,7 +72,7 @@ class addBeerData extends Component {
 	      disabled: true
 	    })
 	  } else if (event.target.name === 'submit') {
-	    this.props.addBeerData(beerData)
+	    this.addBeerData(beerData)
 	  }
 	  if (event.target.name === 'reset') {
 	    this.handleReset()
@@ -91,10 +91,23 @@ class addBeerData extends Component {
 	  this.props.setView('beerList')
 	}
 
+	addBeerData = beerData => {
+	  fetch('/api/beer', {
+	    method: 'POST',
+	    headers: {
+	      'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(beerData)
+	  })
+	    .then(response => response.json())
+	    .then(data => this.handleReset())
+	}
+
 	render() {
 	  return (
 	    <AddBeerContainer>
 	      <form className="form">
+	      	<h1 className="title">Add Beer Info</h1>
 	        <fieldset>
 	            <input
 	            type="text"
@@ -103,7 +116,7 @@ class addBeerData extends Component {
 	              name="name"
 	              value={this.state.name}
 	              onChange={this.handleInput} />
-	          	<div className="cut"></div>
+	          	<div className="cut name"></div>
 	          	<label htmlFor="name" className="placeholder">Beer</label>
 	            {
 	              this.state.invalid === 'name'
@@ -112,34 +125,36 @@ class addBeerData extends Component {
 	            }
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="style">
-	            <input
-	              type="text"
-	              placeholder="Style"
-	              name="style"
-	              value={this.state.style}
-	              onChange={this.handleInput} />
+	          <input
+	            type="text"
+	            className="input"
+	            placeholder=" "
+	            name="style"
+	            value={this.state.style}
+	            onChange={this.handleInput} />
+	          <div className="cut style"></div>
+	          <label htmlFor="style" className="placeholder">Style</label>
 	            {
 	              this.state.invalid === 'style'
 	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
 	                : null
 	            }
-	          </label>
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="brewery">
-	            <input
-	              type="text"
-	              placeholder="Brewery"
-	              name="brewery"
-	              value={this.state.brewery}
-	              onChange={this.handleInput} />
+	          <input
+	            type="text"
+	            className="input"
+	            placeholder=" "
+	            name="brewery"
+	            value={this.state.brewery}
+	            onChange={this.handleInput} />
+	          <div className="cut brewery"></div>
+	          <label htmlFor="brewery" className="placeholder">Brewery</label>
 	            {
-	              this.state.invalid === 'brewery'
+	            	this.state.invalid === 'brewery'
 	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
 	                : null
 	            }
-	          </label>
 	        </fieldset>
 	        <fieldset>
 	          <label htmlFor="rating"></label>
@@ -157,35 +172,36 @@ class addBeerData extends Component {
 	          }
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="notes">
-	            <textarea
-	              type="text"
-	              placeholder="What are your thoughts?"
-	              name="note"
-	              rows="4"
-	              value={this.state.note}
-	              onChange={this.handleInput} />
+	          <textarea
+	            type="text"
+	            placeholder=" "
+	            name="note"
+	            rows="4"
+	            value={this.state.note}
+	            onChange={this.handleInput} />
+	          <div className="cut note"></div>
+	          <label htmlFor="notes" className="placeholder">Notes</label>
 	            {
 	              this.state.invalid === 'note'
 	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
 	                : null
 	            }
-	          </label>
 	        </fieldset>
 	        <fieldset>
-	          <label htmlFor="bar">
-	            <input
-	              type="text"
-	              placeholder="Where did you drink this beer?"
-	              name="bar"
-	              value={this.state.bar}
-	              onChange={this.handleInput} />
+	          <input
+	            type="text"
+	            className="input"
+	            placeholder=" "
+	            name="bar"
+	            value={this.state.bar}
+	            onChange={this.handleInput} />
+	          <div className="cut bar"></div>
+	          <label htmlFor="bar" className="placeholder">Bar</label>
 	            {
 	              this.state.invalid === 'bar'
 	                ? <div className="errorMessage">{this.state.invalidMessage}</div>
 	                : null
 	            }
-	          </label>
 	        </fieldset>
 	        <div className="button-container">
 	          <button
@@ -214,10 +230,14 @@ const AddBeerContainer = styled.div`
 		margin-top: 6px;
 		margin-bottom: 0;
 	}
+	.title {
+		margin: 0 0 24px 0;
+		color: hsl(49, 100%, 96%);
+	}
 	.form {
+		background-color: hsl(15, 86%, 30%);
 		border: 2px solid transparent;
 		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
 		margin: 24px 0;
 		padding: 12px 24px;
 		display: flex;
@@ -255,54 +275,81 @@ const AddBeerContainer = styled.div`
 		border: 2px solid;
 		border-color: rgb(0, 0, 0) rgb(118, 118, 118) rgb(118, 118, 118) rgb(0, 0, 0);
 		border-radius: 6px;
-		padding: 12px;
+		padding: 7px 20px;
 		width: 200px;
 		font-family: 'Roboto';
 	}
 
-	.input {
+	.input, textarea {
 		transition box-shadow .2s ease-in-out;
 		box-shadow: inset 0px 0px 0px 0px transparent;
 	}
-	.input:placeholder-shown {
-		background-color: #fff;
+	.input:placeholder-shown,
+	textarea:placeholder-shown {
+		background-color: hsl(15, 86%, 30%);
 	}
-	.input:focus {
-		box-shadow: inset 0px 0px 0px 2px #dc2f55;
+	.input:focus,
+	textarea:focus {
+		box-shadow: inset 0px 0px 0px 2px hsl(48, 94%, 68%);
 	}
 	.cut {
 		border-radius: 10px;
 		position: absolute;
 		height: 16px;
-		width: 50px;
 		left: 20px;
 		top: -30px;
 		transform: translateY(10px);
 		transition: transform 200ms;
 	}
-	.input:focus ~ .cut,
-	.input:not(:placeholder-shown) ~ .cut {
-		transform: translateY(22px);
-		background-color: #fff;
+	.cut.name {
+		width: 45px;
 	}
-	.input:not(:placeholder-shown) ~ .cut {
-		background-color: rgb(232, 240, 254);
+	.cut.style {
+		width: 46px;
+	}
+	.cut.brewery {
+		width: 60px;
+	}
+	.cut.note {
+		width: 50px;
+	}
+	.cut.bar {
+		width: 40px;
+	}
+	.input:focus ~ .cut,
+	.input:not(:placeholder-shown) ~ .cut,
+	textarea:focus ~ .cut,
+	textarea:not(:placeholder-shown) ~ .cut {
+		transform: translateY(22px);
+		background-color: hsl(15, 86%, 30%);
+	}
+	.input:-webkit-autofill,
+	textarea:-webkit-autofill,
+	.input:not(:placeholder-shown),
+	.input:not(:placeholder-shown) ~ .cut,
+	textarea:not(:placeholder-shown),
+	textarea:not(:placeholder-shown) ~ .cut {
+		background-color: hsl(49, 100%, 96%) !important;
+		color: hsl(15, 86%, 30%);
 	}
 	.placeholder {
 		position: absolute;
-		color: #65657b;
+		color: hsl(49, 100%, 96%);
 		font-size: 14px;
-		font-weight: 300;
+		font-weight: 400;
 		top: 2px;
 		left: 20px;
 		transform-origin: 0 50%;
 		transition: transform 200ms, color 200ms;
 	}
 	.input:focus ~ .placeholder,
-	.input:not(:placeholder-shown) ~ .placeholder {
-		transform: translateY(-15px) translateX(12px) scale(0.75);
+	.input:not(:placeholder-shown) ~ .placeholder,
+	textarea:focus ~ .placeholder,
+	textarea:not(:placeholder-shown) ~ .placeholder {
+		transform: translateY(-17px) translateX(12px) scale(0.75);
 	}
-	.input:not(.input:placeholder-shown) ~ .placeholder {
+	.input:not(:placeholder-shown) ~ .placeholder,
+	textarea:not(:placeholder-shown) ~ .placeholder {
 		color: #808097;
 	}
 

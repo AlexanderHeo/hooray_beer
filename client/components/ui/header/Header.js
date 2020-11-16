@@ -22,6 +22,7 @@ const Header = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 10px 10px 16px;
+	color: hsl(15, 86%, 30%);
 	h1 {
 		min-width: 220px;
 		padding: 0;

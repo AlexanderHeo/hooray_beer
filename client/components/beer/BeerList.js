@@ -44,6 +44,7 @@ class BeerList extends Component {
 
 	render() {
 	  const loaded = this.props.beerListLoaded
+	  console.log(loaded)
 	  const width = this.state.windowWidth
 	  let beerList = <Spinner />
 	  if (loaded && width < 520) {
@@ -74,11 +75,11 @@ class BeerList extends Component {
 
 const mapStateToProps = state => {
   return {
-    beerList: state.beerReducer.beerList,
-    beerListLoaded: state.beerReducer.beerListLoaded,
-    beerListLoadFail: state.beerReducer.beerListLoadFail,
-    beerToEdit: state.beerReducer.beerToEdit,
-    error: state.beerReducer.error
+    beerList: state.beer.beerList,
+    beerListLoaded: state.beer.beerListLoaded,
+    beerListLoadFail: state.beer.beerListLoadFail,
+    beerToEdit: state.beer.beerToEdit,
+    error: state.beer.error
   }
 }
 
