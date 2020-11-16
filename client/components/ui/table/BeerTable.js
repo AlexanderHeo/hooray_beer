@@ -18,12 +18,12 @@ const Table = styled.div`
 	tr:nth-child(8n+2),
 	tr:nth-child(8n+3),
 	tr:nth-child(8n+4) {
-		background-color: rgb(235, 235, 235);
+		background-color: hsl(49, 100%, 96%);
 	}
 	table {
 		border: 2px solid transparent;
 		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
+		box-shadow: 0 3px 5px hsl(15, 86%, 30%), 0 10px 25px hsl(42, 87%, 55%);
 		padding: 10px 0;
 		border-spacing: 2px 0;
 	}

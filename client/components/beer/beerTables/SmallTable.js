@@ -51,7 +51,13 @@ const Table = styled.table`
 	.bar,
 	.tastingNotes {
 		font-size: 12px;
-		color: rgb(118, 118, 118);
+	}
+	.name,
+	.brewery,
+	.bar,
+	.tastingNotes,
+	.note {
+		color: hsl(15, 86%, 30%);
 	}
 	.note {
 		font-size: 12px;

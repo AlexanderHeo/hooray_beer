@@ -5,7 +5,6 @@ const express = require('express');
 const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
-const { Client } = require('pg/lib');
 
 const app = express();
 

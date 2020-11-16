@@ -107,6 +107,7 @@ class addBeerData extends Component {
 	  return (
 	    <AddBeerContainer>
 	      <form className="form">
+	      	<h1 className="title">Add Beer Info</h1>
 	        <fieldset>
 	            <input
 	            type="text"
@@ -115,7 +116,7 @@ class addBeerData extends Component {
 	              name="name"
 	              value={this.state.name}
 	              onChange={this.handleInput} />
-	          	<div className="cut"></div>
+	          	<div className="cut name"></div>
 	          	<label htmlFor="name" className="placeholder">Beer</label>
 	            {
 	              this.state.invalid === 'name'
@@ -131,7 +132,7 @@ class addBeerData extends Component {
 	            name="style"
 	            value={this.state.style}
 	            onChange={this.handleInput} />
-	          <div className="cut"></div>
+	          <div className="cut style"></div>
 	          <label htmlFor="style" className="placeholder">Style</label>
 	            {
 	              this.state.invalid === 'style'
@@ -147,7 +148,7 @@ class addBeerData extends Component {
 	            name="brewery"
 	            value={this.state.brewery}
 	            onChange={this.handleInput} />
-	          <div className="cut"></div>
+	          <div className="cut brewery"></div>
 	          <label htmlFor="brewery" className="placeholder">Brewery</label>
 	            {
 	            	this.state.invalid === 'brewery'
@@ -178,7 +179,7 @@ class addBeerData extends Component {
 	            rows="4"
 	            value={this.state.note}
 	            onChange={this.handleInput} />
-	          <div className="cut"></div>
+	          <div className="cut note"></div>
 	          <label htmlFor="notes" className="placeholder">Notes</label>
 	            {
 	              this.state.invalid === 'note'
@@ -194,7 +195,7 @@ class addBeerData extends Component {
 	            name="bar"
 	            value={this.state.bar}
 	            onChange={this.handleInput} />
-	          <div className="cut"></div>
+	          <div className="cut bar"></div>
 	          <label htmlFor="bar" className="placeholder">Bar</label>
 	            {
 	              this.state.invalid === 'bar'
@@ -229,10 +230,14 @@ const AddBeerContainer = styled.div`
 		margin-top: 6px;
 		margin-bottom: 0;
 	}
+	.title {
+		margin: 0 0 24px 0;
+		color: hsl(49, 100%, 96%);
+	}
 	.form {
+		background-color: hsl(15, 86%, 30%);
 		border: 2px solid transparent;
 		border-radius: 12px;
-		box-shadow: 0 3px 5px rgb(70, 70, 70), 0 10px 25px rgb(120, 120, 120);
 		margin: 24px 0;
 		padding: 12px 24px;
 		display: flex;
@@ -281,38 +286,57 @@ const AddBeerContainer = styled.div`
 	}
 	.input:placeholder-shown,
 	textarea:placeholder-shown {
-		background-color: #fff;
+		background-color: hsl(15, 86%, 30%);
 	}
 	.input:focus,
 	textarea:focus {
-		box-shadow: inset 0px 0px 0px 2px #dc2f55;
+		box-shadow: inset 0px 0px 0px 2px hsl(48, 94%, 68%);
 	}
 	.cut {
 		border-radius: 10px;
 		position: absolute;
 		height: 16px;
-		width: 50px;
 		left: 20px;
 		top: -30px;
 		transform: translateY(10px);
 		transition: transform 200ms;
+	}
+	.cut.name {
+		width: 45px;
+	}
+	.cut.style {
+		width: 46px;
+	}
+	.cut.brewery {
+		width: 60px;
+	}
+	.cut.note {
+		width: 50px;
+	}
+	.cut.bar {
+		width: 40px;
 	}
 	.input:focus ~ .cut,
 	.input:not(:placeholder-shown) ~ .cut,
 	textarea:focus ~ .cut,
 	textarea:not(:placeholder-shown) ~ .cut {
 		transform: translateY(22px);
-		background-color: #fff;
+		background-color: hsl(15, 86%, 30%);
 	}
+	.input:-webkit-autofill,
+	textarea:-webkit-autofill,
+	.input:not(:placeholder-shown),
 	.input:not(:placeholder-shown) ~ .cut,
+	textarea:not(:placeholder-shown),
 	textarea:not(:placeholder-shown) ~ .cut {
-		background-color: rgb(232, 240, 254);
+		background-color: hsl(49, 100%, 96%) !important;
+		color: hsl(15, 86%, 30%);
 	}
 	.placeholder {
 		position: absolute;
-		color: #65657b;
+		color: hsl(49, 100%, 96%);
 		font-size: 14px;
-		font-weight: 300;
+		font-weight: 400;
 		top: 2px;
 		left: 20px;
 		transform-origin: 0 50%;

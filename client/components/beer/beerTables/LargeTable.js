@@ -39,6 +39,13 @@ const Table = styled.table`
 	.barName {
 		text-transform: capitalize;
 	}
+	.beerName,
+	.breweryName,
+	.barName,
+	.note,
+	.tastingNote {
+		color: hsl(15, 86%, 30%);
+	}
 	.beerName {
 		font-size: 28px;
 		font-weight: 700;
@@ -47,12 +54,10 @@ const Table = styled.table`
 	.breweryName {
 		font-size: 16px;
 		font-weight: 500;
-		color: rgb(118, 118, 118);
 		cursor: pointer;
 	}
 	.barName  {
 		font-size: 16px;
-		color: rgb(118, 118, 118);
 	}
 	.rating {
 		min-width: 162px;
@@ -68,7 +73,6 @@ const Table = styled.table`
 	}
 	.tastingNotes {
 		font-weight: 500;
-		color: rgb(118, 118, 118);
 	}
 	.buttonContainer, .button {
 		display: flex;

@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
-import beerReducer from '../components/beer/reducer'
-import breweryReducer from '../components/brewery/reducer'
-import viewReducer from '../components/reducer'
+import beer from '../components/beer/reducer'
+import view from '../components/reducer'
 
 const rootReducer = combineReducers({
-  viewReducer,
-  beerReducer,
-  breweryReducer
+  view,
+  beer
 })
 
 export default rootReducer

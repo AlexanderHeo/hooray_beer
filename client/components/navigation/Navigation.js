@@ -11,11 +11,6 @@ const navigation = props => (
       </li>
       <li>
         <button
-          className='listButton'
-          onClick={() => props.setView('brewery')}>My Breweries</button>
-      </li>
-      <li>
-        <button
           className='addBeerButton'
           onClick={() => props.setView('add')}>Add New Beer</button>
       </li>
@@ -30,9 +25,6 @@ const Navi = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	.true {
-		border-bottom: 2px solid rgb(135, 206, 235);
-	}
 	ul {
 		list-style: none;
 		display: flex;
@@ -48,7 +40,8 @@ const Navi = styled.div`
 		outline: none;
 	}
 	.listButton {
-		background-color: rgb(255, 255, 255);
+		background-color: hsl(49, 100%, 96%);
+		border-radius: 6px;
 	}
 	.listButton:hover {
 		border: 2px solid rgb(135, 206, 235);
@@ -69,6 +62,7 @@ const Navi = styled.div`
 	.addBeerButton:hover {
 		border: 2px solid rgb(0, 144, 247);
 		background-color: rgb(255, 255, 255);
+
 		color: rgb(0, 0, 255);
 	}
 	.addBeerButton:active {
