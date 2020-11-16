@@ -72,7 +72,7 @@ class addBeerData extends Component {
 	      disabled: true
 	    })
 	  } else if (event.target.name === 'submit') {
-	    this.props.addBeerData(beerData)
+	    this.addBeerData(beerData)
 	  }
 	  if (event.target.name === 'reset') {
 	    this.handleReset()
@@ -89,6 +89,18 @@ class addBeerData extends Component {
 
 	handleReset = () => {
 	  this.props.setView('beerList')
+	}
+
+	addBeerData = beerData => {
+	  fetch('/api/beer', {
+	    method: 'POST',
+	    headers: {
+	      'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(beerData)
+	  })
+	    .then(response => response.json())
+	    .then(data => this.handleReset())
 	}
 
 	render() {
