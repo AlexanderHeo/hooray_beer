@@ -47,7 +47,7 @@ export const removeBeer = beerID => {
     })
       .then(response => null)
       .then(data => {
-        const ogBeerList = getState().beerReducer.beerList;
+        const ogBeerList = getState().beer.beerList;
         const beerListCopy = [...ogBeerList];
         const index = beerListCopy.findIndex(beers => beers.beerID === beerID);
         beerListCopy.splice(index, 1);
@@ -86,7 +86,7 @@ export const editBeer = beer => {
     })
       .then(response => response.json())
       .then(data => {
-        const ogBeerList = getState().beerReducer.beerList;
+        const ogBeerList = getState().beer.beerList;
         const beerListCopy = [...ogBeerList];
         const index = beerListCopy.findIndex(beers => beers.beerID === beerID);
         beerListCopy.splice(index, 1, data);

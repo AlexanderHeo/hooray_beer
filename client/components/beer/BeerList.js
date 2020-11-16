@@ -44,7 +44,6 @@ class BeerList extends Component {
 
 	render() {
 	  const loaded = this.props.beerListLoaded
-	  console.log(loaded)
 	  const width = this.state.windowWidth
 	  let beerList = <Spinner />
 	  if (loaded && width < 520) {

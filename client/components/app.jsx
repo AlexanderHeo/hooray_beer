@@ -15,7 +15,7 @@ const app = props => {
     component = <BeerList setView={props.setView}/>
   } else if (view === 'add') {
     component = <AddBeer setView={props.setView}/>
-  } else if (view === 'brewery') {
+  } else if (view === 'edit') {
     component = <UpdateBeer setView={props.setView}/>
   }
 

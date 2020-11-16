@@ -143,7 +143,7 @@ class UpdateBeer extends Component {
 
 const mapStateToProps = state => {
   return {
-    beerToEdit: state.beerReducer.beerToEdit
+    beerToEdit: state.beer.beerToEdit
   }
 }
 
