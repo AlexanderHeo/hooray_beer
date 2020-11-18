@@ -38,9 +38,11 @@ const Navi = styled.div`
 		margin: 0 6px;
 		border: 2px solid transparent;
 		outline: none;
+		color: hsl(15, 86%, 30%);
 	}
 	.listButton {
-		background-color: hsl(49, 100%, 96%);
+		border: 2px solid hsl(15, 86%, 30%);
+		background-color: transparent;
 		border-radius: 6px;
 	}
 	.listButton:hover {

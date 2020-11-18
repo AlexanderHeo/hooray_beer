@@ -26,6 +26,7 @@ export const getBeerList = () => {
 };
 
 export const removeBeerSuccess = beerList => {
+  console.log('removebeersuccess')
   return {
     type: actionTypes.REMOVE_BEER_SUCCESS,
     beerList: beerList
@@ -39,6 +40,7 @@ export const removeBeerFail = error => {
 };
 export const removeBeer = beerID => {
   return (dispatch, getState) => {
+    console.log('removebeer')
     fetch(`/api/beer/${beerID}`, {
       method: 'DELETE',
       headers: {
@@ -51,11 +53,14 @@ export const removeBeer = beerID => {
         const beerListCopy = [...ogBeerList];
         const index = beerListCopy.findIndex(beers => beers.beerID === beerID);
         beerListCopy.splice(index, 1);
+        console.log('beerListCopy:', beerListCopy)
         dispatch(removeBeerSuccess(beerListCopy));
       })
-      .catch(error => dispatch(removeBeerFail(error)));
-  };
-};
+      .catch(error => {
+        dispatch(removeBeerFail(error))
+      })
+  }
+}
 
 export const setEditBeer = beer => {
   return {
