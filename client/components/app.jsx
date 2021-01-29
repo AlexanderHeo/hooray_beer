@@ -10,7 +10,7 @@ import Header from './ui/header/Header';
 
 class App extends Component {
 	state = {
-	  view: 'intro'
+	  view: 'beerList'
 	}
 
 	setView = view => {
