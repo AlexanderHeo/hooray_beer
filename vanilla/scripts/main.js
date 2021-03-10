@@ -50,6 +50,7 @@ const handleButtonClick = e => {
     toggleModal()
 
   } else if (name === 'delete') {
+    console.log('delete', e.target.value)
     deleteBeer(e.target.value)
 
   } else if (name === 'edit') console.log('edit', e.target.value)

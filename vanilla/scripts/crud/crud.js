@@ -25,6 +25,7 @@ async function addNewBeer(beerData) {
 }
 
 const deleteBeer = async id => {
+  console.log('deleteBeer', id)
   const getResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }

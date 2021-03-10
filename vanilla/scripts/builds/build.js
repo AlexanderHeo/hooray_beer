@@ -86,8 +86,8 @@ function buildTable(beerData) {
       const brewery = $('<td>').text(beer.brewery)
       const rating = $('<td>').text(beer.rating)
       const buttons = $('<td>')
-      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger' })
-      const buttonEdit = $('<button>', { name: 'edit', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info' })
+      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' })
+      const buttonEdit = $('<button>', { name: 'edit', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
       row.append(name)
       row.append(brewery)
       row.append(rating)
@@ -99,8 +99,8 @@ function buildTable(beerData) {
   })
   $('#table').append(thead)
   $('#table').append(tbody)
-  $('#deleteButton').click(handleButtonClick)
-  $('#editButton').click(handleButtonClick)
+  $('.deleteButton').click(handleButtonClick)
+  $('.editButton').click(handleButtonClick)
 }
 
 function buildModal() {
@@ -166,15 +166,16 @@ function addNewBeerToTable(beerData) {
   const tdBrewery = $('<td>').text(beerData.brewery)
   const tdRating = $('<td>').text(beerData.rating)
   const tdButtons = $('<td>')
-  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'edit', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info' }).text('Edit')
+  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
+  const buttonEdit = $('<button>', { name: 'edit', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
   tdButtons.append(buttonDelete).append(buttonEdit)
   tr.append(tdBeer)
   tr.append(tdBrewery)
   tr.append(tdRating)
   tr.append(tdButtons)
   $('#table-body').append(tr)
-  $('#deleteButton').click({ beerData: beerData }, deleteBeer)
+  $('.deleteButton').click(handleButtonClick)
+  $('.editButton').click(handleButtonClick)
 }
 
 const removeBeerFromTable = id => {
