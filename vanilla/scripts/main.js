@@ -40,12 +40,40 @@ function handleButtonClick(e) {
     else if (!tasting) missingInput('tasting')
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
-      console.log(beerData)
+      addNewBeer(beerData)
     }
-
   } else if (name === 'cancel') console.log('cancel')
   else if (name === 'delete') console.log('delete')
   else if (name === 'edit') console.log('edit')
+}
+
+async function addNewBeer(beerData) {
+  const idCheckResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  const data = await idCheckResponse.json()
+  if (data) {
+    const dataCopy = Object.assign({}, data)
+    const beerId = dataCopy.currentId++
+    beerData.beerId = beerId
+    dataCopy[beerId] = beerData
+    $('#inputBeer').val('')
+    $('#inputBrewery').val('')
+    $('#inputRating').val('')
+    $('#inputTasting').val('')
+
+    const addResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataCopy)
+    })
+    const addedData = await addResponse.json()
+    if (addedData) {
+      getBeerList()
+    }
+  }
+
 }
 
 function handleInputFocus(e) {

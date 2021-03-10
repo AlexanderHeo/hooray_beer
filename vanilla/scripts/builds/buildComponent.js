@@ -1,4 +1,5 @@
 function buildComponent() {
+  $('#body').empty()
   const container = $('<div>', { class: 'container-fluid container' })
   const rowHeader = $('<div>', { class: 'row' })
   const headerSizer = $('<div>', { class: 'header-sizer' })
