@@ -41,6 +41,7 @@ function handleButtonClick(e) {
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
       addNewBeer(beerData)
+      $('#addModal').addClass('hide')
     }
   } else if (name === 'cancel') console.log('cancel')
   else if (name === 'delete') console.log('delete')
@@ -56,7 +57,6 @@ async function addNewBeer(beerData) {
   if (data) {
     const dataCopy = Object.assign({}, data)
     const beerId = dataCopy.currentId++
-    beerData.beerId = beerId
     dataCopy[beerId] = beerData
     $('#inputBeer').val('')
     $('#inputBrewery').val('')
@@ -64,14 +64,12 @@ async function addNewBeer(beerData) {
     $('#inputTasting').val('')
 
     const addResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
-      method: 'PATCH',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dataCopy)
     })
     const addedData = await addResponse.json()
-    if (addedData) {
-      getBeerList()
-    }
+    if (addedData) addNewBeerToTable(beerData)
   }
 
 }
@@ -98,6 +96,7 @@ function toggleModal() {
     buildModal()
   }
 }
+
 function takedownAddModal() {
   // console.log('take down')
   $('#addModal').empty()
