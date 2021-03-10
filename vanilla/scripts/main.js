@@ -41,10 +41,12 @@ function handleButtonClick(e) {
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
       addNewBeer(beerData)
-      $('#addModal').addClass('hide')
+      toggleModal()
     }
-  } else if (name === 'cancel') console.log('cancel')
-  else if (name === 'delete') console.log('delete')
+  } else if (name === 'cancel') {
+    toggleModal()
+
+  } else if (name === 'delete') console.log('delete')
   else if (name === 'edit') console.log('edit')
 }
 
@@ -72,6 +74,6 @@ function toggleModal() {
 }
 
 function takedownAddModal() {
-  // console.log('take down')
-  $('#addModal').empty()
+  toggleButton()
+  $('#addModal').empty().addClass('hide')
 }
