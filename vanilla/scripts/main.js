@@ -24,6 +24,7 @@ async function getBeerList() {
 }
 
 function handleButtonClick(e) {
+  e.preventDefault()
   const name = e.target.name
   if (name === 'addButton') {
     toggleButton()
@@ -47,8 +48,9 @@ function handleButtonClick(e) {
   } else if (name === 'cancel') {
   	toggleButton()
     toggleModal()
-  } else if (name === 'delete') console.log('delete')
-  else if (name === 'edit') console.log('edit')
+  } else if (name === 'delete') {
+    deleteBeer(e.target.value)
+  } else if (name === 'edit') console.log('edit', e.target.value)
 }
 
 function handleInputFocus(e) {
