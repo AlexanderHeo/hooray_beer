@@ -8,7 +8,7 @@ button {
 	width: 80px;
 }
 .container-fluid {
-	height: 100vh;
+	height: calc(100vh - 63px);
 	overflow-y: scroll;
 	padding-top: 15px;
 	padding-bottom: 15px;
