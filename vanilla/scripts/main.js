@@ -28,10 +28,28 @@ function handleButtonClick(e) {
   if (name === 'addButton') {
     toggleButton()
     toggleModal()
-  } else if (name === 'delete') console.log('delete')
+  } else if (name === 'submit') {
+    const beer = $('#inputBeer').val()
+    const brewery = $('#inputBrewery').val()
+    const rating = $('#inputRating').val()
+    const tasting = $('#inputTasting').val()
+
+    if (!beer) missingInput('beer')
+    else if (!brewery) missingInput('brewery')
+    else if (!rating) missingInput('rating')
+    else if (!tasting) missingInput('tasting')
+
+  } else if (name === 'cancel') console.log('cancel')
+  else if (name === 'delete') console.log('delete')
   else if (name === 'edit') console.log('edit')
-  else if (name === 'submit') console.log('submit')
-  else if (name === 'cancel') console.log('cancel')
+}
+
+function handleInputFocus(e) {
+  const name = e.target.name
+  if (name === 'beer') {
+    $('#beerError').addClass('hide')
+    $('#inputBeer').removeClass('invalid')
+  }
 }
 
 function toggleButton() {
