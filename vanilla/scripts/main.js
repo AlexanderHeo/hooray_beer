@@ -38,6 +38,10 @@ function handleButtonClick(e) {
     else if (!brewery) missingInput('brewery')
     else if (!rating) missingInput('rating')
     else if (!tasting) missingInput('tasting')
+    else if (beer && brewery && rating && tasting) {
+      const beerData = { beer, brewery, rating, tasting }
+      console.log(beerData)
+    }
 
   } else if (name === 'cancel') console.log('cancel')
   else if (name === 'delete') console.log('delete')
@@ -46,10 +50,8 @@ function handleButtonClick(e) {
 
 function handleInputFocus(e) {
   const name = e.target.name
-  if (name === 'beer') {
-    $('#beerError').addClass('hide')
-    $('#inputBeer').removeClass('invalid')
-  }
+  $(`#${name}Error`).addClass('hide')
+  $(`#input${name.charAt(0).toUpperCase()}${name.slice(1)}`).removeClass('invalid')
 }
 
 function toggleButton() {
