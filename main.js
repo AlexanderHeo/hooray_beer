@@ -1,33 +1,6 @@
 $(document).ready(initializeApp)
 
 let database = {}
-// var database = [
-//   {
-//     beer: 'Pale Dog',
-//     brewery: 'State Brewing',
-//     rating: '5'
-//   },
-//   {
-//     beer: 'Super IPA',
-//     brewery: 'American Brewing',
-//     rating: '5'
-//   },
-//   {
-//     beer: 'Chocky Stout',
-//     brewery: 'Isle Brewing',
-//     rating: '5'
-//   },
-//   {
-//     beer: 'Rocker Lager',
-//     brewery: 'Treble Beer',
-//     rating: '5'
-//   },
-//   {
-//     beer: 'Double IPA',
-//     brewery: 'Twice Brewery',
-//     rating: '5'
-//   }
-// ]
 
 function initializeApp() {
   addClickHandlers()
@@ -41,7 +14,7 @@ async function getBeerList() {
   })
   const data = await response.json()
   database = { ...data }
-  console.log(database)
+  if (database) setupBeerTable()
 }
 
 function addClickHandlers() {
@@ -64,4 +37,26 @@ function toggleButton() {
   } else {
     button.text('ADD')
   }
+}
+
+function setupBeerTable() {
+  Object.keys(database).map(x => {
+    if (!isNaN(x)) {
+      const beer = database[x]
+      const row = $('<tr>')
+      const name = $('<td>').text(beer.beer)
+      const brewery = $('<td>').text(beer.brewery)
+      const rating = $('<td>').text(beer.rating)
+      const buttons = $('<td>')
+      const buttonDelete = $('<button>', { type: 'button', class: 'btn btn-warning' })
+      const buttonEdit = $('<button>', { type: 'button', class: 'btn btn-info' })
+      row.append(name)
+      row.append(brewery)
+      row.append(rating)
+      buttons.append(buttonDelete.text('Delete'))
+      buttons.append(buttonEdit.text('Edit'))
+      row.append(buttons)
+      $('#table-body').append(row)
+    }
+  })
 }
