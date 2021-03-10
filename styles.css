@@ -194,7 +194,7 @@ input {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	background-color: blue;
+	border-top: 1px solid black;
 }
 
 .addModal {
