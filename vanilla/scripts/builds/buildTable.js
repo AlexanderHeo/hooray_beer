@@ -19,8 +19,8 @@ function buildTable() {
       const brewery = $('<td>').text(beer.brewery)
       const rating = $('<td>').text(beer.rating)
       const buttons = $('<td>')
-      const buttonDelete = $('<button>', { type: 'button', class: 'btn btn-warning' })
-      const buttonEdit = $('<button>', { type: 'button', class: 'btn btn-info' })
+      const buttonDelete = $('<button>', { name: 'delete', type: 'button', id: 'deleteButton', class: 'btn btn-warning' })
+      const buttonEdit = $('<button>', { name: 'edit', type: 'button', id: 'editButton', class: 'btn btn-info' })
       row.append(name)
       row.append(brewery)
       row.append(rating)
@@ -32,4 +32,6 @@ function buildTable() {
   })
   $('#table').append(thead)
   $('#table').append(tbody)
+  $('#deleteButton').click(handleButtonClick)
+  $('#editButton').click(handleButtonClick)
 }

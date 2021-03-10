@@ -58,7 +58,7 @@ function buildComponent() {
   container.append(addModal)
 
   const footer = $('<div>', { class: 'footer' })
-  const buttonFooter = $('<button>', { id: 'footerPlusButton' }).text('ADD')
+  const buttonFooter = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
   footer.append(buttonFooter)
   container.append(footer)
 

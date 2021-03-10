@@ -18,8 +18,8 @@ function buildModal() {
   const labelTasting = $('<label>').text('Tasting:')
   const inputTasting = $('<textarea>')
   const buttons = $('<div>', { class: 'button-container' })
-  const buttonAdd = $('<button>', { type: 'button', class: 'btn btn-primary' }).text('ADD')
-  const buttonCancel = $('<button>', { type: 'button', class: 'btn btn-secondary' }).text('CANCEL')
+  const buttonAdd = $('<button>', { name: 'submit', id: 'submitButton', type: 'button', class: 'btn btn-primary' }).text('ADD')
+  const buttonCancel = $('<button>', { name: 'cancel', id: 'cancelButton', type: 'button', class: 'btn btn-secondary' }).text('CANCEL')
   formSectionBeer.append(labelBeer)
   formSectionBeer.append(inputBeer)
   formSectionBrewery.append(labelBrewery)
@@ -38,4 +38,7 @@ function buildModal() {
   form.append(buttons)
   col.append(form)
   $('#addModal').append(col)
+
+  $('#submitButton').click(handleButtonClick)
+  $('#cancelButton').click(handleButtonClick)
 }

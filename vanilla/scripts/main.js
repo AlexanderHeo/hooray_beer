@@ -3,12 +3,12 @@ $(document).ready(initializeApp)
 let database = {}
 function initializeApp() {
   buildComponent()
-  addClickHandlers()
   getBeerList()
+  addClickHandlers()
 }
 
 function addClickHandlers() {
-  $('#footerPlusButton').on('click', footerButtonClicked)
+  $('#footerPlusButton').click(handleButtonClick)
 }
 
 async function getBeerList() {
@@ -18,12 +18,20 @@ async function getBeerList() {
   })
   const data = await response.json()
   database = { ...data }
-  if (database) buildTable()
+  if (database) {
+    buildTable()
+  }
 }
 
-function footerButtonClicked() {
-  toggleButton()
-  toggleModal()
+function handleButtonClick(e) {
+  const name = e.target.name
+  if (name === 'addButton') {
+    toggleButton()
+    toggleModal()
+  } else if (name === 'delete') console.log('delete')
+  else if (name === 'edit') console.log('edit')
+  else if (name === 'submit') console.log('submit')
+  else if (name === 'cancel') console.log('cancel')
 }
 
 function toggleButton() {
