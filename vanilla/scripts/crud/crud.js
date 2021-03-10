@@ -8,6 +8,7 @@ async function addNewBeer(beerData) {
   if (data) {
     const dataCopy = Object.assign({}, data)
     const beerId = dataCopy.currentId++
+    beerData.beerId = beerId
     dataCopy[beerId] = beerData
     $('#inputBeer').val('')
     $('#inputBrewery').val('')
@@ -30,16 +31,13 @@ const deleteBeer = async id => {
     headers: { 'Content-Type': 'application/json' }
   })
   const getData = await getResponse.json()
-  console.log(getData[id])
   delete getData[id]
-  console.log(getData)
   const patchRes = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
-    method: 'PATCH',
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(getData)
   })
   const patchData = await patchRes.json()
-  breakdownTable()
-  buildTable(patchData)
+  if (patchData) removeBeerFromTable(id)
 
 }

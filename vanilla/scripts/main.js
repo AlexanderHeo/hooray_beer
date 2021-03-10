@@ -1,29 +1,27 @@
 $(document).ready(initializeApp)
 
-let database = {}
 function initializeApp() {
   buildComponent()
   getBeerList()
   addClickHandlers()
 }
 
-function addClickHandlers() {
+const addClickHandlers = () => {
   $('#footerPlusButton').click(handleButtonClick)
 }
 
-async function getBeerList() {
+const getBeerList = async () => {
   const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }
   })
   const data = await response.json()
-  database = { ...data }
-  if (database) {
-    buildTable()
+  if (data) {
+    buildTable(data)
   }
 }
 
-function handleButtonClick(e) {
+const handleButtonClick = e => {
   e.preventDefault()
   const name = e.target.name
   if (name === 'addButton') {
@@ -53,19 +51,19 @@ function handleButtonClick(e) {
   } else if (name === 'edit') console.log('edit', e.target.value)
 }
 
-function handleInputFocus(e) {
+const handleInputFocus = e => {
   const name = e.target.name
   $(`#${name}Error`).addClass('hide')
   $(`#input${name.charAt(0).toUpperCase()}${name.slice(1)}`).removeClass('invalid')
 }
 
-function toggleButton() {
+const toggleButton = () => {
   const button = $('#footerPlusButton')
   if (button.text() === 'ADD') button.text('CLOSE')
   else button.text('ADD')
 }
 
-function toggleModal() {
+const toggleModal = () => {
   const addModal = $('#addModal')
   addModal.toggleClass('hide')
   const classList = $('#addModal').attr('class')
@@ -76,6 +74,6 @@ function toggleModal() {
   }
 }
 
-function takedownModal() {
+const takedownModal = () => {
   $('#addModal').empty().addClass('hide')
 }

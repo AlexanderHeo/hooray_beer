@@ -65,7 +65,7 @@ function buildComponent() {
   $('#body').append(container)
 }
 
-function buildTable() {
+function buildTable(beerData) {
   const thead = $('<thead>')
   const trHead = $('<tr>')
   const thBeer = $('<th>').text('Beer')
@@ -78,15 +78,15 @@ function buildTable() {
   trHead.append(thOperations)
   thead.append(trHead)
   const tbody = $('<tbody>', { id: 'table-body' })
-  Object.keys(database).map(x => {
+  Object.keys(beerData).map(x => {
     if (!isNaN(x)) {
-      const beer = database[x]
-      const row = $('<tr>')
+      const beer = beerData[x]
+      const row = $('<tr>', { id: beer.id })
       const name = $('<td>').text(beer.beer)
       const brewery = $('<td>').text(beer.brewery)
       const rating = $('<td>').text(beer.rating)
       const buttons = $('<td>')
-      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-warning' })
+      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger' })
       const buttonEdit = $('<button>', { name: 'edit', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info' })
       row.append(name)
       row.append(brewery)
@@ -160,7 +160,7 @@ function buildModal() {
 }
 
 function addNewBeerToTable(beerData) {
-  const tr = $('<tr>')
+  const tr = $('<tr>', { id: beerData.id })
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
   const tdRating = $('<td>').text(beerData.rating)
@@ -174,4 +174,8 @@ function addNewBeerToTable(beerData) {
   tr.append(tdButtons)
   $('#table-body').append(tr)
   $('#deleteButton').click({ beerData: beerData }, deleteBeer)
+}
+
+const removeBeerFromTable = id => {
+  $(`#${id}`).remove()
 }
