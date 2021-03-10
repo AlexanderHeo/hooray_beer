@@ -20,6 +20,11 @@ button {
 	display: inherit;
 	flex-wrap: inherit;
 }
+.app-title-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 .app-title {
 	text-align: center;
 }
