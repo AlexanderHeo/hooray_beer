@@ -24,15 +24,16 @@ const getBeerList = async () => {
 const handleButtonClick = e => {
   e.preventDefault()
   const name = e.target.name
+
   if (name === 'addButton') {
     toggleButton()
     toggleModal()
+
   } else if (name === 'submit') {
     const beer = $('#inputBeer').val()
     const brewery = $('#inputBrewery').val()
     const rating = $('#inputRating').val()
     const tasting = $('#inputTasting').val()
-
     if (!beer) missingInput('beer')
     else if (!brewery) missingInput('brewery')
     else if (!rating) missingInput('rating')
@@ -43,11 +44,14 @@ const handleButtonClick = e => {
   		toggleButton()
       toggleModal()
     }
+
   } else if (name === 'cancel') {
   	toggleButton()
     toggleModal()
+
   } else if (name === 'delete') {
     deleteBeer(e.target.value)
+
   } else if (name === 'edit') console.log('edit', e.target.value)
 }
 

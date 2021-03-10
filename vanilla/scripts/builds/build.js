@@ -160,13 +160,14 @@ function buildModal() {
 }
 
 function addNewBeerToTable(beerData) {
+  console.log(beerData)
   const tr = $('<tr>', { id: beerData.id })
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
   const tdRating = $('<td>').text(beerData.rating)
   const tdButtons = $('<td>')
-  const buttonDelete = $('<button>', { name: 'delete', value: beerData.beerId, type: 'button', id: 'deleteButton', class: 'btn btn-danger' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'edit', value: beerData.beerId, type: 'button', id: 'editButton', class: 'btn btn-info' }).text('Edit')
+  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger' }).text('Delete')
+  const buttonEdit = $('<button>', { name: 'edit', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info' }).text('Edit')
   tdButtons.append(buttonDelete).append(buttonEdit)
   tr.append(tdBeer)
   tr.append(tdBrewery)
