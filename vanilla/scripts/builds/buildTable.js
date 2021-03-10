@@ -1,0 +1,35 @@
+function buildTable() {
+  const thead = $('<thead>')
+  const trHead = $('<tr>')
+  const thBeer = $('<th>').text('Beer')
+  const thBrewery = $('<th>').text('Brewery')
+  const thRating = $('<th>').text('Rating')
+  const thOperations = $('<th>').text('Operations')
+  trHead.append(thBeer)
+  trHead.append(thBrewery)
+  trHead.append(thRating)
+  trHead.append(thOperations)
+  thead.append(trHead)
+  const tbody = $('<tbody>')
+  Object.keys(database).map(x => {
+    if (!isNaN(x)) {
+      const beer = database[x]
+      const row = $('<tr>')
+      const name = $('<td>').text(beer.beer)
+      const brewery = $('<td>').text(beer.brewery)
+      const rating = $('<td>').text(beer.rating)
+      const buttons = $('<td>')
+      const buttonDelete = $('<button>', { type: 'button', class: 'btn btn-warning' })
+      const buttonEdit = $('<button>', { type: 'button', class: 'btn btn-info' })
+      row.append(name)
+      row.append(brewery)
+      row.append(rating)
+      buttons.append(buttonDelete.text('Delete'))
+      buttons.append(buttonEdit.text('Edit'))
+      row.append(buttons)
+      tbody.append(row)
+    }
+  })
+  $('#table').append(thead)
+  $('#table').append(tbody)
+}
