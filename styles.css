@@ -1,0 +1,231 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+button {
+	border-radius: 6px;
+	width: 80px;
+}
+.container-fluid {
+	height: 100vh;
+	overflow-y: scroll;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: rgb(250, 250, 250);
+}
+.header-sizer {
+	width: 100%;
+	max-width: 750px;
+	display: inherit;
+	flex-wrap: inherit;
+}
+.app-title {
+	text-align: center;
+}
+@media (min-width: 576px) {
+	.app-title {
+		text-align: left;
+		margin-bottom: initial;
+	}
+}
+
+/* \/ \/ \/ Beer Stats Window \/ \/ \/ */
+.stats-container {
+	margin-bottom: 0.5rem;
+}
+.stats {
+	width: 100%;
+	display: flex;
+	text-align: center;
+}
+.stat {
+	width: 50%;
+	padding: 0 10px;
+}
+.stat.title {
+	text-align: right;
+}
+.stat.value {
+	text-align: left;
+}
+/* /\ /\ /\ Beer Stats Window /\ /\ /\ */
+
+/* \/ \/ \/ Main Table \/ \/ \/ */
+.table-title {
+	width: 100%;
+	text-align: center;
+	margin-top: 12px;
+	margin-bottom: 0;
+	padding: 6px 0;
+}
+table {
+	width: 100%;
+	max-width: 775px;
+}
+thead {
+	display: none;
+}
+tbody {
+	display: flex;
+	flex-direction: column;
+}
+tbody tr,
+thead tr {
+	display: flex;
+	flex-direction: column;
+	padding: 6px 12px;
+}
+tbody tr td {
+	line-height: 1.1;
+}
+.table-title,
+tbody tr:nth-child(even) {
+	background-color: rgb(221, 221, 221);
+}
+@media (min-width: 400px) {
+	tbody {
+		flex-flow: row wrap;
+	}
+	tbody tr {
+		width: 50%;
+	}
+	tbody tr:nth-child(even) {
+		background-color: transparent;
+	}
+	tbody tr:nth-child(4n+1),
+	tbody tr:nth-child(4n+4) {
+		background-color: rgb(200, 200, 200);
+	}
+}
+@media (min-width: 576px) {
+	.table-title {
+		display: none;
+	}
+	thead {
+		display: initial;
+	}
+	thead tr {
+		background-color: rgb(221, 221, 221);
+		padding: 6px;
+	}
+	thead tr,
+	tbody tr {
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		padding: 0 0;
+	}
+	tbody tr:nth-child(4n+1),
+	tbody tr:nth-child(4n+4) {
+		background-color: transparent;
+	}
+	tbody tr:nth-child(even) {
+		background-color: rgb(221, 221, 221);
+	}
+	/* th, td {border:1px solid black;} */
+	th:not(:last-of-type), td:not(:last-of-type) {
+		padding: 4px 4px;
+	}
+	th:nth-of-type(1),
+	td:nth-of-type(1) {
+		padding: 4px 12px;
+	}
+	th:nth-of-type(3),
+	td:nth-of-type(3),
+	th:last-of-type,
+	td:last-of-type {
+		padding: 4px 0;
+		text-align: center;
+	}
+	th:first-of-type,
+	th:nth-child(2),
+	th:last-of-type,
+	td:first-of-type,
+	td:nth-child(2),
+	td:last-of-type {
+		width: 30%;
+	}
+	th:nth-child(3),
+	td:nth-child(3) {
+		width: 10%;
+	}
+}
+@media (min-width: 776px) {
+	.container-fluid>.row {
+		justify-content: center;
+	}
+}
+
+/* /\ /\ /\ Main Table /\ /\ /\ */
+
+/* \/ \/ \/ Input Form \/ \/ \/ */
+.formContainer {
+	text-align: center;
+	margin-top: 26px;
+}
+label {
+	text-align: right;
+	width: 60px;
+}
+input {
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+.button-container {
+	margin: 12px 0;
+}
+/* /\ /\ /\ Input Form /\ /\ /\ */
+
+.footer {
+	width: 100vw;
+	padding: 12px 0;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: blue;
+
+}
+
+
+/* .table-container {
+	margin: 0 0.5rem;
+}
+@media (min-width: 418px) {
+	.table-container {
+
+	}
+}
+thead tr {
+	background-color: lightgray;
+}
+thead th {
+	padding: 16px 0;
+}
+th,
+td {
+	text-align: left;
+}
+td {
+	padding: 2px 24px;
+}
+th:last-child,
+td:last-child {
+	text-align: center;
+} */
+/*
+thead th:first-child {
+	border-top-left-radius: 12px;
+}
+thead th:last-child {
+	border-top-right-radius: 12px;
+}
+tbody tr:last-child td:first-child {
+	border-bottom-left-radius: 12px;
+}
+tbody tr:last-child td:last-child {
+	border-bottom-right-radius: 12px;
+} */

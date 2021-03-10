@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="./styles.css" type="text/css">
+	<title>Hooray Beer!</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="header-sizer">
+				<div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-12">
+					<h1 class="app-title">Hooray Beer!</h1>
+				</div>
+				<div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
+					<div class="stats-container">
+						<div class="stats"><span class="stat title">Total Beers:</span><span class="stat value">99</span></div>
+						<div class="stats"><span class="stat title">Average Score:</span><span class="stat value">4.1</span></div>
+						<div class="stats"><span class="stat title">Highest Rated:</span><span class="stat value">Best Pale Ale</span></div>
+						<div class="stats"><span class="stat title">Most Drank:</span><span class="stat value">America IPA</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- <div class="table-container"> -->
+				<h4 class="table-title">My Beers List</h4>
+				<table>
+					<thead >
+						<tr>
+							<th>Beer</th>
+							<th>Brewery</th>
+							<th>Rating</th>
+							<th>Operations</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td >Pale Dog</td>
+							<td >State Brewing</td>
+							<td >5</td>
+							<td >
+								<button type="button" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-info">Edit</button>
+							</td>
+						</tr>
+						<tr>
+							<td >Super IPA</td>
+							<td >American Brewery</td>
+							<td >5</td>
+							<td >
+								<button type="button" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-info">Edit</button>
+							</td>
+						</tr>
+						<tr>
+							<td >Choco Stout</td>
+							<td >Isle Brewing</td>
+							<td >5</td>
+							<td >
+								<button type="button" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-info">Edit</button>
+							</td>
+						</tr>
+						<tr>
+							<td >Rocker Lager</td>
+							<td >Note Beers</td>
+							<td >5</td>
+							<td >
+								<button type="button" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-info">Edit</button>
+							</td>
+						</tr>
+						<tr>
+							<td >Double IPA</td>
+							<td >Two Time Brewery</td>
+							<td >5</td>
+							<td >
+								<button type="button" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-info">Edit</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<!-- </div> -->
+			<div class="col-lg-4 col-md-12 col-sm-12 formContainer">
+				<form>
+					<div class="form-section">
+						<label>Beer:</label>
+						<input>
+					</div>
+					<div class="form-section">
+						<label>Brewery:</label>
+						<input>
+					</div>
+					<div class="form-section">
+						<label>Rating:</label>
+						<input>
+					</div>
+					<div class="button-container">
+						<button type="button" class="btn btn-primary">Add</button>
+						<button type="button" class="btn btn-secondary">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<button>Add</button>
+	</div>
+</body>
+</html>
