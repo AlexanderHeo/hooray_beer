@@ -160,7 +160,6 @@ function buildModal() {
 }
 
 function addNewBeerToTable(beerData) {
-  console.log(beerData)
   const tr = $('<tr>')
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
