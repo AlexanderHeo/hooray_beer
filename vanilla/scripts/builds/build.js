@@ -104,9 +104,8 @@ function buildTable(beerData) {
 }
 
 function buildModal() {
-  const div = $('<div>')
-  $('#addModal').append(div)
-  const col = $('<div>', { class: 'col-lg-4 col-md-12 col-sm-12 formContainer', id: 'addModalForm' })
+  const addModal = $('#addModal')
+  const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
   const h4 = $('<h4>').text('Add a New Beer')
   const formSectionBeer = $('<div>', { class: 'form-section' })
@@ -149,7 +148,7 @@ function buildModal() {
   form.append(formSectionTasting)
   form.append(buttons)
   col.append(form)
-  $('#addModal').append(col)
+  addModal.append(col)
 
   $('#submitButton').click(handleButtonClick)
   $('#cancelButton').click(handleButtonClick)
