@@ -41,11 +41,12 @@ function handleButtonClick(e) {
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
       addNewBeer(beerData)
+  		toggleButton()
       toggleModal()
     }
   } else if (name === 'cancel') {
+  	toggleButton()
     toggleModal()
-
   } else if (name === 'delete') console.log('delete')
   else if (name === 'edit') console.log('edit')
 }
@@ -67,13 +68,12 @@ function toggleModal() {
   addModal.toggleClass('hide')
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
-    takedownAddModal()
+    takedownModal()
   } else {
     buildModal()
   }
 }
 
-function takedownAddModal() {
-  toggleButton()
+function takedownModal() {
   $('#addModal').empty().addClass('hide')
 }
