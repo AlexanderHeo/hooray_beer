@@ -87,7 +87,7 @@ function buildTable(beerData) {
       const rating = $('<td>').text(beer.rating)
       const buttons = $('<td>')
       const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' })
-      const buttonEdit = $('<button>', { name: 'edit', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
+      const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
       row.append(name)
       row.append(brewery)
       row.append(rating)
@@ -100,54 +100,67 @@ function buildTable(beerData) {
   $('#table').append(thead)
   $('#table').append(tbody)
   $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click(handleButtonClick)
+  $('.editButton').click({ beerData: beerData }, handleButtonClick)
 }
 
-function buildModal(action, value) {
+function buildModal(action, beerData, value) {
+  // console.log(action, beerData, value)
   const addModal = $('#addModal')
   const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
-  if (action === 'addButton') {
-    const h4 = $('<h4>').text('Add a New Beer')
-    const formSectionBeer = $('<div>', { class: 'form-section' })
-    const formSectionBrewery = $('<div>', { class: 'form-section' })
-    const formSectionRating = $('<div>', { class: 'form-section' })
-    const formSectionTasting = $('<div>', { class: 'form-section' })
-    const labelBeer = $('<label>', { for: 'beer' }).text('Beer:')
-    const inputBeer = $('<input>', { name: 'beer', id: 'inputBeer' })
-    const errorBeer = $('<div>', { id: 'beerError', class: 'error errorBeer hide' })
-    const labelBrewery = $('<label>').text('Brewery:')
-    const inputBrewery = $('<input>', { name: 'brewery', id: 'inputBrewery' })
-    const errorBrewery = $('<div>', { id: 'breweryError', class: 'error errorBrewery hide' })
-    const labelRating = $('<label>').text('Rating:')
-    const inputRating = $('<input>', { name: 'rating', id: 'inputRating' })
-    const errorRating = $('<div>', { id: 'ratingError', class: 'error errorRating hide' })
-    const labelTasting = $('<label>').text('Tasting:')
-    const inputTasting = $('<textarea>', { name: 'tasting', id: 'inputTasting' })
-    const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
-    formSectionBeer.append(labelBeer)
-    formSectionBeer.append(inputBeer)
-    formSectionBeer.append(errorBeer)
-    formSectionBrewery.append(labelBrewery)
-    formSectionBrewery.append(inputBrewery)
-    formSectionBrewery.append(errorBrewery)
-    formSectionRating.append(labelRating)
-    formSectionRating.append(inputRating)
-    formSectionRating.append(errorRating)
-    formSectionTasting.append(labelTasting)
-    formSectionTasting.append(inputTasting)
-    formSectionTasting.append(errorTasting)
-    form.append(h4)
-    form.append(formSectionBeer)
-    form.append(formSectionBrewery)
-    form.append(formSectionRating)
-    form.append(formSectionTasting)
-  } else if (action === 'edit') {
 
+  const h4 = $('<h4>').text('Add a New Beer')
+  const formSectionBeer = $('<div>', { class: 'form-section' })
+  const formSectionBrewery = $('<div>', { class: 'form-section' })
+  const formSectionRating = $('<div>', { class: 'form-section' })
+  const formSectionTasting = $('<div>', { class: 'form-section' })
+  const labelBeer = $('<label>', { for: 'beer' }).text('Beer:')
+  const inputBeer = $('<input>', { name: 'beer', id: 'inputBeer' })
+  const errorBeer = $('<div>', { id: 'beerError', class: 'error errorBeer hide' })
+  const labelBrewery = $('<label>').text('Brewery:')
+  const inputBrewery = $('<input>', { name: 'brewery', id: 'inputBrewery' })
+  const errorBrewery = $('<div>', { id: 'breweryError', class: 'error errorBrewery hide' })
+  const labelRating = $('<label>').text('Rating:')
+  const inputRating = $('<input>', { name: 'rating', id: 'inputRating' })
+  const errorRating = $('<div>', { id: 'ratingError', class: 'error errorRating hide' })
+  const labelTasting = $('<label>').text('Tasting:')
+  const inputTasting = $('<textarea>', { name: 'tasting', id: 'inputTasting' })
+  const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
+
+  if (action === 'editButton') {
+    // console.log(beerData, value)
+    const beerToEdit = beerData[value]
+    inputBeer.val(beerToEdit.beer)
+    inputBrewery.val(beerToEdit.brewery)
+    inputRating.val(beerToEdit.rating)
+    inputTasting.val(beerToEdit.tasting)
   }
 
+  formSectionBeer.append(labelBeer)
+  formSectionBeer.append(inputBeer)
+  formSectionBeer.append(errorBeer)
+  formSectionBrewery.append(labelBrewery)
+  formSectionBrewery.append(inputBrewery)
+  formSectionBrewery.append(errorBrewery)
+  formSectionRating.append(labelRating)
+  formSectionRating.append(inputRating)
+  formSectionRating.append(errorRating)
+  formSectionTasting.append(labelTasting)
+  formSectionTasting.append(inputTasting)
+  formSectionTasting.append(errorTasting)
+  form.append(h4)
+  form.append(formSectionBeer)
+  form.append(formSectionBrewery)
+  form.append(formSectionRating)
+  form.append(formSectionTasting)
+
   const buttons = $('<div>', { class: 'button-container' })
-  const buttonAdd = $('<button>', { name: 'submit', id: 'submitButton', type: 'button', class: 'btn btn-primary' }).text('ADD')
+  let buttonAdd
+  if (action === 'editButton') {
+    buttonAdd = $('<button>', { name: 'edit', value: value, id: 'edit', type: 'button', class: 'btn btn-primary' }).text('EDIT')
+  } else {
+    buttonAdd = $('<button>', { name: 'submit', id: 'submitButton', type: 'button', class: 'btn btn-primary' }).text('SUBMIT')
+  }
   const buttonCancel = $('<button>', { name: 'cancel', id: 'cancelButton', type: 'button', class: 'btn btn-secondary' }).text('CANCEL')
   buttons.append(buttonAdd)
   buttons.append(buttonCancel)
@@ -155,7 +168,8 @@ function buildModal(action, value) {
   col.append(form)
   addModal.append(col)
 
-  $('#submitButton').click(handleButtonClick)
+  $('#submitButton').click({ action: action }, handleButtonClick)
+  $('#edit').click({ action: 'edit' }, handleButtonClick)
   $('#cancelButton').click(handleButtonClick)
   $('#inputBeer').focus(handleInputFocus)
   $('#inputBrewery').focus(handleInputFocus)
@@ -163,14 +177,15 @@ function buildModal(action, value) {
   $('#inputTasting').focus(handleInputFocus)
 }
 
-function addNewBeerToTable(beerData) {
+function addNewBeerToTable(beerList, beerData) {
+  // console.log(beerList, beerData)
   const tr = $('<tr>', { id: beerData.id })
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
   const tdRating = $('<td>').text(beerData.rating)
   const tdButtons = $('<td>')
   const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'edit', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
+  const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
   tdButtons.append(buttonDelete).append(buttonEdit)
   tr.append(tdBeer)
   tr.append(tdBrewery)
@@ -178,9 +193,25 @@ function addNewBeerToTable(beerData) {
   tr.append(tdButtons)
   $('#table-body').append(tr)
   $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click(handleButtonClick)
+  $('.editButton').click({ beerData: beerList }, handleButtonClick)
 }
 
 const removeBeerFromTable = id => {
   $(`#${id}`).remove()
+}
+
+const editBeerTable = (beerList, beerData) => {
+  // console.log('build:', beerList, beerData)
+  const beerRow = $(`#${beerData.id}`)
+  beerRow.empty()
+  const beer = $('<td>').text(beerData.beer)
+  const brewery = $('<td>').text(beerData.brewery)
+  const rating = $('<td>').text(beerData.rating)
+  const buttons = $('<td>')
+  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
+  const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
+  buttons.append(buttonDelete).append(buttonEdit)
+  beerRow.append(beer).append(brewery).append(rating).append(buttons)
+  $('.deleteButton').click(handleButtonClick)
+  $('.editButton').click({ beerData: beerList }, handleButtonClick)
 }

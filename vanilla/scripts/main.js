@@ -11,14 +11,13 @@ const addClickHandlers = () => {
 }
 
 const getBeerList = async () => {
-  const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
+  const init = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }
-  })
-  const data = await response.json()
-  if (data) {
-    buildTable(data)
   }
+  const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', init)
+  const data = await response.json()
+  if (data) buildTable(data)
 }
 
 const handleButtonClick = e => {
@@ -30,7 +29,15 @@ const handleButtonClick = e => {
     toggleButton()
     toggleModal('addButton')
 
-  } else if (name === 'submit') {
+  } else if (name === 'editButton') {
+    console.log('main edit button')
+    const { beerData } = e.data
+    console.log(name, beerData, value)
+    toggleButton()
+    toggleModal('editButton', beerData, value)
+
+  } else if (name === 'submit' || name === 'edit') {
+    // console.log('main submit/edit')
     const beer = $('#inputBeer').val()
     const brewery = $('#inputBrewery').val()
     const rating = $('#inputRating').val()
@@ -41,9 +48,16 @@ const handleButtonClick = e => {
     else if (!tasting) missingInput('tasting')
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
-      beerList(beerData, 'submit')
-  		toggleButton()
-      toggleModal()
+      if (name === 'edit') {
+        // console.log('main edit')
+        beerList('edit', beerData, value)
+        toggleButton()
+        toggleModal()
+      } else if (name === 'submit') {
+        beerList('submit', beerData)
+        toggleButton()
+        toggleModal()
+      }
     }
 
   } else if (name === 'cancel') {
@@ -51,11 +65,7 @@ const handleButtonClick = e => {
     toggleModal()
 
   } else if (name === 'delete') {
-    beerList(value, 'delete')
-
-  } else if (name === 'edit') {
-    beerList(value, 'edit')
-    toggleModal('edit', value)
+    beerList('delete', value)
   }
 }
 
@@ -71,14 +81,14 @@ const toggleButton = () => {
   else button.text('ADD')
 }
 
-const toggleModal = (action, value) => {
+const toggleModal = (action, beerData, value) => {
   const addModal = $('#addModal')
   addModal.toggleClass('hide')
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
     takedownModal()
   } else {
-    buildModal(action, value)
+    buildModal(action, beerData, value)
   }
 }
 
