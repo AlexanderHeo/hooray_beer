@@ -24,10 +24,11 @@ const getBeerList = async () => {
 const handleButtonClick = e => {
   e.preventDefault()
   const name = e.target.name
+  const value = e.target.value
 
   if (name === 'addButton') {
     toggleButton()
-    toggleModal()
+    toggleModal('addButton')
 
   } else if (name === 'submit') {
     const beer = $('#inputBeer').val()
@@ -40,7 +41,7 @@ const handleButtonClick = e => {
     else if (!tasting) missingInput('tasting')
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
-      addNewBeer(beerData)
+      beerList(beerData, 'submit')
   		toggleButton()
       toggleModal()
     }
@@ -50,10 +51,12 @@ const handleButtonClick = e => {
     toggleModal()
 
   } else if (name === 'delete') {
-    console.log('delete', e.target.value)
-    deleteBeer(e.target.value)
+    beerList(value, 'delete')
 
-  } else if (name === 'edit') console.log('edit', e.target.value)
+  } else if (name === 'edit') {
+    beerList(value, 'edit')
+    toggleModal('edit', value)
+  }
 }
 
 const handleInputFocus = e => {
@@ -68,14 +71,14 @@ const toggleButton = () => {
   else button.text('ADD')
 }
 
-const toggleModal = () => {
+const toggleModal = (action, value) => {
   const addModal = $('#addModal')
   addModal.toggleClass('hide')
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
     takedownModal()
   } else {
-    buildModal()
+    buildModal(action, value)
   }
 }
 
