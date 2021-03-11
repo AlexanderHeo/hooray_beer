@@ -1,104 +1,87 @@
 $(document).ready(initializeApp)
 
-let database = {}
 function initializeApp() {
   buildComponent()
   getBeerList()
   addClickHandlers()
 }
 
-function addClickHandlers() {
+const addClickHandlers = () => {
   $('#footerPlusButton').click(handleButtonClick)
 }
 
-async function getBeerList() {
+const getBeerList = async () => {
   const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' }
   })
   const data = await response.json()
-  database = { ...data }
-  if (database) {
-    buildTable()
+  if (data) {
+    buildTable(data)
   }
 }
 
-function handleButtonClick(e) {
+const handleButtonClick = e => {
+  e.preventDefault()
   const name = e.target.name
+  const value = e.target.value
+
   if (name === 'addButton') {
     toggleButton()
-    toggleModal()
+    toggleModal('addButton')
+
   } else if (name === 'submit') {
     const beer = $('#inputBeer').val()
     const brewery = $('#inputBrewery').val()
     const rating = $('#inputRating').val()
     const tasting = $('#inputTasting').val()
-
     if (!beer) missingInput('beer')
     else if (!brewery) missingInput('brewery')
     else if (!rating) missingInput('rating')
     else if (!tasting) missingInput('tasting')
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
-      addNewBeer(beerData)
+      beerList(beerData, 'submit')
+  		toggleButton()
+      toggleModal()
     }
-  } else if (name === 'cancel') console.log('cancel')
-  else if (name === 'delete') console.log('delete')
-  else if (name === 'edit') console.log('edit')
-}
 
-async function addNewBeer(beerData) {
-  const idCheckResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' }
-  })
-  const data = await idCheckResponse.json()
-  if (data) {
-    const dataCopy = Object.assign({}, data)
-    const beerId = dataCopy.currentId++
-    beerData.beerId = beerId
-    dataCopy[beerId] = beerData
-    $('#inputBeer').val('')
-    $('#inputBrewery').val('')
-    $('#inputRating').val('')
-    $('#inputTasting').val('')
+  } else if (name === 'cancel') {
+  	toggleButton()
+    toggleModal()
 
-    const addResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataCopy)
-    })
-    const addedData = await addResponse.json()
-    if (addedData) {
-      getBeerList()
-    }
+  } else if (name === 'delete') {
+    beerList(value, 'delete')
+
+  } else if (name === 'edit') {
+    beerList(value, 'edit')
+    toggleModal('edit', value)
   }
-
 }
 
-function handleInputFocus(e) {
+const handleInputFocus = e => {
   const name = e.target.name
   $(`#${name}Error`).addClass('hide')
   $(`#input${name.charAt(0).toUpperCase()}${name.slice(1)}`).removeClass('invalid')
 }
 
-function toggleButton() {
+const toggleButton = () => {
   const button = $('#footerPlusButton')
   if (button.text() === 'ADD') button.text('CLOSE')
   else button.text('ADD')
 }
 
-function toggleModal() {
+const toggleModal = (action, value) => {
   const addModal = $('#addModal')
   addModal.toggleClass('hide')
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
-    takedownAddModal()
+    takedownModal()
   } else {
-    buildModal()
+    buildModal(action, value)
   }
 }
-function takedownAddModal() {
-  // console.log('take down')
-  $('#addModal').empty()
+
+const takedownModal = () => {
+  $('#addModal').empty().addClass('hide')
 }
