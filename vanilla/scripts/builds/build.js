@@ -191,7 +191,7 @@ function addNewBeerToTable(beerList, beerData) {
   table.append(beerContainer)
   $('.dotButton').click(handleBeerClick)
   $('.xButton').click(handleBeerClick)
-  $('.editButton').click({ beerData: beerData }, handleButtonClick)
+  $('.editButton').click({ beerData: beerList }, handleButtonClick)
   $('.deleteButton').click(handleButtonClick)
 
   // const tr = $('<tr>', { id: beerData.id })
