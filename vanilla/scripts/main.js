@@ -82,7 +82,9 @@ const toggleButton = () => {
 
 const toggleModal = (action, beerData, value) => {
   const addModal = $('#addModal')
+  console.log(addModal)
   addModal.toggleClass('hide')
+  console.log(addModal)
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
     takedownModal()
@@ -93,4 +95,23 @@ const toggleModal = (action, beerData, value) => {
 
 const takedownModal = () => {
   $('#addModal').empty().addClass('hide')
+}
+
+const handleBeerClick = e => {
+  const name = e.currentTarget.name
+  const value = e.currentTarget.value
+  const beerContainer = $('.beerContainer')
+  Object.keys(beerContainer).forEach(x => {
+    if (!isNaN(x)) {
+      const id = beerContainer.eq(x).attr('id').charAt(0)
+      if (parseInt(value) !== parseInt(id)) {
+        if (!beerContainer.eq(x).attr('class').includes('toggle')) {
+          beerContainer.eq(x).addClass('toggle')
+        }
+      }
+    }
+  })
+  if (name === 'dotButton' || name === 'xButton') {
+    $(`#${value}Container`).toggleClass('toggle')
+  }
 }

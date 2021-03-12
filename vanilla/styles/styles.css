@@ -80,11 +80,13 @@ button {
 .nameContainer {
 	display: flex;
 	justify-content: space-between;
-	padding: 12px 36px 2px;
+	padding: 12px 36px;
 	font-size: 1.5rem;
 }
-.dotContainer {
+.dotButton,
+.xButton {
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	border: 1px solid rgb(30, 30, 30);
 	border-radius: 8px;
@@ -97,14 +99,6 @@ button {
 	background-color: rgb(40, 40, 40);
 	margin: 0 1px;
 }
-.xContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid black;
-	border-radius: 10px;
-	padding: 0 15px;
-}
 .xBar {
 	width: 3px;
 	height: 20px;
@@ -112,14 +106,14 @@ button {
 	border-radius: 20px;
 }
 .xBar1 {
-	transform: rotate(45deg) translate(1.5px);
+	transform: rotate(45deg) translate(2px);
 }
 .xBar2 {
-	transform: rotate(-45deg) translate(-1px);
+	transform: rotate(-45deg) translate(-2px);
 }
 
 .infoContainer {
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	padding: 0 36px 12px 36px;
 }
@@ -134,7 +128,18 @@ button {
 	justify-content: space-between;
 }
 .buttons {
-	text-align: center;
+	text-align: right;
+}
+
+.beerContainer.toggle .nameContainer .dotButton,
+.beerContainer .nameContainer .xButton,
+.beerContainer .infoContainer {
+	display: initial;
+}
+.beerContainer .nameContainer .dotButton,
+.beerContainer.toggle .nameContainer .xButton,
+.beerContainer.toggle .infoContainer {
+	display: none;
 }
 
 /* /\ /\ /\ Main Table /\ /\ /\ */
