@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 $(document).ready(initializeApp)
 
@@ -40,7 +41,6 @@ const handleButtonClick = e => {
     toggleModal()
 
   } else if (name === 'delete') {
-    console.log(id)
     beerDB('delete', null, id)
 
   } else if (name === 'submit' || name === 'edit') {
@@ -65,7 +65,6 @@ const handleButtonClick = e => {
         toggleModal()
       }
     }
-
   }
 }
 

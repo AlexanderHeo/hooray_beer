@@ -164,23 +164,51 @@ function buildModal(action, beerData, value) {
 }
 
 function addNewBeerToTable(beerList, beerData) {
-  const tr = $('<tr>', { id: beerData.id })
-  const tdBeer = $('<td>').text(beerData.beer)
-  const tdBrewery = $('<td>').text(beerData.brewery)
-  const tdRating = $('<td>').text(beerData.rating)
-  const tdButtons = $('<td>')
-  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
-  tdButtons.append(buttonDelete).append(buttonEdit)
-  tr.append(tdBeer).append(tdBrewery).append(tdRating).append(tdButtons)
-  $('#table-body').append(tr)
+  const beer = beerData
+  const table = $('#table')
+  const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+  const nameContainer = $('<div>', { class: 'nameContainer' })
+  const nameSpan = $('<span>').text(beer.beer)
+  const dotButton = $('<button>', { name: 'dotButton', value: beer.id, type: 'button', class: 'dotButton' }).text('ooo')
+  const xButton = $('<button>', { name: 'xButton', value: beer.id, type: 'button', class: 'xButton' }).text('X')
+  nameContainer.append(nameSpan).append(dotButton).append(xButton)
+
+  const infoContainer = $('<div>', { class: 'infoContainer' })
+  const info = $('<div>', { class: 'info' })
+  const breweryRating = $('<div>', { class: 'breweryRating' })
+  const brewery = $('<div>', { class: 'brewery' }).text(beer.brewery)
+  const rating = $('<div>', { class: 'rating' }).text(beer.rating)
+  breweryRating.append(brewery).append(rating)
+  const tasting = $('<div>', { class: 'tasting' }).text(beer.tasting)
+  info.append(breweryRating).append(tasting)
+  const buttons = $('<div>', { class: 'buttons' })
+  const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('DELETE')
+  const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('EDIT')
+  buttons.append(buttonEdit).append(buttonDelete)
+  infoContainer.append(info).append(buttons)
+
+  beerContainer.append(nameContainer).append(infoContainer)
+  table.append(beerContainer)
+  $('.dotButton').click(handleBeerClick)
+  $('.xButton').click(handleBeerClick)
+  $('.editButton').click({ beerData: beerData }, handleButtonClick)
   $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click({ beerData: beerList }, handleButtonClick)
+
+  // const tr = $('<tr>', { id: beerData.id })
+  // const tdBeer = $('<td>').text(beerData.beer)
+  // const tdBrewery = $('<td>').text(beerData.brewery)
+  // const tdRating = $('<td>').text(beerData.rating)
+  // const tdButtons = $('<td>')
+  // const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
+  // const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
+  // tdButtons.append(buttonDelete).append(buttonEdit)
+  // tr.append(tdBeer).append(tdBrewery).append(tdRating).append(tdButtons)
+  // $('#table-body').append(tr)
+  // $('.deleteButton').click(handleButtonClick)
+  // $('.editButton').click({ beerData: beerList }, handleButtonClick)
 }
 
-const removeBeerFromTable = id => {
-  $(`#${id}`).remove()
-}
+const removeBeerFromTable = id => $(`#${id}Container`).remove()
 
 const editBeerTable = (beerList, beerData) => {
   const beerRow = $(`#${beerData.id}`)
