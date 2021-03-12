@@ -104,7 +104,6 @@ function buildTable(beerData) {
 }
 
 function buildModal(action, beerData, value) {
-  // console.log(action, beerData, value)
   const addModal = $('#addModal')
   const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
@@ -128,7 +127,6 @@ function buildModal(action, beerData, value) {
   const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
 
   if (action === 'editButton') {
-    // console.log(beerData, value)
     const beerToEdit = beerData[value]
     inputBeer.val(beerToEdit.beer)
     inputBrewery.val(beerToEdit.brewery)
@@ -178,7 +176,6 @@ function buildModal(action, beerData, value) {
 }
 
 function addNewBeerToTable(beerList, beerData) {
-  // console.log(beerList, beerData)
   const tr = $('<tr>', { id: beerData.id })
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
@@ -201,7 +198,6 @@ const removeBeerFromTable = id => {
 }
 
 const editBeerTable = (beerList, beerData) => {
-  // console.log('build:', beerList, beerData)
   const beerRow = $(`#${beerData.id}`)
   beerRow.empty()
   const beer = $('<td>').text(beerData.beer)
