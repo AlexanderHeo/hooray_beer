@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 function buildComponent() {
   const container = $('<div>', { class: 'container-fluid container' })
   const rowHeader = $('<div>', { class: 'row' })
@@ -14,97 +16,94 @@ function buildComponent() {
   const statsTotal = $('<div>', { class: 'stats' })
   const titleTotal = $('<span>', { class: 'stat title' }).text('Total Beers:')
   const valueTotal = $('<span>', { class: 'stat value' }).text('99')
-  statsTotal.append(titleTotal)
-  statsTotal.append(valueTotal)
+  statsTotal.append(titleTotal).append(valueTotal)
 
   const statsAverage = $('<div>', { class: 'stats' })
   const titleAverage = $('<span>', { class: 'stat title' }).text('Average Rating:')
   const valueAverage = $('<span>', { class: 'stat value' }).text('4.1')
-  statsAverage.append(titleAverage)
-  statsAverage.append(valueAverage)
+  statsAverage.append(titleAverage).append(valueAverage)
 
   const statsHighest = $('<div>', { class: 'stats' })
   const titleHighest = $('<span>', { class: 'stat title' }).text('Highest Rated:')
   const valueHighest = $('<span>', { class: 'stat value' }).text('Best Pale Ale')
-  statsHighest.append(titleHighest)
-  statsHighest.append(valueHighest)
+  statsHighest.append(titleHighest).append(valueHighest)
 
   const statsMost = $('<div>', { class: 'stats' })
   const titleMost = $('<span>', { class: 'stat title' }).text('Most Drank:')
   const valueMost = $('<span>', { class: 'stat value' }).text('America Pale')
-  statsMost.append(titleMost)
-  statsMost.append(valueMost)
+  statsMost.append(titleMost).append(valueMost)
 
-  statsContainer.append(statsTotal)
-  statsContainer.append(statsAverage)
-  statsContainer.append(statsHighest)
-  statsContainer.append(statsMost)
+  statsContainer.append(statsTotal).append(statsAverage).append(statsHighest).append(statsMost)
   colStats.append(statsContainer)
 
-  headerSizer.append(colTitle)
-  headerSizer.append(colStats)
+  headerSizer.append(colTitle).append(colStats)
 
   rowHeader.append(headerSizer)
   container.append(rowHeader)
 
   const rowBody = $('<div>', { class: 'row' })
   const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
-  const table = $('<table>', { id: 'table' })
-  rowBody.append(h4)
-  rowBody.append(table)
+  const table = $('<div>', { id: 'table', class: 'table' })
+  rowBody.append(h4).append(table)
   container.append(rowBody)
 
   const addModal = $('<div>', { id: 'addModal', class: 'addModal hide' })
   container.append(addModal)
 
   const footer = $('<div>', { class: 'footer' })
-  const buttonFooter = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
-  footer.append(buttonFooter)
+  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
+  footer.append(footerButton)
   container.append(footer)
 
   $('#body').append(container)
 }
 
 function buildTable(beerData) {
-  const thead = $('<thead>')
-  const trHead = $('<tr>')
-  const thBeer = $('<th>').text('Beer')
-  const thBrewery = $('<th>').text('Brewery')
-  const thRating = $('<th>').text('Rating')
-  const thOperations = $('<th>').text('Operations')
-  trHead.append(thBeer)
-  trHead.append(thBrewery)
-  trHead.append(thRating)
-  trHead.append(thOperations)
-  thead.append(trHead)
-  const tbody = $('<tbody>', { id: 'table-body' })
+  const table = $('#table')
+
   Object.keys(beerData).map(x => {
     if (!isNaN(x)) {
       const beer = beerData[x]
-      const row = $('<tr>', { id: beer.id })
-      const name = $('<td>').text(beer.beer)
-      const brewery = $('<td>').text(beer.brewery)
-      const rating = $('<td>').text(beer.rating)
-      const buttons = $('<td>')
-      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' })
-      const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
-      row.append(name)
-      row.append(brewery)
-      row.append(rating)
-      buttons.append(buttonDelete.text('Delete'))
-      buttons.append(buttonEdit.text('Edit'))
-      row.append(buttons)
-      tbody.append(row)
+      const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+
+      const nameContainer = $('<div>', { class: 'nameContainer' })
+      const nameSpan = $('<span>').text(beer.beer)
+      const dotButton = $('<button>', { name: 'dotButton', value: beer.id, type: 'button', class: 'dotButton' }).text('ooo')
+      // const dot1 = $('<div>', { class: 'dot' })
+      // const dot2 = $('<div>', { class: 'dot' })
+      // const dot3 = $('<div>', { class: 'dot' })
+      // dotButton.append(dot1).append(dot2).append(dot3)
+      const xButton = $('<button>', { name: 'xButton', value: beer.id, type: 'button', class: 'xButton' }).text('X')
+      // const xBar1 = $('<div>', { class: 'xBar xBar1' })
+      // const xBar2 = $('<div>', { class: 'xBar xBar2' })
+      // xButton.append(xBar1).append(xBar2)
+      nameContainer.append(nameSpan).append(dotButton).append(xButton)
+
+      const infoContainer = $('<div>', { class: 'infoContainer' })
+      const info = $('<div>', { class: 'info' })
+      const breweryRating = $('<div>', { class: 'breweryRating' })
+      const brewery = $('<div>', { class: 'brewery' }).text(beer.brewery)
+      const rating = $('<div>', { class: 'rating' }).text(beer.rating)
+      breweryRating.append(brewery).append(rating)
+      const tasting = $('<div>', { class: 'tasting' }).text(beer.tasting)
+      info.append(breweryRating).append(tasting)
+      const buttons = $('<div>', { class: 'buttons' })
+      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('DELETE')
+      const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('EDIT')
+      buttons.append(buttonEdit).append(buttonDelete)
+      infoContainer.append(info).append(buttons)
+
+      beerContainer.append(nameContainer).append(infoContainer)
+      table.append(beerContainer)
     }
   })
-  $('#table').append(thead)
-  $('#table').append(tbody)
-  $('.deleteButton').click(handleButtonClick)
+  $('.dotButton').click(handleBeerClick)
+  $('.xButton').click(handleBeerClick)
   $('.editButton').click({ beerData: beerData }, handleButtonClick)
+  $('.deleteButton').click(handleButtonClick)
 }
 
 function buildModal(action, beerData, value) {
-  // console.log(action, beerData, value)
   const addModal = $('#addModal')
   const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
@@ -128,7 +127,6 @@ function buildModal(action, beerData, value) {
   const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
 
   if (action === 'editButton') {
-    // console.log(beerData, value)
     const beerToEdit = beerData[value]
     inputBeer.val(beerToEdit.beer)
     inputBrewery.val(beerToEdit.brewery)
@@ -136,23 +134,11 @@ function buildModal(action, beerData, value) {
     inputTasting.val(beerToEdit.tasting)
   }
 
-  formSectionBeer.append(labelBeer)
-  formSectionBeer.append(inputBeer)
-  formSectionBeer.append(errorBeer)
-  formSectionBrewery.append(labelBrewery)
-  formSectionBrewery.append(inputBrewery)
-  formSectionBrewery.append(errorBrewery)
-  formSectionRating.append(labelRating)
-  formSectionRating.append(inputRating)
-  formSectionRating.append(errorRating)
-  formSectionTasting.append(labelTasting)
-  formSectionTasting.append(inputTasting)
-  formSectionTasting.append(errorTasting)
-  form.append(h4)
-  form.append(formSectionBeer)
-  form.append(formSectionBrewery)
-  form.append(formSectionRating)
-  form.append(formSectionTasting)
+  formSectionBeer.append(labelBeer).append(inputBeer).append(errorBeer)
+  formSectionBrewery.append(labelBrewery).append(inputBrewery).append(errorBrewery)
+  formSectionRating.append(labelRating).append(inputRating).append(errorRating)
+  formSectionTasting.append(labelTasting).append(inputTasting).append(errorTasting)
+  form.append(h4).append(formSectionBeer).append(formSectionBrewery).append(formSectionRating).append(formSectionTasting)
 
   const buttons = $('<div>', { class: 'button-container' })
   let buttonAdd
@@ -162,8 +148,8 @@ function buildModal(action, beerData, value) {
     buttonAdd = $('<button>', { name: 'submit', id: 'submitButton', type: 'button', class: 'btn btn-primary' }).text('SUBMIT')
   }
   const buttonCancel = $('<button>', { name: 'cancel', id: 'cancelButton', type: 'button', class: 'btn btn-secondary' }).text('CANCEL')
-  buttons.append(buttonAdd)
-  buttons.append(buttonCancel)
+  buttons.append(buttonAdd).append(buttonCancel)
+
   form.append(buttons)
   col.append(form)
   addModal.append(col)
@@ -178,7 +164,6 @@ function buildModal(action, beerData, value) {
 }
 
 function addNewBeerToTable(beerList, beerData) {
-  // console.log(beerList, beerData)
   const tr = $('<tr>', { id: beerData.id })
   const tdBeer = $('<td>').text(beerData.beer)
   const tdBrewery = $('<td>').text(beerData.brewery)
@@ -187,10 +172,7 @@ function addNewBeerToTable(beerList, beerData) {
   const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
   const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
   tdButtons.append(buttonDelete).append(buttonEdit)
-  tr.append(tdBeer)
-  tr.append(tdBrewery)
-  tr.append(tdRating)
-  tr.append(tdButtons)
+  tr.append(tdBeer).append(tdBrewery).append(tdRating).append(tdButtons)
   $('#table-body').append(tr)
   $('.deleteButton').click(handleButtonClick)
   $('.editButton').click({ beerData: beerList }, handleButtonClick)
@@ -201,7 +183,6 @@ const removeBeerFromTable = id => {
 }
 
 const editBeerTable = (beerList, beerData) => {
-  // console.log('build:', beerList, beerData)
   const beerRow = $(`#${beerData.id}`)
   beerRow.empty()
   const beer = $('<td>').text(beerData.beer)

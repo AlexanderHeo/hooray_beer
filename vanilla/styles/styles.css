@@ -64,102 +64,95 @@ button {
 	margin-bottom: 0;
 	padding: 6px 0;
 }
-table {
+.table {
 	width: 100%;
 	max-width: 775px;
 }
-thead {
+.beerContainer:nth-child(odd) {
+	background-color:rgb(230, 230, 230);
+}
+.beerContainer {
+	width: 100%;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.nameContainer {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 36px;
+	font-size: 1.5rem;
+	position: relative;
+}
+.dotButton,
+.xButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid rgb(30, 30, 30);
+	border-radius: 50%;
+	font-weight: 600;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 4px;
+	right: 38px;
+}
+.dotButton {
+	font-size: 1rem;
+}
+.xButton {
+	font-size: 1.5rem;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: rgb(40, 40, 40);
+	margin: 0 1px;
+}
+.xBar {
+	width: 3px;
+	height: 20px;
+	background-color:rgb(20, 20, 20);
+	border-radius: 20px;
+}
+.xBar1 {
+	transform: rotate(45deg) translate(2px);
+}
+.xBar2 {
+	transform: rotate(-45deg) translate(-2px);
+}
+
+.infoContainer {
 	display: none;
+	justify-content: space-between;
+	padding: 0 36px 12px 36px;
 }
-tbody {
+.info {
+	width: 100%;
 	display: flex;
-	flex-direction: column;
+	flex-flow: column wrap;
+	justify-content: space-around;
 }
-tbody tr,
-thead tr {
+.breweryRating {
 	display: flex;
-	flex-direction: column;
-	padding: 6px 12px;
+	justify-content: space-between;
 }
-tbody tr td {
-	line-height: 1.1;
+.buttons {
+	text-align: right;
 }
-.table-title,
-tbody tr:nth-child(even) {
-	background-color: rgb(221, 221, 221);
+
+.beerContainer.toggle .nameContainer .dotButton,
+.beerContainer .nameContainer .xButton,
+.beerContainer .infoContainer {
+	display: flex;
 }
-@media (min-width: 400px) {
-	tbody {
-		flex-flow: row wrap;
-	}
-	tbody tr {
-		width: 50%;
-	}
-	tbody tr:nth-child(even) {
-		background-color: transparent;
-	}
-	tbody tr:nth-child(4n+1),
-	tbody tr:nth-child(4n+4) {
-		background-color: rgb(200, 200, 200);
-	}
-}
-@media (min-width: 576px) {
-	.table-title {
-		display: none;
-	}
-	thead {
-		display: initial;
-	}
-	thead tr {
-		background-color: rgb(221, 221, 221);
-		padding: 6px;
-	}
-	thead tr,
-	tbody tr {
-		flex-direction: row;
-		align-items: center;
-		width: 100%;
-		padding: 0 0;
-	}
-	tbody tr:nth-child(4n+1),
-	tbody tr:nth-child(4n+4) {
-		background-color: transparent;
-	}
-	tbody tr:nth-child(even) {
-		background-color: rgb(221, 221, 221);
-	}
-	/* th, td {border:1px solid black;} */
-	th:not(:last-of-type), td:not(:last-of-type) {
-		padding: 4px 4px;
-	}
-	th:nth-of-type(1),
-	td:nth-of-type(1) {
-		padding: 4px 12px;
-	}
-	th:nth-of-type(3),
-	td:nth-of-type(3),
-	th:last-of-type,
-	td:last-of-type {
-		padding: 4px 0;
-		text-align: center;
-	}
-	th:first-of-type,
-	th:nth-child(2),
-	th:last-of-type,
-	td:first-of-type,
-	td:nth-child(2),
-	td:last-of-type {
-		width: 30%;
-	}
-	th:nth-child(3),
-	td:nth-child(3) {
-		width: 10%;
-	}
-}
-@media (min-width: 776px) {
-	.container-fluid>.row {
-		justify-content: center;
-	}
+.beerContainer .nameContainer .dotButton,
+.beerContainer.toggle .nameContainer .xButton,
+.beerContainer.toggle .infoContainer {
+	display: none;
 }
 
 /* /\ /\ /\ Main Table /\ /\ /\ */

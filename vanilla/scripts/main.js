@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 $(document).ready(initializeApp)
 
 function initializeApp() {
@@ -23,21 +24,26 @@ const getBeerList = async () => {
 const handleButtonClick = e => {
   e.preventDefault()
   const name = e.target.name
-  const value = e.target.value
+  const id = e.target.value
 
   if (name === 'addButton') {
     toggleButton()
     toggleModal('addButton')
 
-  } else if (name === 'editButton') {
-    console.log('main edit button')
+  }	else if (name === 'editButton') {
     const { beerData } = e.data
-    console.log(name, beerData, value)
     toggleButton()
-    toggleModal('editButton', beerData, value)
+    toggleModal('editButton', beerData, id)
+
+  } else if (name === 'cancel') {
+    toggleButton()
+    toggleModal()
+
+  } else if (name === 'delete') {
+    console.log(id)
+    beerDB('delete', null, id)
 
   } else if (name === 'submit' || name === 'edit') {
-    // console.log('main submit/edit')
     const beer = $('#inputBeer').val()
     const brewery = $('#inputBrewery').val()
     const rating = $('#inputRating').val()
@@ -46,26 +52,20 @@ const handleButtonClick = e => {
     else if (!brewery) missingInput('brewery')
     else if (!rating) missingInput('rating')
     else if (!tasting) missingInput('tasting')
+
     else if (beer && brewery && rating && tasting) {
       const beerData = { beer, brewery, rating, tasting }
-      if (name === 'edit') {
-        // console.log('main edit')
-        beerList('edit', beerData, value)
+      if (name === 'submit') {
+        beerDB('submit', beerData)
         toggleButton()
         toggleModal()
-      } else if (name === 'submit') {
-        beerList('submit', beerData)
+      } else if (name === 'edit') {
+        beerDB('edit', beerData, id)
         toggleButton()
         toggleModal()
       }
     }
 
-  } else if (name === 'cancel') {
-  	toggleButton()
-    toggleModal()
-
-  } else if (name === 'delete') {
-    beerList('delete', value)
   }
 }
 
@@ -94,4 +94,23 @@ const toggleModal = (action, beerData, value) => {
 
 const takedownModal = () => {
   $('#addModal').empty().addClass('hide')
+}
+
+const handleBeerClick = e => {
+  const name = e.currentTarget.name
+  const value = e.currentTarget.value
+  const beerContainer = $('.beerContainer')
+  Object.keys(beerContainer).forEach(x => {
+    if (!isNaN(x)) {
+      const id = beerContainer.eq(x).attr('id').charAt(0)
+      if (parseInt(value) !== parseInt(id)) {
+        if (!beerContainer.eq(x).attr('class').includes('toggle')) {
+          beerContainer.eq(x).addClass('toggle')
+        }
+      }
+    }
+  })
+  if (name === 'dotButton' || name === 'xButton') {
+    $(`#${value}Container`).toggleClass('toggle')
+  }
 }
