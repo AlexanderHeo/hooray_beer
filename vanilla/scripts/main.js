@@ -66,16 +66,16 @@ const handleButtonClick = e => {
     toggleModal()
     toggleAccordion()
 
+  } else if (name === 'delete') {
+    beerDB('delete', null, value)
+
   } else if (name === 'xButton' || name === 'dotButton') {
     toggleAccordion(value)
 
-    // }	else if (name === 'editButton') {
-    //   const { beerData } = e.data
-    //   toggleButton()
-    //   toggleModal('editButton', beerData, id)
-
-    // } else if (name === 'delete') {
-    //   beerDB('delete', null, id)
+  }	else if (name === 'editButton') {
+    const { beerList } = e.data
+    toggleButton()
+    toggleModal('editButton', beerList, value)
 
     // } else if (name === 'submit' || name === 'edit') {
     //   const beer = $('#inputBeer').val()
@@ -87,18 +87,18 @@ const handleButtonClick = e => {
     //   else if (!rating) missingInput('rating')
     //   else if (!tasting) missingInput('tasting')
 
-  //   else if (beer && brewery && rating && tasting) {
-  //     const beerData = { beer, brewery, rating, tasting }
-  //     if (name === 'submit') {
-  //       beerDB('submit', beerData)
-  //       toggleButton()
-  //       toggleModal()
-  //     } else if (name === 'edit') {
-  //       beerDB('edit', beerData, id)
-  //       toggleButton()
-  //       toggleModal()
-  //     }
-  //   }
+    //   else if (beer && brewery && rating && tasting) {
+    //     const beerData = { beer, brewery, rating, tasting }
+    //     if (name === 'submit') {
+    //       beerDB('submit', beerData)
+    //       toggleButton()
+    //       toggleModal()
+    //     } else if (name === 'edit') {
+    //       beerDB('edit', beerData, id)
+    //       toggleButton()
+    //       toggleModal()
+    //     }
+    //   }
   }
 }
 

@@ -58,12 +58,12 @@ function buildComponent() {
   $('#body').append(container)
 }
 
-function buildTable(beerData) {
+function buildTable(beerList) {
   const table = $('#table')
 
-  Object.keys(beerData).map(x => {
+  Object.keys(beerList).map(x => {
     if (!isNaN(x)) {
-      const beer = beerData[x]
+      const beer = beerList[x]
       const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
 
       const nameContainer = $('<div>', { class: 'nameContainer' })
@@ -90,10 +90,10 @@ function buildTable(beerData) {
       table.append(beerContainer)
     }
   })
-  $('#table').on('click', handleButtonClick)
+  $('#table').on('click', { beerList }, handleButtonClick)
 }
 
-function buildModal(action, beerData, value) {
+function buildModal(action, beerList, value) {
   const addModal = $('#addModal')
   const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
@@ -117,7 +117,7 @@ function buildModal(action, beerData, value) {
   const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
 
   if (action === 'editButton') {
-    const beerToEdit = beerData[value]
+    const beerToEdit = beerList[value]
     inputBeer.val(beerToEdit.beer)
     inputBrewery.val(beerToEdit.brewery)
     inputRating.val(beerToEdit.rating)
