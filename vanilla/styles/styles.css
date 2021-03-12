@@ -82,6 +82,7 @@ button {
 	justify-content: space-between;
 	padding: 12px 36px;
 	font-size: 1.5rem;
+	position: relative;
 }
 .dotButton,
 .xButton {
@@ -89,9 +90,21 @@ button {
 	justify-content: center;
 	align-items: center;
 	border: 1px solid rgb(30, 30, 30);
-	border-radius: 8px;
-	padding: 0 6px;
+	border-radius: 50%;
+	font-weight: 600;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 4px;
+	right: 38px;
 }
+.dotButton {
+	font-size: 1rem;
+}
+.xButton {
+	font-size: 1.5rem;
+}
+
 .dot {
 	width: 10px;
 	height: 10px;
@@ -134,7 +147,7 @@ button {
 .beerContainer.toggle .nameContainer .dotButton,
 .beerContainer .nameContainer .xButton,
 .beerContainer .infoContainer {
-	display: initial;
+	display: flex;
 }
 .beerContainer .nameContainer .dotButton,
 .beerContainer.toggle .nameContainer .xButton,

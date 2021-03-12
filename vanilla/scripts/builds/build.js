@@ -99,6 +99,8 @@ function buildTable(beerData) {
   })
   $('.dotButton').click(handleBeerClick)
   $('.xButton').click(handleBeerClick)
+  $('.editButton').click({ beerData: beerData }, handleButtonClick)
+  $('.deleteButton').click(handleButtonClick)
 }
 
 function buildModal(action, beerData, value) {

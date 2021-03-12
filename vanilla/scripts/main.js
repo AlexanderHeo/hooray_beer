@@ -40,6 +40,7 @@ const handleButtonClick = e => {
     toggleModal()
 
   } else if (name === 'delete') {
+    console.log(id)
     beerDB('delete', null, id)
 
   } else if (name === 'submit' || name === 'edit') {
@@ -82,9 +83,7 @@ const toggleButton = () => {
 
 const toggleModal = (action, beerData, value) => {
   const addModal = $('#addModal')
-  console.log(addModal)
   addModal.toggleClass('hide')
-  console.log(addModal)
   const classList = $('#addModal').attr('class')
   if (classList.split(' ')[1] === 'hide') {
     takedownModal()
