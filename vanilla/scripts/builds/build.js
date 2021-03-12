@@ -90,10 +90,7 @@ function buildTable(beerData) {
       table.append(beerContainer)
     }
   })
-  $('.dotButton').click(handleBeerClick)
-  $('.xButton').click(handleBeerClick)
-  $('.editButton').click({ beerData: beerData }, handleButtonClick)
-  $('.deleteButton').click(handleButtonClick)
+  $('#table').on('click', handleButtonClick)
 }
 
 function buildModal(action, beerData, value) {

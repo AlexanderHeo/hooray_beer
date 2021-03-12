@@ -145,11 +145,11 @@ button {
 }
 
 .beerContainer.toggle .nameContainer .dotButton,
-.beerContainer .nameContainer .xButton,
-.beerContainer .infoContainer {
+.beerContainer.toggle.open .nameContainer .xButton,
+.beerContainer.toggle.open .infoContainer {
 	display: flex;
 }
-.beerContainer .nameContainer .dotButton,
+.beerContainer.toggle.open .nameContainer .dotButton,
 .beerContainer.toggle .nameContainer .xButton,
 .beerContainer.toggle .infoContainer {
 	display: none;
