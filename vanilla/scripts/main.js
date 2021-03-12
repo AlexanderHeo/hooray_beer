@@ -59,6 +59,12 @@ const handleButtonClick = e => {
   if (name === 'addButton') {
     toggleButton()
     toggleModal('addButton')
+    toggleAccordion()
+
+  } else if (name === 'cancel') {
+    toggleButton()
+    toggleModal()
+    toggleAccordion()
 
   } else if (name === 'xButton' || name === 'dotButton') {
     toggleAccordion(value)
@@ -67,10 +73,6 @@ const handleButtonClick = e => {
     //   const { beerData } = e.data
     //   toggleButton()
     //   toggleModal('editButton', beerData, id)
-
-    // } else if (name === 'cancel') {
-    //   toggleButton()
-    //   toggleModal()
 
     // } else if (name === 'delete') {
     //   beerDB('delete', null, id)
@@ -101,30 +103,16 @@ const handleButtonClick = e => {
 }
 
 const toggleAccordion = id => {
-  // console.log('x')
   const container = $(`#${id}Container`)
   container.toggleClass('open')
-  // console.log(container.attr('class'))
   const containerList = $('.beerContainer')
   Object.keys(containerList).map(x => {
     if (!isNaN(x)) {
-      // console.log((id - 1) !== parseInt(x))
       if ((id - 1) !== parseInt(x)) {
-        // console.log(x, 'is not clicked')
         if (containerList.eq(x).attr('class').includes('open')) {
           containerList.eq(x).toggleClass('open')
         }
       }
-      //     const idid = $(`#${id}Container`)
-      //     const xxxx = containerList.eq(x)
-
-      //     console.log(idid, xxxx)
-      //     console.log(idid === xxxx)
-      //     if (id - 1 !== x) {
-      //       if (containerList.eq(x).attr('class').includes('open')) {
-      //         containerList.eq(x).removeClass('open')
-      //       }
-      //     }
     }
   })
 }
@@ -154,23 +142,4 @@ const toggleModal = (action, beerData, value) => {
 
 const takedownModal = () => {
   $('#addModal').empty().addClass('hide')
-}
-
-const handleBeerClick = e => {
-  const name = e.currentTarget.name
-  const value = e.currentTarget.value
-  const beerContainer = $('.beerContainer')
-  Object.keys(beerContainer).forEach(x => {
-    if (!isNaN(x)) {
-      const id = beerContainer.eq(x).attr('id').charAt(0)
-      if (parseInt(value) !== parseInt(id)) {
-        if (!beerContainer.eq(x).attr('class').includes('toggle')) {
-          beerContainer.eq(x).addClass('toggle')
-        }
-      }
-    }
-  })
-  if (name === 'dotButton' || name === 'xButton') {
-    $(`#${value}Container`).toggleClass('toggle')
-  }
 }
