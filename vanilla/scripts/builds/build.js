@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 function buildComponent() {
   const container = $('<div>', { class: 'container-fluid container' })
   const rowHeader = $('<div>', { class: 'row' })
@@ -49,7 +51,7 @@ function buildComponent() {
 
   const rowBody = $('<div>', { class: 'row' })
   const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
-  const table = $('<table>', { id: 'table' })
+  const table = $('<div>', { id: 'table', class: 'table' })
   rowBody.append(h4)
   rowBody.append(table)
   container.append(rowBody)
@@ -58,49 +60,91 @@ function buildComponent() {
   container.append(addModal)
 
   const footer = $('<div>', { class: 'footer' })
-  const buttonFooter = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
-  footer.append(buttonFooter)
+  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
+  footer.append(footerButton)
   container.append(footer)
 
   $('#body').append(container)
 }
 
 function buildTable(beerData) {
-  const thead = $('<thead>')
-  const trHead = $('<tr>')
-  const thBeer = $('<th>').text('Beer')
-  const thBrewery = $('<th>').text('Brewery')
-  const thRating = $('<th>').text('Rating')
-  const thOperations = $('<th>').text('Operations')
-  trHead.append(thBeer)
-  trHead.append(thBrewery)
-  trHead.append(thRating)
-  trHead.append(thOperations)
-  thead.append(trHead)
-  const tbody = $('<tbody>', { id: 'table-body' })
+  const table = $('#table')
+  // console.log(beerData)
+
   Object.keys(beerData).map(x => {
     if (!isNaN(x)) {
       const beer = beerData[x]
-      const row = $('<tr>', { id: beer.id })
-      const name = $('<td>').text(beer.beer)
-      const brewery = $('<td>').text(beer.brewery)
-      const rating = $('<td>').text(beer.rating)
-      const buttons = $('<td>')
-      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' })
-      const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
-      row.append(name)
-      row.append(brewery)
-      row.append(rating)
-      buttons.append(buttonDelete.text('Delete'))
-      buttons.append(buttonEdit.text('Edit'))
-      row.append(buttons)
-      tbody.append(row)
+      const beerContainer = $('<div>', { class: 'beerContainer' })
+
+      const nameContainer = $('<div>', { class: 'nameContainer' })
+      const nameSpan = $('<span>').text(beer.beer)
+      const dotContainer = $('<div>', { class: 'dotContainer', id: 'dotContainer' })
+      const dot1 = $('<div>', { class: 'dot' })
+      const dot2 = $('<div>', { class: 'dot' })
+      const dot3 = $('<div>', { class: 'dot' })
+      dotContainer.append(dot1).append(dot2).append(dot3)
+
+      const xContainer = $('<div>', { class: 'xContainer', id: 'xContainer' })
+      const xBar1 = $('<div>', { class: 'xBar xBar1' })
+      const xBar2 = $('<div>', { class: 'xBar xBar2' })
+      xContainer.append(xBar1).append(xBar2)
+
+      nameContainer.append(nameSpan).append(dotContainer).append(xContainer)
+
+      const infoContainer = $('<div>', { class: 'infoContainer' })
+      const info = $('<div>', { class: 'info' })
+      const breweryRating = $('<div>', { class: 'breweryRating' })
+      const brewery = $('<div>', { class: 'brewery' }).text(beer.brewery)
+      const rating = $('<div>', { class: 'rating' }).text(beer.rating)
+      breweryRating.append(brewery).append(rating)
+      const tasting = $('<div>', { class: 'tasting' }).text(beer.tasting)
+      info.append(breweryRating).append(tasting)
+      const buttons = $('<div>', { class: 'buttons' })
+      const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('DELETE')
+      const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('EDIT')
+      buttons.append(buttonEdit).append(buttonDelete)
+      infoContainer.append(info).append(buttons)
+
+      beerContainer.append(nameContainer).append(infoContainer)
+      table.append(beerContainer)
     }
   })
-  $('#table').append(thead)
-  $('#table').append(tbody)
-  $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click({ beerData: beerData }, handleButtonClick)
+
+  // const thead = $('<thead>')
+  // const trHead = $('<tr>')
+  // const thBeer = $('<th>').text('Beer')
+  // const thBrewery = $('<th>').text('Brewery')
+  // const thRating = $('<th>').text('Rating')
+  // const thOperations = $('<th>').text('Operations')
+  // trHead.append(thBeer)
+  // trHead.append(thBrewery)
+  // trHead.append(thRating)
+  // trHead.append(thOperations)
+  // thead.append(trHead)
+  // const tbody = $('<tbody>', { id: 'table-body' })
+  // Object.keys(beerData).map(x => {
+  //   if (!isNaN(x)) {
+  //     const beer = beerData[x]
+  //     const row = $('<tr>', { id: beer.id })
+  //     const name = $('<td>').text(beer.beer)
+  //     const brewery = $('<td>').text(beer.brewery)
+  //     const rating = $('<td>').text(beer.rating)
+  //     const buttons = $('<td>')
+  //     const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' })
+  //     const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' })
+  //     row.append(name)
+  //     row.append(brewery)
+  //     row.append(rating)
+  //     buttons.append(buttonDelete.text('Delete'))
+  //     buttons.append(buttonEdit.text('Edit'))
+  //     row.append(buttons)
+  //     tbody.append(row)
+  //   }
+  // })
+  // $('#table').append(thead)
+  // $('#table').append(tbody)
+  // $('.deleteButton').click(handleButtonClick)
+  // $('.editButton').click({ beerData: beerData }, handleButtonClick)
 }
 
 function buildModal(action, beerData, value) {
