@@ -29,31 +29,55 @@ function buildComponent() {
 
 function buildStats(beerList) {
   const headerSizer = $('.header-sizer')
-
   const colStats = $('<div>', { class: 'col-xl-5 col-lg-5 col-md-5 col-sm-6 col-12' })
+  const total = Object.keys(beerList).filter(x => !isNaN(x)).length
+  const sumArr = []
+  Object.keys(beerList).forEach(x => {
+    const rating = beerList[x].rating
+    if (!isNaN(rating)) {
+      sumArr.push(rating)
+    }
+  })
+  const sum = sumArr.reduce((a, b) => parseInt(a) + parseInt(b))
+  const avg = sum / total
+  const toSortPlus = Object.assign({}, beerList)
+  const sortedPlus = Object.keys(toSortPlus) // .sort((beerList[a], beerList[b]) => {
+  //   if (!isNaN(a)) {
+  //     console.log(b, a)
+  //     console.log(beerList[b].rating, beerList[a].rating)
+  //     console.log('----------------------------')
+  //     return parseInt(beerList[b].rating) - parseInt(beerList[a].rating)
+  //   }
+  // })
+  const sorted = []
+  sortedPlus.forEach(x => {
+    if (!isNaN(x)) {
+      sorted.push(toSortPlus[x])
+    }
+  })
+  sorted.sort((a, b) => parseInt(b.rating) - parseInt(a.rating))
+  console.log(sorted)
+  console.log(sorted[0].beer)
+  console.log(sorted[Object.keys(sorted)[Object.keys(sorted).length - 1]].beer)
   const statsContainer = $('<div>', { class: 'stats-container' })
-
   const statsTotal = $('<div>', { class: 'stats' })
   const titleTotal = $('<span>', { class: 'stat title' }).text('Total Beers:')
-  const valueTotal = $('<span>', { class: 'stat value' }).text('99')
+  const valueTotal = $('<span>', { class: 'stat value' }).text(total)
   statsTotal.append(titleTotal).append(valueTotal)
-
   const statsAverage = $('<div>', { class: 'stats' })
   const titleAverage = $('<span>', { class: 'stat title' }).text('Average Rating:')
-  const valueAverage = $('<span>', { class: 'stat value' }).text('4.1')
+  const valueAverage = $('<span>', { class: 'stat value' }).text(avg)
   statsAverage.append(titleAverage).append(valueAverage)
-
   const statsHighest = $('<div>', { class: 'stats' })
   const titleHighest = $('<span>', { class: 'stat title' }).text('Highest Rated:')
-  const valueHighest = $('<span>', { class: 'stat value' }).text('Best Pale Ale')
+  const valueHighest = $('<span>', { class: 'stat value' }).text(sorted[0].beer)
   statsHighest.append(titleHighest).append(valueHighest)
+  const statsLowest = $('<div>', { class: 'stats' })
+  const titleLowest = $('<span>', { class: 'stat title' }).text('Lowest Rated:')
+  const valueLowest = $('<span>', { class: 'stat value' }).text(sorted[Object.keys(sorted)[Object.keys(sorted).length - 1]].beer)
+  statsLowest.append(titleLowest).append(valueLowest)
+  statsContainer.append(statsTotal).append(statsAverage).append(statsHighest).append(statsLowest)
 
-  const statsMost = $('<div>', { class: 'stats' })
-  const titleMost = $('<span>', { class: 'stat title' }).text('Most Drank:')
-  const valueMost = $('<span>', { class: 'stat value' }).text('America Pale')
-  statsMost.append(titleMost).append(valueMost)
-
-  statsContainer.append(statsTotal).append(statsAverage).append(statsHighest).append(statsMost)
   colStats.append(statsContainer)
   headerSizer.append(colStats)
 }
