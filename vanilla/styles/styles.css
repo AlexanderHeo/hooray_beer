@@ -171,6 +171,7 @@ label {
 	text-align: right;
 	vertical-align: top;
 	width: 60px;
+	margin-right: 5px;
 }
 textarea {
 	width: 180px;
