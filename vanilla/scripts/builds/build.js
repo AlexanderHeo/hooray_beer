@@ -90,7 +90,6 @@ function buildTable(beerList) {
       table.append(beerContainer)
     }
   })
-  table.on('click', { beerList }, handleButtonClick)
 }
 
 function buildModal(action, beerList, value) {
@@ -153,44 +152,9 @@ function buildModal(action, beerList, value) {
   $('#inputTasting').focus(handleInputFocus)
 }
 
-function addNewBeerToTable(beerList, beerData) {
-  const beer = beerData
-  const table = $('#table')
-  table.off('click')
-
-  const beerContainer = $('<div>', { id: beer.id, class: 'beerContainer toggle' })
-
-  const nameContainer = $('<div>', { class: 'nameContainer' })
-  const nameSpan = $('<span>', { class: 'beer' }).text(beer.beer)
-  const dotButton = $('<button>', { name: 'dotButton', value: beer.id, type: 'button', class: 'dotButton' }).text('ooo')
-  const xButton = $('<button>', { name: 'xButton', value: beer.id, type: 'button', class: 'xButton' }).text('X')
-  nameContainer.append(nameSpan).append(dotButton).append(xButton)
-
-  const infoContainer = $('<div>', { class: 'infoContainer' })
-  const info = $('<div>', { class: 'info' })
-  const breweryRating = $('<div>', { class: 'breweryRating' })
-  const brewery = $('<div>', { class: 'brewery' }).text(beer.brewery)
-  const rating = $('<div>', { class: 'rating' }).text(beer.rating)
-  breweryRating.append(brewery).append(rating)
-  const tasting = $('<div>', { class: 'tasting' }).text(beer.tasting)
-  info.append(breweryRating).append(tasting)
-  const buttons = $('<div>', { class: 'buttons' })
-  const buttonDelete = $('<button>', { name: 'delete', value: beer.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('DELETE')
-  const buttonEdit = $('<button>', { name: 'editButton', value: beer.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('EDIT')
-  buttons.append(buttonEdit).append(buttonDelete)
-  infoContainer.append(info).append(buttons)
-
-  beerContainer.append(nameContainer).append(infoContainer)
-  table.append(beerContainer)
-  table.on('click', { beerList }, handleButtonClick)
-}
-
-const removeBeerFromTable = id => $(`#${id}`).remove()
-
-const editBeerTable = (beerList, beerData) => {
-  const beerRow = $(`#${beerData.id}`)
-  beerRow.find('.beer').text(beerData.beer)
-  beerRow.find('.brewery').text(beerData.brewery)
-  beerRow.find('.rating').text(beerData.rating)
-  beerRow.find('.tasting').text(beerData.tasting)
+const resetTable = () => {
+  $('#table').off('click')
+  $('#table').empty()
+  $('.header-sizer').find('div:nth-child(2)').remove()
+  getBeerList()
 }

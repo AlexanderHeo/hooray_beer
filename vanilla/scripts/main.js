@@ -51,6 +51,8 @@ const getBeerList = async () => {
   if (data) {
     buildStats(data)
     buildTable(data)
+    const beerList = data
+  	$('#table').on('click', { beerList }, handleButtonClick)
   }
 }
 
