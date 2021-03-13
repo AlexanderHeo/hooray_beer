@@ -38,18 +38,18 @@ function initializeApp() {
 const addClickHandlers = () => {
   $('#footerPlusButton').click(handleButtonClick)
 }
-const getBeerList = () => {
-  buildTable(database.beers)
-}
-// const getBeerList = async () => {
-//   const init = {
-//     method: 'GET',
-//     headers: { 'Content-Type': 'application/json' }
-//   }
-//   const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', init)
-//   const data = await response.json()
-//   if (data) buildTable(data)
+// const getBeerList = () => {
+//   buildTable(database.beers)
 // }
+const getBeerList = async () => {
+  const init = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  }
+  const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', init)
+  const data = await response.json()
+  if (data) buildTable(data)
+}
 
 const handleButtonClick = e => {
   e.preventDefault()
@@ -70,6 +70,7 @@ const handleButtonClick = e => {
     beerDB('delete', null, value)
 
   } else if (name === 'xButton' || name === 'dotButton') {
+    // console.log(value)
     toggleAccordion(value)
 
   }	else if (name === 'editButton') {
@@ -77,44 +78,48 @@ const handleButtonClick = e => {
     toggleButton()
     toggleModal('editButton', beerList, value)
 
-    // } else if (name === 'submit' || name === 'edit') {
-    //   const beer = $('#inputBeer').val()
-    //   const brewery = $('#inputBrewery').val()
-    //   const rating = $('#inputRating').val()
-    //   const tasting = $('#inputTasting').val()
-    //   if (!beer) missingInput('beer')
-    //   else if (!brewery) missingInput('brewery')
-    //   else if (!rating) missingInput('rating')
-    //   else if (!tasting) missingInput('tasting')
+  } else if (name === 'submit' || name === 'edit') {
+    const beer = $('#inputBeer').val()
+    const brewery = $('#inputBrewery').val()
+    const rating = $('#inputRating').val()
+    const tasting = $('#inputTasting').val()
+    if (!beer) missingInput('beer')
+    else if (!brewery) missingInput('brewery')
+    else if (!rating) missingInput('rating')
+    else if (!tasting) missingInput('tasting')
 
-    //   else if (beer && brewery && rating && tasting) {
-    //     const beerData = { beer, brewery, rating, tasting }
-    //     if (name === 'submit') {
-    //       beerDB('submit', beerData)
-    //       toggleButton()
-    //       toggleModal()
-    //     } else if (name === 'edit') {
-    //       beerDB('edit', beerData, id)
-    //       toggleButton()
-    //       toggleModal()
-    //     }
-    //   }
+    else if (beer && brewery && rating && tasting) {
+      const beerData = { beer, brewery, rating, tasting }
+      if (name === 'submit') {
+        beerDB('submit', beerData)
+        toggleButton()
+        toggleModal()
+        toggleAccordion()
+      } else if (name === 'edit') {
+        beerDB('edit', beerData, value)
+        toggleButton()
+        toggleModal()
+        toggleAccordion()
+      }
+    }
   }
 }
 
 const toggleAccordion = id => {
-  const container = $(`#${id}Container`)
-  container.toggleClass('open')
-  const containerList = $('.beerContainer')
-  Object.keys(containerList).map(x => {
-    if (!isNaN(x)) {
-      if ((id - 1) !== parseInt(x)) {
-        if (containerList.eq(x).attr('class').includes('open')) {
-          containerList.eq(x).toggleClass('open')
-        }
+  const list = document.querySelectorAll('.beerContainer')
+  list.forEach(x => {
+    const beerCopy = x
+    if (beerCopy.id === id) {
+      $(`#${beerCopy.id}`).toggleClass('toggle')
+    } else {
+      if (beerCopy.classList.value.includes('open')) {
+        beerCopy.classList.remove('open')
       }
     }
   })
+  const container = $(`#${id}`)
+  container.removeClass('beerContainer toggle')
+  container.toggleClass('beerContainer toggle open')
 }
 
 const handleInputFocus = e => {

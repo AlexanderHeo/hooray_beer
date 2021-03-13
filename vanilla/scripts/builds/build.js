@@ -64,7 +64,7 @@ function buildTable(beerList) {
   Object.keys(beerList).map(x => {
     if (!isNaN(x)) {
       const beer = beerList[x]
-      const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+      const beerContainer = $('<div>', { id: `${beer.id}`, class: 'beerContainer toggle' })
 
       const nameContainer = $('<div>', { class: 'nameContainer' })
       const nameSpan = $('<span>', { class: 'beer' }).text(beer.beer)
@@ -90,7 +90,7 @@ function buildTable(beerList) {
       table.append(beerContainer)
     }
   })
-  $('#table').on('click', { beerList }, handleButtonClick)
+  table.on('click', { beerList }, handleButtonClick)
 }
 
 function buildModal(action, beerList, value) {
@@ -156,9 +156,12 @@ function buildModal(action, beerList, value) {
 function addNewBeerToTable(beerList, beerData) {
   const beer = beerData
   const table = $('#table')
+  table.off('click')
+
   const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+
   const nameContainer = $('<div>', { class: 'nameContainer' })
-  const nameSpan = $('<span>').text(beer.beer)
+  const nameSpan = $('<span>', { class: 'beer' }).text(beer.beer)
   const dotButton = $('<button>', { name: 'dotButton', value: beer.id, type: 'button', class: 'dotButton' }).text('ooo')
   const xButton = $('<button>', { name: 'xButton', value: beer.id, type: 'button', class: 'xButton' }).text('X')
   nameContainer.append(nameSpan).append(dotButton).append(xButton)
@@ -179,16 +182,12 @@ function addNewBeerToTable(beerList, beerData) {
 
   beerContainer.append(nameContainer).append(infoContainer)
   table.append(beerContainer)
-  $('.dotButton').click(handleBeerClick)
-  $('.xButton').click(handleBeerClick)
-  $('.editButton').click({ beerData: beerList }, handleButtonClick)
-  $('.deleteButton').click(handleButtonClick)
+  table.on('click', { beerList }, handleButtonClick)
 }
 
 const removeBeerFromTable = id => $(`#${id}Container`).remove()
 
 const editBeerTable = (beerList, beerData) => {
-  console.log(beerData)
   const beerRow = $(`#${beerData.id}Container`)
   beerRow.find('.beer').text(beerData.beer)
   beerRow.find('.brewery').text(beerData.brewery)
