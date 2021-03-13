@@ -21,6 +21,14 @@ button {
 	display: inherit;
 	flex-wrap: inherit;
 }
+.header-sizer div:last-of-type {
+	background-color: rgb(230, 230, 230);
+}
+@media (min-width: 576px) {
+	.header-sizer div:first-of-type {
+		background-color: rgb(230, 230, 230)
+	}
+}
 .app-title-container {
 	display: flex;
 	align-items: center;
