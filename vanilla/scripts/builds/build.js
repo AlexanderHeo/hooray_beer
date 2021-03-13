@@ -158,7 +158,7 @@ function addNewBeerToTable(beerList, beerData) {
   const table = $('#table')
   table.off('click')
 
-  const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+  const beerContainer = $('<div>', { id: beer.id, class: 'beerContainer toggle' })
 
   const nameContainer = $('<div>', { class: 'nameContainer' })
   const nameSpan = $('<span>', { class: 'beer' }).text(beer.beer)
