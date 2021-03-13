@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 async function beerDB(action, beerData, id) {
   const getResponse = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', {
     method: 'GET',
@@ -31,10 +32,6 @@ async function beerDB(action, beerData, id) {
       body: JSON.stringify(beerList)
     })
     const putData = await putResponse.json()
-    if (putData) {
-      if (action === 'submit') addNewBeerToTable(beerList, beerData)
-      else if (action === 'delete') removeBeerFromTable(id)
-      else if (action === 'edit') editBeerTable(beerList, beerData)
-    }
+    if (putData) resetTable()
   }
 }

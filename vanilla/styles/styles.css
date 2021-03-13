@@ -8,6 +8,7 @@ button {
 	width: 80px;
 }
 .container-fluid {
+	max-width: 750px;
 	height: calc(100vh - 63px);
 	overflow-y: scroll;
 	padding-top: 15px;
@@ -19,6 +20,14 @@ button {
 	max-width: 750px;
 	display: inherit;
 	flex-wrap: inherit;
+}
+.header-sizer div:last-of-type {
+	background-color: rgb(230, 230, 230);
+}
+@media (min-width: 576px) {
+	.header-sizer div:first-of-type {
+		background-color: rgb(230, 230, 230)
+	}
 }
 .app-title-container {
 	display: flex;
@@ -86,7 +95,6 @@ button {
 }
 .dotButton,
 .xButton {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: 1px solid rgb(30, 30, 30);
@@ -94,9 +102,6 @@ button {
 	font-weight: 600;
 	width: 40px;
 	height: 40px;
-	position: absolute;
-	top: 4px;
-	right: 38px;
 }
 .dotButton {
 	font-size: 1rem;
@@ -145,11 +150,11 @@ button {
 }
 
 .beerContainer.toggle .nameContainer .dotButton,
-.beerContainer .nameContainer .xButton,
-.beerContainer .infoContainer {
+.beerContainer.toggle.open .nameContainer .xButton,
+.beerContainer.toggle.open .infoContainer {
 	display: flex;
 }
-.beerContainer .nameContainer .dotButton,
+.beerContainer.toggle.open .nameContainer .dotButton,
 .beerContainer.toggle .nameContainer .xButton,
 .beerContainer.toggle .infoContainer {
 	display: none;

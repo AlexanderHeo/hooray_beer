@@ -9,6 +9,26 @@ function buildComponent() {
   const h1Span = $('<span>').text('Hooray Beer!')
   h1.append(h1Span)
   colTitle.append(h1)
+  headerSizer.append(colTitle)
+  rowHeader.append(headerSizer)
+
+  const rowBody = $('<div>', { class: 'row' })
+  const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
+  const table = $('<div>', { id: 'table', class: 'table' })
+  rowBody.append(h4).append(table)
+
+  const addModal = $('<div>', { id: 'addModal', class: 'addModal hide' })
+
+  const footer = $('<div>', { class: 'footer' })
+  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
+  footer.append(footerButton)
+
+  container.append(rowHeader).append(rowBody).append(addModal).append(footer)
+  $('#body').append(container)
+}
+
+function buildStats(beerList) {
+  const headerSizer = $('.header-sizer')
 
   const colStats = $('<div>', { class: 'col-xl-5 col-lg-5 col-md-5 col-sm-6 col-12' })
   const statsContainer = $('<div>', { class: 'stats-container' })
@@ -35,48 +55,21 @@ function buildComponent() {
 
   statsContainer.append(statsTotal).append(statsAverage).append(statsHighest).append(statsMost)
   colStats.append(statsContainer)
-
-  headerSizer.append(colTitle).append(colStats)
-
-  rowHeader.append(headerSizer)
-  container.append(rowHeader)
-
-  const rowBody = $('<div>', { class: 'row' })
-  const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
-  const table = $('<div>', { id: 'table', class: 'table' })
-  rowBody.append(h4).append(table)
-  container.append(rowBody)
-
-  const addModal = $('<div>', { id: 'addModal', class: 'addModal hide' })
-  container.append(addModal)
-
-  const footer = $('<div>', { class: 'footer' })
-  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
-  footer.append(footerButton)
-  container.append(footer)
-
-  $('#body').append(container)
+  headerSizer.append(colStats)
 }
 
-function buildTable(beerData) {
+function buildTable(beerList) {
   const table = $('#table')
 
-  Object.keys(beerData).map(x => {
+  Object.keys(beerList).map(x => {
     if (!isNaN(x)) {
-      const beer = beerData[x]
-      const beerContainer = $('<div>', { id: `${beer.id}Container`, class: 'beerContainer toggle' })
+      const beer = beerList[x]
+      const beerContainer = $('<div>', { id: `${beer.id}`, class: 'beerContainer toggle' })
 
       const nameContainer = $('<div>', { class: 'nameContainer' })
-      const nameSpan = $('<span>').text(beer.beer)
+      const nameSpan = $('<span>', { class: 'beer' }).text(beer.beer)
       const dotButton = $('<button>', { name: 'dotButton', value: beer.id, type: 'button', class: 'dotButton' }).text('ooo')
-      // const dot1 = $('<div>', { class: 'dot' })
-      // const dot2 = $('<div>', { class: 'dot' })
-      // const dot3 = $('<div>', { class: 'dot' })
-      // dotButton.append(dot1).append(dot2).append(dot3)
       const xButton = $('<button>', { name: 'xButton', value: beer.id, type: 'button', class: 'xButton' }).text('X')
-      // const xBar1 = $('<div>', { class: 'xBar xBar1' })
-      // const xBar2 = $('<div>', { class: 'xBar xBar2' })
-      // xButton.append(xBar1).append(xBar2)
       nameContainer.append(nameSpan).append(dotButton).append(xButton)
 
       const infoContainer = $('<div>', { class: 'infoContainer' })
@@ -97,13 +90,9 @@ function buildTable(beerData) {
       table.append(beerContainer)
     }
   })
-  $('.dotButton').click(handleBeerClick)
-  $('.xButton').click(handleBeerClick)
-  $('.editButton').click({ beerData: beerData }, handleButtonClick)
-  $('.deleteButton').click(handleButtonClick)
 }
 
-function buildModal(action, beerData, value) {
+function buildModal(action, beerList, value) {
   const addModal = $('#addModal')
   const col = $('<div>', { class: 'col-12 formContainer', id: 'addModalForm' })
   const form = $('<form>')
@@ -127,7 +116,7 @@ function buildModal(action, beerData, value) {
   const errorTasting = $('<div>', { id: 'tastingError', class: 'error errorTasting hide' })
 
   if (action === 'editButton') {
-    const beerToEdit = beerData[value]
+    const beerToEdit = beerList[value]
     inputBeer.val(beerToEdit.beer)
     inputBrewery.val(beerToEdit.brewery)
     inputRating.val(beerToEdit.rating)
@@ -163,36 +152,9 @@ function buildModal(action, beerData, value) {
   $('#inputTasting').focus(handleInputFocus)
 }
 
-function addNewBeerToTable(beerList, beerData) {
-  const tr = $('<tr>', { id: beerData.id })
-  const tdBeer = $('<td>').text(beerData.beer)
-  const tdBrewery = $('<td>').text(beerData.brewery)
-  const tdRating = $('<td>').text(beerData.rating)
-  const tdButtons = $('<td>')
-  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
-  tdButtons.append(buttonDelete).append(buttonEdit)
-  tr.append(tdBeer).append(tdBrewery).append(tdRating).append(tdButtons)
-  $('#table-body').append(tr)
-  $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click({ beerData: beerList }, handleButtonClick)
-}
-
-const removeBeerFromTable = id => {
-  $(`#${id}`).remove()
-}
-
-const editBeerTable = (beerList, beerData) => {
-  const beerRow = $(`#${beerData.id}`)
-  beerRow.empty()
-  const beer = $('<td>').text(beerData.beer)
-  const brewery = $('<td>').text(beerData.brewery)
-  const rating = $('<td>').text(beerData.rating)
-  const buttons = $('<td>')
-  const buttonDelete = $('<button>', { name: 'delete', value: beerData.id, type: 'button', id: 'deleteButton', class: 'btn btn-danger deleteButton' }).text('Delete')
-  const buttonEdit = $('<button>', { name: 'editButton', value: beerData.id, type: 'button', id: 'editButton', class: 'btn btn-info editButton' }).text('Edit')
-  buttons.append(buttonDelete).append(buttonEdit)
-  beerRow.append(beer).append(brewery).append(rating).append(buttons)
-  $('.deleteButton').click(handleButtonClick)
-  $('.editButton').click({ beerData: beerList }, handleButtonClick)
+const resetTable = () => {
+  $('#table').off('click')
+  $('#table').empty()
+  $('.header-sizer').find('div:nth-child(2)').remove()
+  getBeerList()
 }
