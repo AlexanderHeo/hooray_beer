@@ -41,14 +41,7 @@ function buildStats(beerList) {
   const sum = sumArr.reduce((a, b) => parseInt(a) + parseInt(b))
   const avg = sum / total
   const toSortPlus = Object.assign({}, beerList)
-  const sortedPlus = Object.keys(toSortPlus) // .sort((beerList[a], beerList[b]) => {
-  //   if (!isNaN(a)) {
-  //     console.log(b, a)
-  //     console.log(beerList[b].rating, beerList[a].rating)
-  //     console.log('----------------------------')
-  //     return parseInt(beerList[b].rating) - parseInt(beerList[a].rating)
-  //   }
-  // })
+  const sortedPlus = Object.keys(toSortPlus)
   const sorted = []
   sortedPlus.forEach(x => {
     if (!isNaN(x)) {
@@ -56,9 +49,6 @@ function buildStats(beerList) {
     }
   })
   sorted.sort((a, b) => parseInt(b.rating) - parseInt(a.rating))
-  console.log(sorted)
-  console.log(sorted[0].beer)
-  console.log(sorted[Object.keys(sorted)[Object.keys(sorted).length - 1]].beer)
   const statsContainer = $('<div>', { class: 'stats-container' })
   const statsTotal = $('<div>', { class: 'stats' })
   const titleTotal = $('<span>', { class: 'stat title' }).text('Total Beers:')

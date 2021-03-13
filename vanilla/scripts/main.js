@@ -2,33 +2,6 @@
 /* eslint-disable no-undef */
 $(document).ready(initializeApp)
 
-const database = {
-  beers: {
-    1: {
-      beer: 'Pale Ale',
-      brewery: 'Casper Brewing',
-      id: '1',
-      rating: '5',
-      tasting: 'spooky good'
-    },
-    2: {
-      beer: 'Pine IPA',
-      brewery: 'Forest Brewing',
-      id: 2,
-      rating: '5',
-      tasting: 'piney hops'
-    },
-    3: {
-      beer: 'Vance Brewing Lager',
-      brewery: 'Vance from Vance Brewing',
-      id: 3,
-      rating: '5',
-      tasting: 'Vance from Vance Brewing'
-    },
-    currentId: 4
-  }
-}
-
 function initializeApp() {
   buildComponent()
   getBeerList()
@@ -38,9 +11,6 @@ function initializeApp() {
 const addClickHandlers = () => {
   $('#footerPlusButton').click(handleButtonClick)
 }
-// const getBeerList = () => {
-//   buildTable(database.beers)
-// }
 const getBeerList = async () => {
   const init = {
     method: 'GET',
@@ -75,7 +45,6 @@ const handleButtonClick = e => {
     beerDB('delete', null, value)
 
   } else if (name === 'xButton' || name === 'dotButton') {
-    // console.log(value)
     toggleAccordion(value)
 
   }	else if (name === 'editButton') {
