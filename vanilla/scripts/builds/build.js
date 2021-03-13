@@ -9,6 +9,26 @@ function buildComponent() {
   const h1Span = $('<span>').text('Hooray Beer!')
   h1.append(h1Span)
   colTitle.append(h1)
+  headerSizer.append(colTitle)
+  rowHeader.append(headerSizer)
+
+  const rowBody = $('<div>', { class: 'row' })
+  const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
+  const table = $('<div>', { id: 'table', class: 'table' })
+  rowBody.append(h4).append(table)
+
+  const addModal = $('<div>', { id: 'addModal', class: 'addModal hide' })
+
+  const footer = $('<div>', { class: 'footer' })
+  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
+  footer.append(footerButton)
+
+  container.append(rowHeader).append(rowBody).append(addModal).append(footer)
+  $('#body').append(container)
+}
+
+function buildStats(beerList) {
+  const headerSizer = $('.header-sizer')
 
   const colStats = $('<div>', { class: 'col-xl-5 col-lg-5 col-md-5 col-sm-6 col-12' })
   const statsContainer = $('<div>', { class: 'stats-container' })
@@ -35,27 +55,7 @@ function buildComponent() {
 
   statsContainer.append(statsTotal).append(statsAverage).append(statsHighest).append(statsMost)
   colStats.append(statsContainer)
-
-  headerSizer.append(colTitle).append(colStats)
-
-  rowHeader.append(headerSizer)
-  container.append(rowHeader)
-
-  const rowBody = $('<div>', { class: 'row' })
-  const h4 = $('<h4>', { class: 'table-title' }).text('My Beers List')
-  const table = $('<div>', { id: 'table', class: 'table' })
-  rowBody.append(h4).append(table)
-  container.append(rowBody)
-
-  const addModal = $('<div>', { id: 'addModal', class: 'addModal hide' })
-  container.append(addModal)
-
-  const footer = $('<div>', { class: 'footer' })
-  const footerButton = $('<button>', { name: 'addButton', id: 'footerPlusButton', class: 'btn btn-success' }).text('ADD')
-  footer.append(footerButton)
-  container.append(footer)
-
-  $('#body').append(container)
+  headerSizer.append(colStats)
 }
 
 function buildTable(beerList) {
@@ -185,10 +185,10 @@ function addNewBeerToTable(beerList, beerData) {
   table.on('click', { beerList }, handleButtonClick)
 }
 
-const removeBeerFromTable = id => $(`#${id}Container`).remove()
+const removeBeerFromTable = id => $(`#${id}`).remove()
 
 const editBeerTable = (beerList, beerData) => {
-  const beerRow = $(`#${beerData.id}Container`)
+  const beerRow = $(`#${beerData.id}`)
   beerRow.find('.beer').text(beerData.beer)
   beerRow.find('.brewery').text(beerData.brewery)
   beerRow.find('.rating').text(beerData.rating)

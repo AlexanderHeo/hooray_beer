@@ -48,7 +48,10 @@ const getBeerList = async () => {
   }
   const response = await fetch('https://hooraybeer-d468f-default-rtdb.firebaseio.com/beers.json', init)
   const data = await response.json()
-  if (data) buildTable(data)
+  if (data) {
+    buildStats(data)
+    buildTable(data)
+  }
 }
 
 const handleButtonClick = e => {
