@@ -8,6 +8,7 @@ button {
 	width: 80px;
 }
 .container-fluid {
+	max-width: 750px;
 	height: calc(100vh - 63px);
 	overflow-y: scroll;
 	padding-top: 15px;
@@ -86,7 +87,6 @@ button {
 }
 .dotButton,
 .xButton {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: 1px solid rgb(30, 30, 30);
@@ -94,9 +94,6 @@ button {
 	font-weight: 600;
 	width: 40px;
 	height: 40px;
-	position: absolute;
-	top: 4px;
-	right: 38px;
 }
 .dotButton {
 	font-size: 1rem;
