@@ -2,32 +2,27 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-family: 'Crimson Pro', serif;
 }
 button {
 	border-radius: 6px;
 	width: 80px;
 }
-.container-fluid {
+.container {
 	max-width: 750px;
 	height: calc(100vh - 63px);
 	overflow-y: scroll;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	background-color: rgb(250, 250, 250);
+	background: rgb(255,237,142);
+background: linear-gradient(18deg, rgba(255,237,142,1) 35%, rgba(255,255,255,1) 65%, rgba(255,237,142,1) 95%);
 }
 .header-sizer {
 	width: 100%;
 	max-width: 750px;
+	border-bottom: 4px double palegoldenrod;
 	display: inherit;
 	flex-wrap: inherit;
-}
-.header-sizer div:last-of-type {
-	background-color: rgb(230, 230, 230);
-}
-@media (min-width: 576px) {
-	.header-sizer div:first-of-type {
-		background-color: rgb(230, 230, 230)
-	}
 }
 .app-title-container {
 	display: flex;
@@ -35,6 +30,7 @@ button {
 	justify-content: center;
 }
 .app-title {
+	font-family: 'Overlock', cursive;
 	text-align: center;
 }
 @media (min-width: 576px) {
@@ -69,16 +65,17 @@ button {
 .table-title {
 	width: 100%;
 	text-align: center;
+	border-bottom: 4px double palegoldenrod;
 	margin-top: 12px;
 	margin-bottom: 0;
-	padding: 6px 0;
+	padding: 0 0 12px 0;
 }
 .table {
 	width: 100%;
 	max-width: 775px;
 }
 .beerContainer:nth-child(odd) {
-	background-color:rgb(230, 230, 230);
+	background-color:rgba(255, 255, 255, 0.5);
 }
 .beerContainer {
 	width: 100%;
@@ -105,6 +102,8 @@ button {
 }
 .dotButton {
 	font-size: 1rem;
+	background: rgb(255,237,142);
+	background: linear-gradient(18deg, rgba(255,237,142,1) 35%, rgba(255,255,255,1) 65%, rgba(255,237,142,1) 95%);
 }
 .xButton {
 	font-size: 1.5rem;
@@ -195,7 +194,8 @@ input {
 	bottom: 0;
 	left: 0;
 	border-top: 1px solid black;
-	background-color: rgb(250,250,250);
+	background: rgb(255,237,142);
+	background: linear-gradient(18deg, rgba(255,237,142,1) 35%, rgba(255,255,255,1) 65%, rgba(255,237,142,1) 95%);
 }
 
 .addModal {
@@ -204,7 +204,8 @@ input {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: rgb(250, 250, 250);
+	background: rgb(255,237,142);
+	background: linear-gradient(18deg, rgba(255,237,142,1) 35%, rgba(255,255,255,1) 65%, rgba(255,237,142,1) 95%);
 	overflow-y: scroll;
 }
 input {
